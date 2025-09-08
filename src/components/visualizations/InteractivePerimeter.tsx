@@ -59,7 +59,8 @@ const InteractivePerimeter: React.FC<InteractivePerimeterProps> = ({
     if (targetPerimeter > 0) {
       drawTargetInfo(ctx, targetPerimeter, currentPerimeter);
     }
-  }, [points, shape, targetPerimeter, currentPerimeter, showGrid, centerPoint, previewPoint, drawCompassPreview, drawGrid, drawShape]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [points, shape, targetPerimeter, currentPerimeter, showGrid, centerPoint, previewPoint]);
 
   const drawGrid = useCallback((ctx: CanvasRenderingContext2D, width: number, height: number) => {
     ctx.strokeStyle = '#e5e7eb';
@@ -101,7 +102,8 @@ const InteractivePerimeter: React.FC<InteractivePerimeterProps> = ({
     ctx.arc(center.x, center.y, radiusPixels, 0, 2 * Math.PI);
     ctx.stroke();
     ctx.setLineDash([]);
-  }, [drawVirtualCompass]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const drawCompassCenter = (ctx: CanvasRenderingContext2D, center: { x: number; y: number }) => {
     // Draw compass base (center pin)

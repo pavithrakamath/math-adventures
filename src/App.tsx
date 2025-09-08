@@ -71,7 +71,6 @@ function App() {
                 
                 <LessonGrid
                   lessons={lessons}
-                  lessonProgress={progress.lessonProgress}
                   completedLessons={progress.completedLessons}
                   onLessonClick={handleLessonClick}
                 />
@@ -95,7 +94,6 @@ function App() {
                 
                 <LessonGrid
                   lessons={lessons}
-                  lessonProgress={progress.lessonProgress}
                   completedLessons={progress.completedLessons}
                   onLessonClick={handleLessonClick}
                 />
