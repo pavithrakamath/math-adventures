@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, useTransition, useDeferredValue } from 'react';
 import { useLessonData } from './useLessonData';
-import { useErrorHandler } from './useErrorHandler';
+// import { useErrorHandler } from './useErrorHandler';
 import type { Lesson } from '../types/lesson.types';
 
 interface UseLessonOptions {
@@ -17,24 +17,24 @@ export const useLesson = (lessonId: string, options: UseLessonOptions = {}) => {
   const [retryAttempts, setRetryAttempts] = useState(0);
   const [isPending, startTransition] = useTransition();
   
-  const { loadLessonData, getLessonById } = useLessonData();
-  const { handleAsyncError } = useErrorHandler();
+  const { loadLessonData } = useLessonData();
+  // const { handleAsyncError } = useErrorHandler();
 
   // Deferred value for smooth UI updates
   const deferredLesson = useDeferredValue(lesson);
 
   // Load lesson with retry logic
-  const loadLesson = useCallback(async (id: string, attempt: number = 0): Promise<void> => {
+  const loadLesson = useCallback(async (_id: string, attempt: number = 0): Promise<void> => {
     try {
       setLoading(true);
       setError(null);
 
-      const lessonData = await loadLessonData(id);
+      const lessonData = await loadLessonData(_id);
       if (lessonData) {
         setLesson(lessonData.lesson);
         setRetryAttempts(0);
       } else {
-        throw new Error(`Failed to load lesson: ${id}`);
+        throw new Error(`Failed to load lesson: ${_id}`);
       }
     } catch (err) {
       const error = err as Error;
@@ -44,7 +44,7 @@ export const useLesson = (lessonId: string, options: UseLessonOptions = {}) => {
         const delay = retryDelay * Math.pow(2, attempt);
         setTimeout(() => {
           setRetryAttempts(attempt + 1);
-          loadLesson(id, attempt + 1);
+          loadLesson(_id, attempt + 1);
         }, delay);
       } else {
         setError(error);
@@ -118,10 +118,10 @@ export const useLesson = (lessonId: string, options: UseLessonOptions = {}) => {
 };
 
 // Hook for lesson progress tracking
-export const useLessonProgress = (lessonId: string) => {
+export const useLessonProgress = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const [completedSections, setCompletedSections] = useState<Set<number>>(new Set());
-  const [answers, setAnswers] = useState<Record<string, any>>({});
+  const [answers, setAnswers] = useState<Record<string, unknown>>({});
   const [score, setScore] = useState(0);
   const [timeSpent, setTimeSpent] = useState(0);
   const [startTime] = useState(() => new Date());
@@ -134,7 +134,7 @@ export const useLessonProgress = (lessonId: string) => {
     setCompletedSections(prev => new Set([...prev, section]));
   }, []);
 
-  const addAnswer = useCallback((questionId: string, answer: any, isCorrect: boolean) => {
+  const addAnswer = useCallback((questionId: string, answer: unknown, isCorrect: boolean) => {
     setAnswers(prev => ({
       ...prev,
       [questionId]: { answer, isCorrect, timestamp: new Date() },
@@ -160,7 +160,7 @@ export const useLessonProgress = (lessonId: string) => {
     const totalAnswers = Object.keys(answers).length;
     if (totalAnswers === 0) return 0;
     
-    const correctAnswers = Object.values(answers).filter(a => a.isCorrect).length;
+    const correctAnswers = Object.values(answers).filter(a => (a as { isCorrect: boolean }).isCorrect).length;
     return (correctAnswers / totalAnswers) * 100;
   }, [answers]);
 

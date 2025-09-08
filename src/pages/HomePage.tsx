@@ -4,7 +4,7 @@ import Header from '../components/layout/Header';
 import Navigation from '../components/layout/Navigation';
 import LessonCard from '../components/lessons/LessonCard';
 import { lessons } from '../data/lessons';
-import { useProgress } from '../context/AppStateContext';
+import { useProgress } from '../context/AppStateHooks';
 
 const HomePage = () => {
   const navigate = useNavigate();

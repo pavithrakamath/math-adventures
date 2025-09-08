@@ -5,7 +5,7 @@ import { Button } from '../ui/button';
 import { resolveComponent, isComponentReference } from '../../utils/componentResolver';
 import { QuestionRenderer } from './QuestionRenderer';
 import { getQuestionsForLesson } from '../../data/questions';
-import { useProgress } from '../../context/AppStateContext';
+import { useProgress } from '../../context/AppStateHooks';
 import type { Lesson } from '../../types/lesson.types';
 
 interface LessonViewProps {

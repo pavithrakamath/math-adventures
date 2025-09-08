@@ -69,27 +69,24 @@ const AreaVisualizationLesson: React.FC<AreaVisualizationLessonProps> = ({ class
         <div className="flex justify-center space-x-2 mb-4">
           <Button
             onClick={prevShape}
-            variant="outline"
             size="sm"
-            className="flex items-center"
+            className="flex items-center border border-gray-300 bg-black hover:bg-gray-50 text-gray-700"
           >
             <ArrowLeft className="w-4 h-4 mr-1" />
             Previous
           </Button>
           <Button
             onClick={nextShape}
-            variant="outline"
             size="sm"
-            className="flex items-center"
+            className="flex items-center border border-gray-300 bg-black hover:bg-gray-50 text-gray-700"
           >
             Next
             <ArrowRight className="w-4 h-4 ml-1" />
           </Button>
           <Button
             onClick={resetShape}
-            variant="outline"
             size="sm"
-            className="flex items-center"
+              className="flex items-center border border-gray-300 bg-black hover:bg-gray-50 text-gray-700"
           >
             <RotateCcw className="w-4 h-4 mr-1" />
             Reset

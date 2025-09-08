@@ -1,39 +1,7 @@
-import React, { createContext, useContext, useReducer, useCallback, useMemo } from 'react';
+import React, { useReducer, useMemo } from 'react';
 import { debounce } from 'lodash-es';
-import type { UserProgress, LessonProgress } from '../types/progress.types';
-import type { Lesson } from '../types/lesson.types';
-
-// Enhanced app state interface
-export interface AppState {
-  progress: UserProgress;
-  currentLesson: string | null;
-  isLoading: boolean;
-  error: string | null;
-  settings: {
-    theme: 'light' | 'dark' | 'auto';
-    language: string;
-    soundEnabled: boolean;
-    animationsEnabled: boolean;
-  };
-  ui: {
-    sidebarOpen: boolean;
-    currentView: 'home' | 'lesson' | 'achievements' | 'settings';
-  };
-}
-
-// Action types
-type AppAction =
-  | { type: 'SET_LOADING'; payload: boolean }
-  | { type: 'SET_ERROR'; payload: string | null }
-  | { type: 'UPDATE_PROGRESS'; payload: Partial<UserProgress> }
-  | { type: 'COMPLETE_LESSON'; payload: { lessonId: string; score: number; timeSpent: number } }
-  | { type: 'ADD_MISTAKE'; payload: { lessonId: string; question: string; errorDescription: string } }
-  | { type: 'UPDATE_SCORE'; payload: { lessonId: string; scoreIncrement: number } }
-  | { type: 'MARK_AS_COMPLETED'; payload: string }
-  | { type: 'SET_CURRENT_LESSON'; payload: string | null }
-  | { type: 'UPDATE_SETTINGS'; payload: Partial<AppState['settings']> }
-  | { type: 'UPDATE_UI'; payload: Partial<AppState['ui']> }
-  | { type: 'RESET_APP' };
+import { AppStateContext } from './AppStateContext';
+import type { AppState, AppAction } from './AppStateContext.types';
 
 // Initial state
 const initialState: AppState = {
@@ -76,7 +44,7 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
         progress: { ...state.progress, ...action.payload },
       };
     
-    case 'COMPLETE_LESSON':
+    case 'COMPLETE_LESSON': {
       const { lessonId, score, timeSpent } = action.payload;
       const newCompletedLessons = new Set(state.progress.completedLessons);
       newCompletedLessons.add(lessonId);
@@ -112,8 +80,9 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
           },
         },
       };
+    }
     
-    case 'ADD_MISTAKE':
+    case 'ADD_MISTAKE': {
       const { lessonId: mistakeLessonId, question, errorDescription } = action.payload;
       const currentLessonProgress = state.progress.lessonProgress[mistakeLessonId];
       const newMistake = {
@@ -137,8 +106,9 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
           },
         },
       };
+    }
     
-    case 'UPDATE_SCORE':
+    case 'UPDATE_SCORE': {
       const { lessonId: scoreLessonId, scoreIncrement } = action.payload;
       const currentScore = state.progress.lessonProgress[scoreLessonId]?.score || 0;
       
@@ -158,8 +128,9 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
           },
         },
       };
+    }
     
-    case 'MARK_AS_COMPLETED':
+    case 'MARK_AS_COMPLETED': {
       const completedLessonId = action.payload;
       const completedLessons = new Set(state.progress.completedLessons);
       completedLessons.add(completedLessonId);
@@ -181,6 +152,7 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
           },
         },
       };
+    }
     
     case 'SET_CURRENT_LESSON':
       return { ...state, currentLesson: action.payload };
@@ -205,11 +177,6 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
   }
 };
 
-// Context
-const AppStateContext = createContext<{
-  state: AppState;
-  dispatch: React.Dispatch<AppAction>;
-} | null>(null);
 
 // Provider component
 export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -230,7 +197,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
                 key,
                 {
                   ...lp,
-                  completedSections: Array.from(lp.completedSections),
+                  completedSections: Array.from(lp.completedSections || new Set()),
                   lastAccessed: lp.lastAccessed.toISOString(),
                 },
               ])
@@ -257,7 +224,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         parsed.progress.lastActivity = new Date(parsed.progress.lastActivity);
         Object.values(parsed.progress.lessonProgress).forEach((lp: unknown) => {
           const lessonProgress = lp as Record<string, unknown>;
-          lessonProgress.completedSections = new Set(lessonProgress.completedSections as unknown[]);
+          lessonProgress.completedSections = new Set(lessonProgress.completedSections as unknown[] || []);
           lessonProgress.lastAccessed = new Date(lessonProgress.lastAccessed as string);
         });
         dispatch({ type: 'UPDATE_PROGRESS', payload: parsed.progress });
@@ -283,120 +250,4 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       {children}
     </AppStateContext.Provider>
   );
-};
-
-// Custom hooks for accessing state
-export const useAppState = () => {
-  const context = useContext(AppStateContext);
-  if (!context) {
-    throw new Error('useAppState must be used within an AppStateProvider');
-  }
-  return context;
-};
-
-export const useProgress = () => {
-  const { state, dispatch } = useAppState();
-  
-  const updateLessonProgress = useCallback((lessonId: string, updates: Partial<LessonProgress>) => {
-    dispatch({
-      type: 'UPDATE_PROGRESS',
-      payload: {
-        lessonProgress: {
-          ...state.progress.lessonProgress,
-          [lessonId]: {
-            ...state.progress.lessonProgress[lessonId],
-            lessonId,
-            currentSection: 0,
-            completedSections: new Set(),
-            answers: {},
-            score: 0,
-            timeSpent: 0,
-            isCompleted: false,
-            lastAccessed: new Date(),
-            ...updates,
-          },
-        },
-      },
-    });
-  }, [state.progress.lessonProgress, dispatch]);
-
-  const completeLesson = useCallback((lessonId: string, score: number, timeSpent: number) => {
-    dispatch({ type: 'COMPLETE_LESSON', payload: { lessonId, score, timeSpent } });
-  }, [dispatch]);
-
-  const addMistake = useCallback((lessonId: string, question: string, errorDescription: string) => {
-    dispatch({ type: 'ADD_MISTAKE', payload: { lessonId, question, errorDescription } });
-  }, [dispatch]);
-
-  const updateScore = useCallback((lessonId: string, scoreIncrement: number) => {
-    dispatch({ type: 'UPDATE_SCORE', payload: { lessonId, scoreIncrement } });
-  }, [dispatch]);
-
-  const markAsCompleted = useCallback((lessonId: string) => {
-    dispatch({ type: 'MARK_AS_COMPLETED', payload: lessonId });
-  }, [dispatch]);
-
-  const getLessonProgress = useCallback((lessonId: string) => {
-    return state.progress.lessonProgress[lessonId];
-  }, [state.progress.lessonProgress]);
-
-  const getPastErrors = useCallback((lessonId: string): string => {
-    const lessonProgress = state.progress.lessonProgress[lessonId];
-    if (!lessonProgress || lessonProgress.mistakes.length === 0) {
-      return "No past errors recorded for this lesson.";
-    }
-    // Return a summary of the last few mistakes
-    return lessonProgress.mistakes
-      .slice(-3)
-      .map(m => `On question "${m.question}", the student had this issue: ${m.errorDescription}`)
-      .join('\n');
-  }, [state.progress.lessonProgress]);
-
-  const getOverallProgress = useCallback((totalLessons: number): number => {
-    return (state.progress.completedLessons.size / totalLessons) * 100;
-  }, [state.progress.completedLessons.size]);
-
-  const isLessonCompleted = useCallback((lessonId: string): boolean => {
-    return state.progress.completedLessons.has(lessonId);
-  }, [state.progress.completedLessons]);
-
-  return {
-    progress: state.progress,
-    isLoading: state.isLoading,
-    updateLessonProgress,
-    completeLesson,
-    addMistake,
-    updateScore,
-    markAsCompleted,
-    getLessonProgress,
-    getPastErrors,
-    getOverallProgress,
-    isLessonCompleted,
-  };
-};
-
-export const useSettings = () => {
-  const { state, dispatch } = useAppState();
-  
-  const updateSettings = useCallback((settings: Partial<AppState['settings']>) => {
-    dispatch({ type: 'UPDATE_SETTINGS', payload: settings });
-  }, [dispatch]);
-
-  return {
-    settings: state.settings,
-    updateSettings,
-  };
-};
-
-export const useUI = () => {
-  const { state, dispatch } = useAppState();
-  
-  const updateUI = useCallback((ui: Partial<AppState['ui']>) => {
-    dispatch({ type: 'UPDATE_UI', payload: ui });
-  }, [dispatch]);
-
-  return {
-    ui: state.ui,
-    updateUI,
-  };
 };

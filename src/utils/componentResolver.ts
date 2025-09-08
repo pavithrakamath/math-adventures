@@ -26,12 +26,13 @@ const TriangularNumbersVisualizer = lazy(() => import('../components/visualizati
 const FibonacciVisualizer = lazy(() => import('../components/visualizations/FibonacciVisualizer'));
 const OddToSquareVisualizer = lazy(() => import('../components/visualizations/OddToSquareVisualizer'));
 const PatternRelationshipsVisualizer = lazy(() => import('../components/visualizations/PatternRelationshipsVisualizer'));
+const PerimeterAreaComparison = lazy(() => import('../components/visualizations/PerimeterAreaComparison'));
 
 // Lazy load lesson components
 const Quiz = lazy(() => import('../components/lessons/Quiz'));
 
 // Component mapping
-const componentMap: Record<string, React.ComponentType<Record<string, unknown>>> = {
+const componentMap: Record<string, React.ComponentType<unknown>> = {
   'FractionVisualizer': FractionVisualizer,
   'BarChart': BarChart,
   'InteractiveBarGraph': InteractiveBarGraph,
@@ -57,6 +58,7 @@ const componentMap: Record<string, React.ComponentType<Record<string, unknown>>>
   'FibonacciVisualizer': FibonacciVisualizer,
   'OddToSquareVisualizer': OddToSquareVisualizer,
   'PatternRelationshipsVisualizer': PatternRelationshipsVisualizer,
+  'PerimeterAreaComparison': PerimeterAreaComparison,
   'Quiz': Quiz,
 };
 
@@ -65,7 +67,7 @@ const componentMap: Record<string, React.ComponentType<Record<string, unknown>>>
  * @param componentName - The string name of the component
  * @returns The resolved React component or null if not found
  */
-export const resolveComponent = (componentName: string): React.ComponentType<Record<string, unknown>> | null => {
+export const resolveComponent = (componentName: string): React.ComponentType<unknown> | null => {
   return componentMap[componentName] || null;
 };
 

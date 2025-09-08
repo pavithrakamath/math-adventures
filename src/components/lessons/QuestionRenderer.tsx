@@ -9,6 +9,7 @@ import SymmetryVisualizer from '../visualizations/SymmetryVisualizer';
 import FractionVisualizer from '../visualizations/FractionVisualizer';
 import InteractiveBarGraph from '../visualizations/InteractiveBarGraph';
 import InteractivePictograph from '../visualizations/InteractivePictograph';
+import PerimeterVisual from '../visualizations/PerimeterVisual';
 
 interface QuestionRendererProps {
   question: Question;
@@ -214,6 +215,8 @@ export function QuestionRenderer({
           return <SymmetryVisualizer {...question.interactiveHint} />;
         case 'fraction-visualizer':
           return <FractionVisualizer {...question.interactiveHint} />;
+        case 'perimeter-visual':
+          return <PerimeterVisual {...question.interactiveHint} />;
         default:
           return null;
       }
@@ -230,15 +233,33 @@ export function QuestionRenderer({
   const renderExplanation = () => {
     if (question.interactiveHint) {
       return (
-        <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <div className="flex items-center mb-4">
-            <Lightbulb className="mr-2 h-5 w-5 text-blue-600" />
-            <h3 className="text-lg font-semibold text-blue-900">
-              Let's Work It Out Visually
-            </h3>
-          </div>
-          <div>
-            {renderInteractiveHint()}
+        <div className="mt-6 space-y-4">
+          {/* Show text hint first if it exists */}
+          {question.hint && (
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+              <div className="flex items-center mb-4">
+                <Lightbulb className="mr-2 h-5 w-5 text-blue-600" />
+                <h3 className="text-lg font-semibold text-blue-900">
+                  Let's think about this...
+                </h3>
+              </div>
+              <div>
+                <p className="text-gray-700 whitespace-pre-wrap">{question.hint}</p>
+              </div>
+            </div>
+          )}
+          
+          {/* Then show the visualizer */}
+          <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+            <div className="flex items-center mb-4">
+              <Lightbulb className="mr-2 h-5 w-5 text-green-600" />
+              <h3 className="text-lg font-semibold text-green-900">
+                Let's Work It Out Visually
+              </h3>
+            </div>
+            <div>
+              {renderInteractiveHint()}
+            </div>
           </div>
         </div>
       );

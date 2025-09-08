@@ -51,6 +51,12 @@ export type InteractiveHint =
       patternType: 'triangular' | 'square' | 'fibonacci' | 'arithmetic' | 'geometric' | 'custom';
       sequence: number[];
       customPattern?: string;
+    }
+  | {
+      type: 'perimeter-visual';
+      shape: 'rectangle' | 'square' | 'triangle' | 'polygon';
+      dimensions: number[];
+      unit?: string;
     };
 
 export type Question =

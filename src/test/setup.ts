@@ -7,7 +7,7 @@ configure({ testIdAttribute: 'data-testid' });
 
 // Polyfills for Node.js environment
 global.TextEncoder = TextEncoder;
-global.TextDecoder = TextDecoder as any;
+global.TextDecoder = TextDecoder as typeof globalThis.TextDecoder;
 
 // Mock localStorage
 const localStorageMock = {
@@ -16,7 +16,7 @@ const localStorageMock = {
   removeItem: jest.fn(),
   clear: jest.fn(),
 };
-global.localStorage = localStorageMock as any;
+global.localStorage = localStorageMock as Storage;
 
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {

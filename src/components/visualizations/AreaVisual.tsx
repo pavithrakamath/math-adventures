@@ -35,13 +35,17 @@ const AreaVisual: React.FC<AreaVisualProps> = ({
 
   const renderRectangle = () => {
     const [width, height] = dimensions;
-    const scale = 4;
+    
+    // Adaptive scaling to fit within reasonable bounds
+    const maxDimension = Math.max(width, height);
+    const maxDisplaySize = 200; // Maximum display size in pixels
+    const scale = Math.min(4, maxDisplaySize / maxDimension);
     const scaledWidth = width * scale;
     const scaledHeight = height * scale;
     
     return (
       <div className="relative">
-        <svg viewBox={`0 0 ${scaledWidth + 40} ${scaledHeight + 40}`} className="w-full h-64">
+        <svg viewBox={`0 0 ${Math.max(scaledWidth + 40, 240)} ${Math.max(scaledHeight + 40, 200)}`} className="w-full h-64">
           {/* Grid */}
           {showGrid && (
             <defs>
@@ -108,10 +112,10 @@ const AreaVisual: React.FC<AreaVisualProps> = ({
           
           {/* Dimensions */}
           <motion.text
-            x="20 + scaledWidth/2"
+            x={20 + scaledWidth/2}
             y="15"
             textAnchor="middle"
-            className="text-sm font-medium fill-red-600"
+            className="text-xs font-small fill-red-600"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.8 }}
@@ -120,10 +124,10 @@ const AreaVisual: React.FC<AreaVisualProps> = ({
           </motion.text>
           
           <motion.text
-            x="20 + scaledWidth + 15"
-            y="20 + scaledHeight/2"
+            x={20 + scaledWidth + 15}
+            y={20 + scaledHeight/2}
             textAnchor="middle"
-            className="text-sm font-medium fill-red-600"
+            className="text-xs font-small fill-red-600"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 1 }}
@@ -137,12 +141,15 @@ const AreaVisual: React.FC<AreaVisualProps> = ({
 
   const renderSquare = () => {
     const [side] = dimensions;
-    const scale = 4;
+    
+    // Adaptive scaling to fit within reasonable bounds
+    const maxDisplaySize = 200; // Maximum display size in pixels
+    const scale = Math.min(4, maxDisplaySize / side);
     const scaledSide = side * scale;
     
     return (
       <div className="relative">
-        <svg viewBox={`0 0 ${scaledSide + 40} ${scaledSide + 40}`} className="w-full h-64">
+        <svg viewBox={`0 0 ${Math.max(scaledSide + 40, 240)} ${Math.max(scaledSide + 40, 200)}`} className="w-full h-64">
           {/* Grid */}
           {showGrid && (
             <defs>
@@ -209,10 +216,10 @@ const AreaVisual: React.FC<AreaVisualProps> = ({
           
           {/* Side dimension */}
           <motion.text
-            x="20 + scaledSide/2"
+            x={20 + scaledSide/2}
             y="15"
             textAnchor="middle"
-            className="text-sm font-medium fill-red-600"
+            className="text-[10px] font-medium fill-red-600"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.8 }}
@@ -226,13 +233,17 @@ const AreaVisual: React.FC<AreaVisualProps> = ({
 
   const renderTriangle = () => {
     const [base, height] = dimensions;
-    const scale = 3;
+    
+    // Adaptive scaling to fit within reasonable bounds
+    const maxDimension = Math.max(base, height);
+    const maxDisplaySize = 150; // Maximum display size in pixels
+    const scale = Math.min(3, maxDisplaySize / maxDimension);
     const scaledBase = base * scale;
     const scaledHeight = height * scale;
     
     return (
       <div className="relative">
-        <svg viewBox={`0 0 ${scaledBase + 40} ${scaledHeight + 40}`} className="w-full h-64">
+        <svg viewBox={`0 0 ${Math.max(scaledBase + 40, 200)} ${Math.max(scaledHeight + 40, 150)}`} className="w-full h-64">
           {/* Grid */}
           {showGrid && (
             <defs>
@@ -272,10 +283,10 @@ const AreaVisual: React.FC<AreaVisualProps> = ({
             transition={{ duration: 0.8, delay: 0.3 }}
           />
           <motion.text
-            x="20 + scaledBase/2"
+            x={20 + scaledBase/2}
             y={20 + scaledHeight + 25}
             textAnchor="middle"
-            className="text-sm font-medium fill-red-600"
+            className="text-[10px] font-medium fill-red-600"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}
@@ -300,7 +311,7 @@ const AreaVisual: React.FC<AreaVisualProps> = ({
             x={20 + scaledBase + 25}
             y={20 + scaledHeight/2}
             textAnchor="middle"
-            className="text-sm font-medium fill-red-600"
+            className="text-[10px] font-medium fill-red-600"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.8 }}
@@ -314,7 +325,10 @@ const AreaVisual: React.FC<AreaVisualProps> = ({
 
   const renderCircle = () => {
     const [radius] = dimensions;
-    const scale = 2;
+    
+    // Adaptive scaling to fit within reasonable bounds
+    const maxDisplaySize = 80; // Maximum radius in pixels
+    const scale = Math.min(2, maxDisplaySize / radius);
     const scaledRadius = radius * scale;
     const centerX = 100;
     const centerY = 100;
@@ -366,7 +380,7 @@ const AreaVisual: React.FC<AreaVisualProps> = ({
             x={centerX + scaledRadius/2}
             y={centerY - 10}
             textAnchor="middle"
-            className="text-sm font-medium fill-red-600"
+            className="text-[10px] font-medium fill-red-600"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}
@@ -394,6 +408,10 @@ const AreaVisual: React.FC<AreaVisualProps> = ({
   };
 
   const area = calculateArea();
+  
+  // Check if scaling was applied
+  const maxDimension = Math.max(...dimensions);
+  const isScaled = maxDimension > 10;
 
   return (
     <div className={`space-y-4 ${className}`}>
@@ -403,6 +421,11 @@ const AreaVisual: React.FC<AreaVisualProps> = ({
         </h3>
         <div className="text-sm text-gray-600">
           Dimensions: {dimensions.join(' × ')} {unit}
+          {isScaled && (
+            <div className="text-xs text-gray-500 mt-1">
+              (Visualization scaled down for display)
+            </div>
+          )}
         </div>
       </div>
       

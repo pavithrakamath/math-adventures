@@ -24,6 +24,12 @@ export function ShapeVisualizer({
   const perimeter = 2 * (width + actualHeight);
   const area = width * actualHeight;
   const correctAnswer = calculation === 'perimeter' ? perimeter : area;
+  
+  // Adaptive scaling for large dimensions
+  const maxDimension = Math.max(width, actualHeight);
+  const baseScale = 20; // pixels per unit
+  const maxDisplaySize = 200; // Maximum display size in pixels
+  const scale = maxDimension > 10 ? Math.min(baseScale, maxDisplaySize / maxDimension) : baseScale;
 
   const isCorrect = userInput === correctAnswer.toString();
 
@@ -35,13 +41,18 @@ export function ShapeVisualizer({
             <p className="mb-4 text-center text-muted-foreground">
               Let's visualize this {shape} and understand how to calculate its {calculation}.
             </p>
+            {maxDimension > 10 && (
+              <div className="mb-4 p-2 bg-yellow-50 border border-yellow-200 rounded text-sm text-yellow-700 text-center">
+                <strong>Note:</strong> Large dimensions are scaled down for better visualization. The calculations remain accurate.
+              </div>
+            )}
             <div className="flex justify-center mb-6">
               <div className="relative">
                 <div
                   className="border-4 border-primary bg-primary/20"
                   style={{
-                    width: `${width * 20}px`,
-                    height: `${actualHeight * 20}px`,
+                    width: `${width * scale}px`,
+                    height: `${actualHeight * scale}px`,
                   }}
                 />
                 <div className="absolute -bottom-6 left-0 right-0 text-center">
@@ -80,8 +91,8 @@ export function ShapeVisualizer({
                 <div
                   className="border-4 border-primary bg-primary/20"
                   style={{
-                    width: `${width * 20}px`,
-                    height: `${actualHeight * 20}px`,
+                    width: `${width * scale}px`,
+                    height: `${actualHeight * scale}px`,
                   }}
                 />
                 {calculation === 'perimeter' && (
@@ -133,8 +144,8 @@ export function ShapeVisualizer({
                 <div
                   className="border-4 border-primary bg-primary/20"
                   style={{
-                    width: `${width * 20}px`,
-                    height: `${actualHeight * 20}px`,
+                    width: `${width * scale}px`,
+                    height: `${actualHeight * scale}px`,
                   }}
                 />
               </div>
@@ -183,8 +194,8 @@ export function ShapeVisualizer({
                 <div
                   className="border-4 border-primary bg-primary/20"
                   style={{
-                    width: `${width * 20}px`,
-                    height: `${actualHeight * 20}px`,
+                    width: `${width * scale}px`,
+                    height: `${actualHeight * scale}px`,
                   }}
                 />
                 <div className="absolute -bottom-6 left-0 right-0 text-center">
@@ -245,8 +256,8 @@ export function ShapeVisualizer({
                 <div
                   className="border-4 border-green-500 bg-green-200"
                   style={{
-                    width: `${width * 20}px`,
-                    height: `${actualHeight * 20}px`,
+                    width: `${width * scale}px`,
+                    height: `${actualHeight * scale}px`,
                   }}
                 />
                 <div className="absolute -bottom-6 left-0 right-0 text-center">

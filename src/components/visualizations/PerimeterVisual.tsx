@@ -34,13 +34,20 @@ const PerimeterVisual: React.FC<PerimeterVisualProps> = ({
 
   const renderRectangle = () => {
     const [width, height] = dimensions;
-    const scale = 4; // Scale factor for visualization
-    const scaledWidth = width * scale;
-    const scaledHeight = height * scale;
+    
+    // Adaptive scaling to fit within reasonable bounds
+    const maxDimension = Math.max(width, height);
+    const maxDisplaySize = 200; // Maximum display size in pixels
+    const scale = Math.min(4, maxDisplaySize / maxDimension);
+    
+    // For very large dimensions, use more aggressive scaling
+    const finalScale = maxDimension > 50 ? Math.min(scale, 1) : scale;
+    const scaledWidth = width * finalScale;
+    const scaledHeight = height * finalScale;
     
     return (
       <div className="relative">
-        <svg viewBox={`0 0 ${scaledWidth + 40} ${scaledHeight + 40}`} className="w-full h-64">
+        <svg viewBox={`0 0 ${Math.max(scaledWidth + 40, 240)} ${Math.max(scaledHeight + 40, 200)}`} className="w-full h-64">
           {/* Grid */}
           {showGrid && (
             <defs>
@@ -86,7 +93,7 @@ const PerimeterVisual: React.FC<PerimeterVisualProps> = ({
             x="20 + scaledWidth/2"
             y="15"
             textAnchor="middle"
-            className="text-sm font-medium fill-red-600"
+            className="text-[10px] font-medium fill-red-600"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
@@ -111,7 +118,7 @@ const PerimeterVisual: React.FC<PerimeterVisualProps> = ({
             x="20 + scaledWidth + 15"
             y="20 + scaledHeight/2"
             textAnchor="middle"
-            className="text-sm font-medium fill-red-600"
+            className="text-[10px] font-medium fill-red-600"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.7 }}
@@ -140,12 +147,18 @@ const PerimeterVisual: React.FC<PerimeterVisualProps> = ({
 
   const renderSquare = () => {
     const [side] = dimensions;
-    const scale = 4;
-    const scaledSide = side * scale;
+    
+    // Adaptive scaling to fit within reasonable bounds
+    const maxDisplaySize = 200; // Maximum display size in pixels
+    const scale = Math.min(4, maxDisplaySize / side);
+    
+    // For very large dimensions, use more aggressive scaling
+    const finalScale = side > 50 ? Math.min(scale, 1) : scale;
+    const scaledSide = side * finalScale;
     
     return (
       <div className="relative">
-        <svg viewBox={`0 0 ${scaledSide + 40} ${scaledSide + 40}`} className="w-full h-64">
+        <svg viewBox={`0 0 ${Math.max(scaledSide + 40, 240)} ${Math.max(scaledSide + 40, 200)}`} className="w-full h-64">
           {/* Grid */}
           {showGrid && (
             <defs>
@@ -191,7 +204,7 @@ const PerimeterVisual: React.FC<PerimeterVisualProps> = ({
             x="20 + scaledSide/2"
             y="15"
             textAnchor="middle"
-            className="text-sm font-medium fill-red-600"
+            className="text-[10px] font-medium fill-red-600"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
@@ -220,9 +233,16 @@ const PerimeterVisual: React.FC<PerimeterVisualProps> = ({
 
   const renderTriangle = () => {
     const [a, b, c] = dimensions;
-    const scale = 2;
-    const scaledB = b * scale;
-    const scaledC = c * scale;
+    
+    // Adaptive scaling to fit within reasonable bounds
+    const maxSide = Math.max(a, b, c);
+    const maxDisplaySize = 150; // Maximum display size in pixels
+    const scale = Math.min(2, maxDisplaySize / maxSide);
+    
+    // For very large dimensions, use more aggressive scaling
+    const finalScale = maxSide > 50 ? Math.min(scale, 0.5) : scale;
+    const scaledB = b * finalScale;
+    const scaledC = c * finalScale;
     
     // Calculate triangle vertices using law of cosines
     const angleA = Math.acos((b * b + c * c - a * a) / (2 * b * c));
@@ -266,7 +286,7 @@ const PerimeterVisual: React.FC<PerimeterVisualProps> = ({
             x={(x1 + x2) / 2}
             y={y1 + 15}
             textAnchor="middle"
-            className="text-sm font-medium fill-red-600"
+            className="text-[10px] font-medium fill-red-600"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.5 }}
@@ -278,7 +298,7 @@ const PerimeterVisual: React.FC<PerimeterVisualProps> = ({
             x={(x2 + x3) / 2 + 10}
             y={(y2 + y3) / 2}
             textAnchor="middle"
-            className="text-sm font-medium fill-red-600"
+            className="text-[10px] font-medium fill-red-600"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.7 }}
@@ -290,7 +310,7 @@ const PerimeterVisual: React.FC<PerimeterVisualProps> = ({
             x={(x1 + x3) / 2 - 10}
             y={(y1 + y3) / 2}
             textAnchor="middle"
-            className="text-sm font-medium fill-red-600"
+            className="text-[10px] font-medium fill-red-600"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.9 }}
@@ -328,6 +348,7 @@ const PerimeterVisual: React.FC<PerimeterVisualProps> = ({
   };
 
   const perimeter = calculatePerimeter();
+  const maxDimension = Math.max(...dimensions);
 
   return (
     <div className={`space-y-4 ${className}`}>
@@ -337,6 +358,11 @@ const PerimeterVisual: React.FC<PerimeterVisualProps> = ({
         </h3>
         <div className="text-sm text-gray-600">
           Dimensions: {dimensions.join(' × ')} {unit}
+          {maxDimension > 50 && (
+            <div className="text-xs text-gray-500 mt-1">
+              (Visualization scaled down for display)
+            </div>
+          )}
         </div>
       </div>
       

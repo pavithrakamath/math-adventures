@@ -1,37 +1,74 @@
 {
   "id": "perimeter-area",
   "title": "Perimeter and Area",
-  "description": "Calculate perimeter and area of different shapes",
+  "description": "Master perimeter and area calculations with interactive visualizations and real-world problems",
   "difficulty": "Intermediate",
-  "estimatedTime": "25-30 min",
+  "estimatedTime": "35-40 min",
   "emoji": "📐",
   "learningObjectives": [
-    "Calculate perimeter of rectangles and squares",
-    "Calculate area of rectangles and squares",
+    "Calculate perimeter of rectangles, squares, and triangles",
+    "Calculate area of rectangles, squares, and triangles", 
     "Understand the difference between perimeter and area",
-    "Solve real-world problems involving measurement"
+    "Solve real-world problems involving measurement",
+    "Compare shapes with different perimeters and areas",
+    "Estimate measurements and verify calculations"
   ],
   "sections": [
     {
       "id": "intro",
       "type": "intro",
-      "title": "📐 Perimeter vs Area",
-      "content": "Perimeter = distance around! Area = space inside! 🎯",
+      "title": "📐 Welcome to Perimeter and Area!",
+      "content": "Let's explore the fascinating world of measurement! Perimeter is the distance around a shape, while area is the space inside. Get ready for hands-on learning! 🎯",
       "order": 1
     },
     {
-      "id": "area-visualizations",
+      "id": "perimeter-basics",
       "type": "interactive",
-      "title": "📐 Interactive Area Visualizations",
-      "content": "AreaVisualizationLesson",
+      "title": "📏 Understanding Perimeter",
+      "content": "InteractivePerimeter",
       "order": 2
     },
     {
-      "id": "perimeter-practice",
+      "id": "area-basics", 
       "type": "interactive",
-      "title": "📏 Perimeter Practice",
+      "title": "📐 Understanding Area",
+      "content": "AreaVisualizationLesson",
+      "order": 3
+    },
+    {
+      "id": "perimeter-practice",
+      "type": "interactive", 
+      "title": "🎯 Perimeter Practice",
       "content": "ShapeVisualizer",
+      "order": 4
+    },
+    {
+      "id": "area-practice",
+      "type": "interactive",
+      "title": "🎯 Area Practice", 
+      "content": "ShapeVisualizer",
+      "order": 5
+    },
+    {
+      "id": "shape-comparison",
+      "type": "interactive",
+      "title": "⚖️ Shape Comparison Challenge",
+      "content": "PerimeterAreaComparison",
       "order": 6
+    },
+    {
+      "id": "real-world-problems",
+      "type": "interactive",
+      "title": "🏠 Real-World Applications",
+      "content": "EstimationGame",
+      "order": 7
+    },
+    {
+      "id": "quiz",
+      "type": "quiz",
+      "title": "🧠 Test Your Knowledge",
+      "content": "Test your understanding with these challenging questions!",
+      "order": 8
     }
   ]
 }

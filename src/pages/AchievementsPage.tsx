@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Trophy, Star, Target, Clock } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
-import { useProgress } from '../context/AppStateContext';
+import { useProgress } from '../context/AppStateHooks';
 
 const AchievementsPage = () => {
   const { t } = useTranslation();

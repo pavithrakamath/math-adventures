@@ -13,6 +13,7 @@ import FibonacciVisualizer from '../components/visualizations/FibonacciVisualize
 import OddToSquareVisualizer from '../components/visualizations/OddToSquareVisualizer';
 import PatternRelationshipsVisualizer from '../components/visualizations/PatternRelationshipsVisualizer';
 import AreaVisualizationLesson from '../components/visualizations/AreaVisualizationLesson';
+import PerimeterAreaComparison from '../components/visualizations/PerimeterAreaComparison';
 
 // Import lesson data from JSON files
 import patternsMathematicsData from './lessons/patterns-mathematics.json';
@@ -42,6 +43,7 @@ const visualizationComponents: Record<string, React.ComponentType<any>> = {
   OddToSquareVisualizer,
   PatternRelationshipsVisualizer,
   AreaVisualizationLesson,
+  PerimeterAreaComparison,
 };
 
 // Function to process lesson data and map visualization components

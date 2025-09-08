@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Palette, Globe, Volume2, Zap, RotateCcw } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
-import { useSettings } from '../context/AppStateContext';
+import { useSettings } from '../context/AppStateHooks';
 import { AccessibleButton } from '../components/common/AccessibleButton';
 
 const SettingsPage = () => {

@@ -58,5 +58,94 @@
       "height": 7,
       "calculation": "perimeter"
     }
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Akshi wants to put lace all around a rectangular tablecloth that is 3 m long and 2 m wide. How much lace does she need?",
+    "options": ["5 m", "6 m", "10 m", "12 m"],
+    "answer": "10 m",
+    "errorDescription": "The student may have added only length and width, or calculated area instead of perimeter. For putting lace around, we need the perimeter.",
+    "hint": "Putting lace 'all around' means we need the perimeter. For a rectangle: P = 2 × (length + width).",
+    "interactiveHint": {
+      "type": "shape-visualizer",
+      "shape": "rectangle",
+      "width": 3,
+      "height": 2,
+      "calculation": "perimeter"
+    }
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Usha takes three rounds of a square park with side 75 m. What total distance does she cover?",
+    "options": ["225 m", "300 m", "900 m", "16,875 m"],
+    "answer": "900 m",
+    "errorDescription": "The student may have calculated only one round, or calculated area instead of perimeter. Remember: 3 rounds = 3 × perimeter.",
+    "hint": "First find the perimeter of the square park: 4 × 75 = 300 m. Then multiply by 3 rounds: 300 × 3 = 900 m.",
+    "interactiveHint": {
+      "type": "shape-visualizer",
+      "shape": "square",
+      "width": 75,
+      "height": 75,
+      "calculation": "perimeter"
+    }
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A triangle has sides of 4 cm, 5 cm, and 7 cm. What is its perimeter?",
+    "options": ["16 cm", "20 cm", "35 cm", "140 cm"],
+    "answer": "16 cm",
+    "errorDescription": "The student may have multiplied the sides instead of adding them. For perimeter, we add all the sides.",
+    "hint": "For any triangle, perimeter = sum of all three sides. Add: 4 + 5 + 7 = 16 cm",
+    "interactiveHint": {
+      "type": "perimeter-visual",
+      "shape": "triangle",
+      "dimensions": [4, 5, 7],
+      "unit": "cm"
+    }
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A farmer has a rectangular field 230 m long and 160 m wide. He wants to fence it with 3 rounds of rope. What total length of rope is needed?",
+    "options": ["390 m", "780 m", "1,170 m", "2,340 m"],
+    "answer": "2,340 m",
+    "errorDescription": "The student may have calculated only one round, or added length and width instead of calculating perimeter. Remember: 3 rounds = 3 × perimeter.",
+    "hint": "First calculate the perimeter: 2 × (230 + 160) = 2 × 390 = 780 m. Then multiply by 3 rounds: 780 × 3 = ?",
+    "interactiveHint": {
+      "type": "shape-visualizer",
+      "shape": "rectangle",
+      "width": 230,
+      "height": 160,
+      "calculation": "perimeter"
+    }
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A floor is 5 m long and 4 m wide. A square carpet of side 3 m is laid on the floor. What area of the floor is NOT carpeted?",
+    "options": ["2 sq m", "11 sq m", "20 sq m", "29 sq m"],
+    "answer": "11 sq m",
+    "errorDescription": "The student may have calculated only the carpet area or floor area, but not the difference. We need: Floor area - Carpet area.",
+    "hint": "Calculate floor area (5 × 4 = 20), carpet area (3 × 3 = 9), then subtract: 20 - 9 = 11 sq m",
+    "interactiveHint": {
+      "type": "shape-visualizer",
+      "shape": "rectangle",
+      "width": 5,
+      "height": 4,
+      "calculation": "area"
+    }
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Four square flower beds, each of side 4 m, are in the four corners of a piece of land 12 m long and 10 m wide. What area is available for lawn?",
+    "options": ["48 sq m", "56 sq m", "120 sq m", "168 sq m"],
+    "answer": "56 sq m",
+    "errorDescription": "The student may have calculated only the total land area or only the flower bed area. We need: Total land area - Total flower bed area.",
+    "hint": "Total land area = 12 × 10 = 120. One flower bed area = 4 × 4 = 16. Four flower beds = 4 × 16 = 64. Available area = 120 - 64 = 56 sq m",
+    "interactiveHint": {
+      "type": "shape-visualizer",
+      "shape": "rectangle",
+      "width": 12,
+      "height": 10,
+      "calculation": "area"
+    }
   }
 ]
