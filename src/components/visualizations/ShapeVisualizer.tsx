@@ -109,18 +109,20 @@ const ShapeVisualizer: React.FC<ShapeVisualizerProps> = ({
           perimeter = 4 * (dimensions.side || 0);
           area = (dimensions.side || 0) * (dimensions.side || 0);
           break;
-        case 'triangle':
+        case 'triangle': {
           const base = dimensions.base || 0;
           const height = dimensions.height || 0;
           const hypotenuse = Math.sqrt(base * base + height * height);
           perimeter = base + height + Math.round(hypotenuse);
           area = (base * height) / 2;
           break;
-        case 'circle':
+        }
+        case 'circle': {
           const radius = dimensions.radius || 0;
           perimeter = Math.round(2 * Math.PI * radius * 10) / 10;
           area = Math.round(Math.PI * radius * radius * 10) / 10;
           break;
+        }
       }
 
       setCurrentShape({

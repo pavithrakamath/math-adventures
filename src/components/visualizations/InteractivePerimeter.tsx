@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
 interface InteractivePerimeterProps {
@@ -59,9 +59,9 @@ const InteractivePerimeter: React.FC<InteractivePerimeterProps> = ({
     if (targetPerimeter > 0) {
       drawTargetInfo(ctx, targetPerimeter, currentPerimeter);
     }
-  }, [points, shape, targetPerimeter, currentPerimeter, showGrid]);
+  }, [points, shape, targetPerimeter, currentPerimeter, showGrid, centerPoint, drawCompassPreview, drawGrid, drawShape, previewPoint]);
 
-  const drawGrid = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
+  const drawGrid = useCallback((ctx: CanvasRenderingContext2D, width: number, height: number) => {
     ctx.strokeStyle = '#e5e7eb';
     ctx.lineWidth = 1;
     
@@ -83,9 +83,9 @@ const InteractivePerimeter: React.FC<InteractivePerimeterProps> = ({
       ctx.lineTo(width, y);
       ctx.stroke();
     }
-  };
+  }, [scale]);
 
-  const drawCompassPreview = (ctx: CanvasRenderingContext2D, center: { x: number; y: number }, current: { x: number; y: number }) => {
+  const drawCompassPreview = useCallback((ctx: CanvasRenderingContext2D, center: { x: number; y: number }, current: { x: number; y: number }) => {
     const radiusPixels = Math.sqrt(
       Math.pow(current.x - center.x, 2) + Math.pow(current.y - center.y, 2)
     );
@@ -101,7 +101,7 @@ const InteractivePerimeter: React.FC<InteractivePerimeterProps> = ({
     ctx.arc(center.x, center.y, radiusPixels, 0, 2 * Math.PI);
     ctx.stroke();
     ctx.setLineDash([]);
-  };
+  }, [drawVirtualCompass]);
 
   const drawCompassCenter = (ctx: CanvasRenderingContext2D, center: { x: number; y: number }) => {
     // Draw compass base (center pin)
@@ -128,7 +128,7 @@ const InteractivePerimeter: React.FC<InteractivePerimeterProps> = ({
     ctx.stroke();
   };
 
-  const drawVirtualCompass = (ctx: CanvasRenderingContext2D, center: { x: number; y: number }, current: { x: number; y: number }, radius: number) => {
+  const drawVirtualCompass = useCallback((ctx: CanvasRenderingContext2D, center: { x: number; y: number }, current: { x: number; y: number }, radius: number) => {
     // Draw compass base (center pin)
     ctx.fillStyle = '#dc2626';
     ctx.beginPath();
@@ -180,9 +180,9 @@ const InteractivePerimeter: React.FC<InteractivePerimeterProps> = ({
     ctx.font = '12px Arial';
     ctx.textAlign = 'center';
     ctx.fillText(`r = ${(radius / scale).toFixed(1)} cm`, midX, midY - 8);
-  };
+  }, [scale]);
 
-  const drawShape = (ctx: CanvasRenderingContext2D, points: { x: number; y: number }[], shapeType: string) => {
+  const drawShape = useCallback((ctx: CanvasRenderingContext2D, points: { x: number; y: number }[], shapeType: string) => {
     if (points.length === 0) return;
 
     ctx.strokeStyle = '#3b82f6';
@@ -246,7 +246,7 @@ const InteractivePerimeter: React.FC<InteractivePerimeterProps> = ({
       setCurrentPerimeter(perimeter);
       onPerimeterChange?.(perimeter);
     }
-  };
+  }, [scale, onPerimeterChange, drawVirtualCompass]);
 
   const drawTargetInfo = (ctx: CanvasRenderingContext2D, target: number, current: number) => {
     ctx.fillStyle = '#374151';

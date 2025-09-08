@@ -14,7 +14,7 @@ export interface LessonSection {
   id: string;
   type: 'intro' | 'interactive' | 'practice' | 'assessment';
   title: string;
-  content: React.ComponentType<any> | string;
+  content: React.ComponentType<Record<string, unknown>> | string;
   order: number;
 }
 
@@ -26,7 +26,7 @@ export interface Question {
   correctAnswer: string | number | string[] | boolean;
   explanation: string;
   hint: string;
-  visualization?: React.ComponentType<any>;
+  visualization?: React.ComponentType<Record<string, unknown>>;
   points: number;
   difficulty: 'easy' | 'medium' | 'hard';
 }
@@ -35,7 +35,7 @@ export interface LessonProgress {
   lessonId: string;
   currentSection: number;
   completedSections: Set<number>;
-  answers: Record<string, any>;
+  answers: Record<string, string | number | boolean | string[]>;
   score: number;
   timeSpent: number;
   isCompleted: boolean;
@@ -67,6 +67,6 @@ export interface MathConcept {
   name: string;
   description: string;
   examples: string[];
-  visualizations: React.ComponentType<any>[];
+  visualizations: React.ComponentType<Record<string, unknown>>[];
   relatedConcepts: string[];
 }

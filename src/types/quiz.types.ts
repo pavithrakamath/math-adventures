@@ -23,7 +23,7 @@ export interface QuizQuestion {
   correctAnswer: string | number | string[] | boolean;
   explanation: string;
   hint: string;
-  visualization?: React.ComponentType<any>;
+  visualization?: React.ComponentType<Record<string, unknown>>;
   points: number;
   difficulty: 'easy' | 'medium' | 'hard';
   timeLimit?: number;

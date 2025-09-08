@@ -4,7 +4,7 @@ import { useState, useCallback } from 'react';
 export interface LessonState {
   currentSection: number;
   currentQuestion: number;
-  answers: Record<string, any>;
+  answers: Record<string, string | number | boolean | string[]>;
   showHint: boolean;
   timeSpent: number;
   startTime: Date;
@@ -13,7 +13,7 @@ export interface LessonState {
   attempts: Record<string, number>;
 }
 
-export const useLessonState = (_lessonId: string) => {
+export const useLessonState = () => {
   const [state, setState] = useState<LessonState>({
     currentSection: 0,
     currentQuestion: 0,
@@ -40,7 +40,7 @@ export const useLessonState = (_lessonId: string) => {
     }));
   }, []);
 
-  const addAnswer = useCallback((questionId: string, answer: any, isCorrect: boolean) => {
+  const addAnswer = useCallback((questionId: string, answer: string | number | boolean | string[], isCorrect: boolean) => {
     setState(prev => ({
       ...prev,
       answers: {

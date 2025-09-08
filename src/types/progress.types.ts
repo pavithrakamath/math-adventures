@@ -18,7 +18,7 @@ export interface LessonProgress {
   lessonId: string;
   currentSection: number;
   completedSections: Set<number>;
-  answers: Record<string, any>;
+  answers: Record<string, string | number | boolean | string[]>;
   score: number;
   timeSpent: number;
   isCompleted: boolean;
@@ -27,7 +27,7 @@ export interface LessonProgress {
 
 export interface ProgressAction {
   type: 'LOAD_PROGRESS' | 'UPDATE_LESSON_PROGRESS' | 'COMPLETE_LESSON' | 'UNLOCK_ACHIEVEMENT' | 'RESET_PROGRESS';
-  payload?: any;
+  payload?: Record<string, unknown>;
 }
 
 export interface StreakData {

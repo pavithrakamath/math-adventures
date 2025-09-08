@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
 interface BarData {
@@ -35,9 +35,9 @@ const InteractiveBarGraph: React.FC<InteractiveBarGraphProps> = ({
 
   useEffect(() => {
     drawGraph();
-  }, [graphData, maxValue]);
+  }, [graphData, maxValue, drawGraph]);
 
-  const drawGraph = () => {
+  const drawGraph = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -117,7 +117,7 @@ const InteractiveBarGraph: React.FC<InteractiveBarGraphProps> = ({
     ctx.font = 'bold 16px Arial';
     ctx.textAlign = 'center';
     ctx.fillText(title, width / 2, 30);
-  };
+  }, [graphData, maxValue, title]);
 
   const addDataPoint = () => {
     const newItem: BarData = {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 interface BarData {
   label: string;
@@ -35,12 +35,12 @@ const ClickableLessonBarChart: React.FC<ClickableLessonBarChartProps> = ({
   const [isEditing, setIsEditing] = useState(false);
 
   // Default data if none provided
-  const defaultData: BarData[] = [
+  const defaultData: BarData[] = useMemo(() => [
     { label: 'Apples', value: 15, color: '#3b82f6', emoji: '🍎' },
     { label: 'Bananas', value: 12, color: '#ef4444', emoji: '🍌' },
     { label: 'Oranges', value: 8, color: '#10b981', emoji: '🍊' },
     { label: 'Grapes', value: 10, color: '#f59e0b', emoji: '🍇' }
-  ];
+  ], []);
 
   const chartData = isEditing ? editingData : (data || defaultData);
   const chartTitle = title || "Interactive Bar Chart";
@@ -55,7 +55,7 @@ const ClickableLessonBarChart: React.FC<ClickableLessonBarChartProps> = ({
     } else {
       setEditingData([...defaultData]);
     }
-  }, [data]);
+  }, [data, defaultData]);
 
   useEffect(() => {
     setSelectedBar(null);

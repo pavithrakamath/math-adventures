@@ -5,7 +5,7 @@ import type { Lesson } from '../../types/lesson.types';
 
 export interface LessonGridProps {
   lessons: Lesson[];
-  lessonProgress: Record<string, any>;
+  lessonProgress: Record<string, { score: number; timeSpent: number; isCompleted: boolean }>;
   completedLessons: Set<string>;
   onLessonClick: (lessonId: string) => void;
   className?: string;

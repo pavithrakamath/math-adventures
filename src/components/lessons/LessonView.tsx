@@ -24,7 +24,7 @@ const LessonView: React.FC<LessonViewProps> = ({ lesson, onComplete }) => {
   const { state, addAnswer, completeLesson, getAccuracy, getProgress } = useLessonState(lesson.id);
   const questions = getQuestionsForLesson(lesson.id);
 
-  const handleAnswer = (answer: any, isCorrect: boolean) => {
+  const handleAnswer = (answer: string | number | boolean | string[], isCorrect: boolean) => {
     if (questions[currentQuestion]) {
       addAnswer(questions[currentQuestion].id, answer, isCorrect);
       // Let QuestionBox handle the progression with timer
