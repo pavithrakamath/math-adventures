@@ -1,5 +1,5 @@
 // import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Header from './components/layout/Header';
 import Navigation from './components/layout/Navigation';
@@ -9,11 +9,12 @@ import { lessons } from './data/lessons';
 import { useProgress } from './hooks/useProgress';
 import './App.css';
 
-function App() {
+function AppContent() {
   const { progress, isLoading, getOverallProgress } = useProgress();
+  const navigate = useNavigate();
 
   const handleLessonClick = (lessonId: string) => {
-    window.location.href = `/lesson/${lessonId}`;
+    navigate(`/lesson/${lessonId}`);
   };
 
   const totalLessons = lessons.length;
@@ -37,45 +38,44 @@ function App() {
   }
 
   return (
-    <Router>
-      <div className="min-h-screen bg-gray-50">
-        <Header
-          title="Math Adventures"
-          subtitle="Grade 6 Mathematics Learning Platform"
-          progress={overallProgress}
-          totalLessons={totalLessons}
-          completedLessons={completedLessons}
-          currentStreak={progress.currentStreak}
-          totalScore={progress.totalScore}
-        />
-        
-        <Navigation />
-        
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <Routes>
-            <Route path="/" element={
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="text-center mb-8">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                    Welcome to Math Adventures! 🎯
-                  </h2>
-                  <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Embark on an exciting journey through Grade 6 mathematics. 
-                    Choose any lesson to start learning with interactive visualizations, solve problems, and unlock achievements!
-                  </p>
-                </div>
-                
-                <LessonGrid
-                  lessons={lessons}
-                  completedLessons={progress.completedLessons}
-                  onLessonClick={handleLessonClick}
-                />
-              </motion.div>
-            } />
+    <div className="min-h-screen bg-gray-50">
+      <Header
+        title="Math Adventures"
+        subtitle="Grade 6 Mathematics Learning Platform"
+        progress={overallProgress}
+        totalLessons={totalLessons}
+        completedLessons={completedLessons}
+        currentStreak={progress.currentStreak}
+        totalScore={progress.totalScore}
+      />
+      
+      <Navigation />
+      
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <Routes>
+          <Route path="/" element={
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                  Welcome to Math Adventures! 🎯
+                </h2>
+                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                  Embark on an exciting journey through Grade 6 mathematics. 
+                  Choose any lesson to start learning with interactive visualizations, solve problems, and unlock achievements!
+                </p>
+              </div>
+              
+              <LessonGrid
+                lessons={lessons}
+                completedLessons={progress.completedLessons}
+                onLessonClick={handleLessonClick}
+              />
+            </motion.div>
+          } />
             
             <Route path="/lessons" element={
               <motion.div
@@ -160,6 +160,13 @@ function App() {
           </Routes>
         </main>
       </div>
+    );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
     </Router>
   );
 }
