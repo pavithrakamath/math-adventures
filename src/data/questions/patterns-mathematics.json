@@ -1,0 +1,87 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "What pattern do you see in this sequence: 2, 4, 8, 16, ?",
+    "options": ["24", "32", "20", "18"],
+    "answer": "32",
+    "errorDescription": "The student struggled to identify the multiplication pattern. They might need help understanding that each number is double the previous one.",
+    "hint": "Look at how each number relates to the one before it. Each number is double the previous one! 2×2=4, 4×2=8, 8×2=16, 16×2=32",
+    "interactiveHint": {
+      "type": "pattern-visualizer",
+      "sequence": [2, 4, 8, 16],
+      "operation": "multiply",
+      "value": 2
+    }
+  },
+  {
+    "type": "multiple-choice",
+    "text": "In nature, what pattern do you see in a sunflower?",
+    "options": ["Spiral", "Square", "Triangle", "Random"],
+    "answer": "Spiral",
+    "errorDescription": "The student might not have noticed the spiral pattern in sunflowers. This is a common natural pattern called the Fibonacci spiral.",
+    "hint": "Look at how the seeds are arranged in the center. Sunflowers have a beautiful spiral pattern in their seeds - this is called the Fibonacci spiral!"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What comes next in this pattern: 🔴🔵🔴🔵🔴?",
+    "options": ["🔴", "🔵", "🟢", "🟡"],
+    "answer": "🔵",
+    "errorDescription": "The student might have missed the alternating pattern. This is a simple ABAB pattern that repeats.",
+    "hint": "Look at the color sequence carefully. The pattern alternates between red and blue circles. After red, it should be blue!"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the next number in the sequence: 2, 4, 6, 8, ...?",
+    "options": ["9", "10", "12", "14"],
+    "answer": "10",
+    "errorDescription": "The student is having trouble identifying the simple arithmetic progression (adding 2). They may not be looking for the relationship between consecutive numbers.",
+    "hint": "You noticed there is a pattern, that is a great start! Let's look at it together below.",
+    "interactiveHint": {
+      "type": "pattern-visualizer",
+      "sequence": [2, 4, 6, 8],
+      "operation": "add",
+      "value": 2
+    }
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Describe the pattern: 1, 4, 9, 16, ...",
+    "options": [
+      "Adding 3",
+      "Multiplying by 4",
+      "Square Numbers",
+      "Doubling the number"
+    ],
+    "answer": "Square Numbers",
+    "errorDescription": "The student may not recognize the pattern of perfect squares. Prompt them to think about multiplying a number by itself.",
+    "hint": "This pattern is a bit trickier than just adding or multiplying by the same number each time. Let's look at the position of each number in the sequence:\n\nThe 1st number is 1. (Think: 1 × 1 = 1)\nThe 2nd number is 4. (Think: 2 × 2 = 4)\nThe 3rd number is 9. (Think: 3 × 3 = 9)\nThe 4th number is 16. (Think: 4 × 4 = 16)\n\nWhat do you notice? Each number is its position number multiplied by itself. This special pattern has a name. Do you know what it is?"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Find the next number in this sequence: 20, 17, 14, 11, ...?",
+    "options": ["8", "9", "10", "7"],
+    "answer": "8",
+    "errorDescription": "The student is having trouble with a subtraction pattern. They need to identify the common difference.",
+    "hint": "This pattern is going down instead of up. What's the difference between each number? Let's check it out together.",
+    "interactiveHint": {
+      "type": "pattern-visualizer",
+      "sequence": [20, 17, 14, 11],
+      "operation": "subtract",
+      "value": 3
+    }
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the next number in the sequence: 3, 6, 12, 24, ...?",
+    "options": ["30", "48", "36", "42"],
+    "answer": "48",
+    "errorDescription": "The student may not be seeing the multiplicative pattern. They might be trying to find an addition pattern instead.",
+    "hint": "Let's investigate this pattern. It seems to be growing very quickly! Adding the same number each time doesn't seem to work. What happens if you try multiplying each number to get the next one? Let's visualize it.",
+    "interactiveHint": {
+      "type": "pattern-visualizer",
+      "sequence": [3, 6, 12, 24],
+      "operation": "multiply",
+      "value": 2
+    }
+  }
+]

@@ -1,0 +1,37 @@
+{
+  "id": "prime-time",
+  "title": "Prime Time - The Idli-Vada Game",
+  "description": "Discover prime numbers through the fun Idli-Vada game",
+  "difficulty": "Advanced",
+  "estimatedTime": "25-30 min",
+  "emoji": "🥟",
+  "learningObjectives": [
+    "Identify prime and composite numbers",
+    "Find factors and multiples",
+    "Play the Idli-Vada game for multiples",
+    "Understand common multiples and factors"
+  ],
+  "sections": [
+    {
+      "id": "intro",
+      "type": "intro",
+      "title": "🥟 The Idli-Vada Game!",
+      "content": "Multiples of 3 = \"Idli\"! Multiples of 5 = \"Vada\"! Both = \"Idli-Vada\"! 🎮",
+      "order": 1
+    },
+    {
+      "id": "multiples",
+      "type": "interactive",
+      "title": "🔍 Prime Number Factor Checker",
+      "content": "FactorChecker",
+      "order": 2
+    },
+    {
+      "id": "game",
+      "type": "practice",
+      "title": "🎲 Play the Game!",
+      "content": "Count: 1, 2, Idli, 4, Vada, Idli, 7, 8, Idli, Vada, 11, Idli, 13, 14, Idli-Vada!",
+      "order": 3
+    }
+  ]
+}

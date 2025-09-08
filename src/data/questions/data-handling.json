@@ -1,0 +1,68 @@
+[
+  {
+    "type": "chart",
+    "text": "The bar chart below shows the number of fruits sold at a local shop in one day.",
+    "data": [
+      { "name": "Apple", "value": 45 },
+      { "name": "Banana", "value": 60 },
+      { "name": "Orange", "value": 30 },
+      { "name": "Grapes", "value": 50 },
+      { "name": "Mango", "value": 25 }
+    ],
+    "question": "Which fruit was sold the most?",
+    "answer": "Banana",
+    "errorDescription": "The student is having trouble reading the bar chart. They should look for the tallest bar.",
+    "hint": "A bar chart is a visual way to compare numbers. The 'taller' the bar, the larger the number it represents. To find the fruit that was sold the most, simply look for the bar that reaches the highest up the chart. Which fruit is that?"
+  },
+  {
+    "type": "text",
+    "text": "How many more Bananas were sold than Apples?",
+    "data": [
+      { "name": "Apple", "value": 45 },
+      { "name": "Banana", "value": 60 },
+      { "name": "Orange", "value": 30 },
+      { "name": "Grapes", "value": 50 },
+      { "name": "Mango", "value": 25 }
+    ],
+    "answer": "15",
+    "errorDescription": "The student needs help with interpreting the data to find a difference. They need to find the values for both fruits and then subtract.",
+    "hint": "This is a two-step problem, but it's straightforward! First, find the value for each fruit by looking at the height of its bar. The Bananas bar is at 60 and the Apples bar is at 45. The question asks 'how many more', which means we need to find the difference. What is 60 - 45?"
+  },
+  {
+    "type": "chart",
+    "text": "The bar chart shows the number of fruits sold.",
+    "data": [
+      { "name": "Apple", "value": 45 },
+      { "name": "Banana", "value": 60 },
+      { "name": "Orange", "value": 30 },
+      { "name": "Grapes", "value": 50 },
+      { "name": "Mango", "value": 25 }
+    ],
+    "question": "Which fruit was sold the least?",
+    "answer": "Mango",
+    "errorDescription": "The student is having trouble reading the bar chart for the lowest value. They should look for the shortest bar.",
+    "hint": "Just like the tallest bar shows the biggest number, the shortest bar shows the smallest number. Look for the fruit with the bar that is lowest on the chart."
+  },
+  {
+    "type": "text",
+    "text": "What is the total number of fruits sold for the day?",
+    "data": [
+      { "name": "Apple", "value": 45 },
+      { "name": "Banana", "value": 60 },
+      { "name": "Orange", "value": 30 },
+      { "name": "Grapes", "value": 50 },
+      { "name": "Mango", "value": 25 }
+    ],
+    "answer": "210",
+    "errorDescription": "The student needs to add up the values from all the bars.",
+    "hint": "The question asks for the 'total' number of fruits. 'Total' is a keyword that tells us we need to add things together. You need to find the value for each fruit and then add them all up: 45 + 60 + 30 + 50 + 25. What do you get?"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "How many tally marks represent the number 7?",
+    "options": ["7 tally marks", "6 tally marks", "8 tally marks", "9 tally marks"],
+    "answer": "7 tally marks",
+    "errorDescription": "The student may be confused about how tally marks work. Tally marks are grouped in fives with a diagonal line through every fifth mark.",
+    "hint": "Remember: tally marks are grouped in fives with a diagonal line through every fifth mark. For 7, we write 5 marks with a diagonal line through them (representing 5) plus 2 more marks."
+  }
+]

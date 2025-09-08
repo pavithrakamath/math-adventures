@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Trophy, Clock, User } from 'lucide-react';
 import ProgressBar from './ProgressBar';
@@ -15,7 +14,7 @@ export interface HeaderProps {
   className?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({
+const Header = ({
   title,
   subtitle,
   progress = 0,
@@ -25,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({
   totalScore = 0,
   showStats = true,
   className = '',
-}) => {
+}: HeaderProps) => {
   return (
     <motion.header
       className={`bg-gradient-to-r from-primary-600 to-primary-700 text-white ${className}`}
@@ -35,7 +34,6 @@ const Header: React.FC<HeaderProps> = ({
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="py-6">
-          {/* Title Section */}
           <div className="text-center mb-6">
             <motion.h1
               className="text-3xl md:text-4xl font-bold font-display mb-2"
@@ -57,7 +55,6 @@ const Header: React.FC<HeaderProps> = ({
             )}
           </div>
 
-          {/* Progress Section */}
           {showStats && (
             <motion.div
               className="space-y-4"
@@ -65,7 +62,6 @@ const Header: React.FC<HeaderProps> = ({
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              {/* Overall Progress */}
               <ProgressBar
                 progress={progress}
                 label="Overall Progress"
@@ -74,7 +70,6 @@ const Header: React.FC<HeaderProps> = ({
                 color="success"
               />
 
-              {/* Stats Grid */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
                 <motion.div
                   className="bg-white bg-opacity-10 rounded-lg p-4 text-center"

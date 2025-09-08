@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, XCircle, Lightbulb, RotateCcw, Clock } from 'lucide-react';
-import Button from '../ui/Button';
+import { Button } from '../ui/button';
 import Feedback from '../ui/Feedback';
 import TallyMarks from '../visualizations/TallyMarks';
+import SymmetryVisualizer from '../visualizations/SymmetryVisualizer';
 import type { Question } from '../../types/lesson.types';
 
 export interface QuestionBoxProps {
@@ -231,6 +232,39 @@ const QuestionBox: React.FC<QuestionBoxProps> = ({
     </div>
   );
 
+  const renderVisualSelect = () => {
+    const handleVisualizerComplete = (_isCorrect: boolean, linesFound: number) => {
+      handleAnswerSelect(linesFound);
+    };
+
+    // Determine the shape based on the question
+    let shape: 'square' | 'rectangle' | 'triangle' | 'circle' | 'butterfly' | 'heart' | 'star' | 'pentagon' | 'hexagon' | undefined;
+    
+    if (question.question.toLowerCase().includes('square')) {
+      shape = 'square';
+    } else if (question.question.toLowerCase().includes('rectangle')) {
+      shape = 'rectangle';
+    } else if (question.question.toLowerCase().includes('triangle')) {
+      shape = 'triangle';
+    } else if (question.question.toLowerCase().includes('pentagon')) {
+      shape = 'pentagon';
+    } else if (question.question.toLowerCase().includes('hexagon')) {
+      shape = 'hexagon';
+    } else if (question.question.toLowerCase().includes('circle')) {
+      shape = 'circle';
+    }
+
+    return (
+      <div className="space-y-4">
+        <SymmetryVisualizer
+          shape={shape}
+          onComplete={handleVisualizerComplete}
+          showHint={showHint}
+        />
+      </div>
+    );
+  };
+
   const renderQuestionType = () => {
     switch (question.type) {
       case 'multiple-choice':
@@ -239,6 +273,8 @@ const QuestionBox: React.FC<QuestionBoxProps> = ({
         return renderTrueFalse();
       case 'input':
         return renderInput();
+      case 'visual-select':
+        return renderVisualSelect();
       default:
         return renderMultipleChoice();
     }

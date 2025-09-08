@@ -1,0 +1,37 @@
+{
+  "id": "lines-angles",
+  "title": "Lines and Angles",
+  "description": "Explore the building blocks of geometry - points, lines, and angles",
+  "difficulty": "Beginner",
+  "estimatedTime": "25-30 min",
+  "emoji": "📐",
+  "learningObjectives": [
+    "Understand points, lines, rays, and line segments",
+    "Identify different types of angles",
+    "Measure angles using a protractor",
+    "Recognize geometric patterns in real life"
+  ],
+  "sections": [
+    {
+      "id": "intro",
+      "type": "intro",
+      "title": "📐 Points and Lines",
+      "content": "A point is a dot! A ray goes on forever! ✨",
+      "order": 1
+    },
+    {
+      "id": "angles",
+      "type": "interactive",
+      "title": "🎯 Draw Shapes with Specific Perimeter",
+      "content": "InteractivePerimeter",
+      "order": 2
+    },
+    {
+      "id": "practice",
+      "type": "practice",
+      "title": "🔍 Angle Hunt",
+      "content": "Find right angles in your room! Look for L-shapes!",
+      "order": 3
+    }
+  ]
+}

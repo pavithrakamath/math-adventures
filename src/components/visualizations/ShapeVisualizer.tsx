@@ -1,421 +1,297 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { Button } from '../ui/button';
+import { ArrowRight, Lightbulb, Ruler } from 'lucide-react';
 
 interface ShapeVisualizerProps {
-  shape?: 'rectangle' | 'square' | 'triangle' | 'circle';
-  dimensions?: {
-    length?: number;
-    width?: number;
-    side?: number;
-    base?: number;
-    height?: number;
-    radius?: number;
-  };
-  onCalculation?: (perimeter: number, area: number) => void;
-  showHint?: boolean;
+  shape: 'rectangle' | 'square';
+  width: number;
+  height: number;
+  calculation: 'perimeter' | 'area';
 }
 
-interface Shape {
-  type: 'rectangle' | 'square' | 'triangle' | 'circle';
-  dimensions: {
-    length?: number;
-    width?: number;
-    side?: number;
-    base?: number;
-    height?: number;
-    radius?: number;
-  };
-  perimeter: number;
-  area: number;
-  color: string;
-}
-
-const ShapeVisualizer: React.FC<ShapeVisualizerProps> = ({
+export function ShapeVisualizer({
   shape = 'rectangle',
-  dimensions,
-  onCalculation,
-  showHint = true
-}) => {
-  const [currentShape, setCurrentShape] = useState<Shape | null>(null);
-  const [viewMode, setViewMode] = useState<'perimeter' | 'area'>('perimeter');
-  const [showCalculations, setShowCalculations] = useState(false);
+  width = 5,
+  height = 3,
+  calculation = 'perimeter',
+}: ShapeVisualizerProps) {
+  const [stage, setStage] = useState(0);
+  const [userInput, setUserInput] = useState('');
+  const [showAnswer, setShowAnswer] = useState(false);
 
-  const generateRandomShape = (): Shape => {
-    const shapes = ['rectangle', 'square', 'triangle', 'circle'] as const;
-    const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
-    
-    let newDimensions: Record<string, number> = {};
-    let perimeter = 0;
-    let area = 0;
+  const isSquare = shape === 'square';
+  const actualHeight = isSquare ? width : height;
+  const perimeter = 2 * (width + actualHeight);
+  const area = width * actualHeight;
+  const correctAnswer = calculation === 'perimeter' ? perimeter : area;
 
-    switch (randomShape) {
-      case 'rectangle': {
-        newDimensions = {
-          length: Math.floor(Math.random() * 8) + 3,
-          width: Math.floor(Math.random() * 6) + 2
-        };
-        perimeter = 2 * (newDimensions.length + newDimensions.width);
-        area = newDimensions.length * newDimensions.width;
-        break;
-      }
-      case 'square': {
-        newDimensions = {
-          side: Math.floor(Math.random() * 8) + 3
-        };
-        perimeter = 4 * newDimensions.side;
-        area = newDimensions.side * newDimensions.side;
-        break;
-      }
-      case 'triangle': {
-        newDimensions = {
-          base: Math.floor(Math.random() * 8) + 4,
-          height: Math.floor(Math.random() * 6) + 3
-        };
-        // For right triangle, we'll calculate the hypotenuse
-        const hypotenuse = Math.sqrt(newDimensions.base * newDimensions.base + newDimensions.height * newDimensions.height);
-        perimeter = newDimensions.base + newDimensions.height + Math.round(hypotenuse);
-        area = (newDimensions.base * newDimensions.height) / 2;
-        break;
-      }
-      case 'circle': {
-        newDimensions = {
-          radius: Math.floor(Math.random() * 5) + 2
-        };
-        perimeter = Math.round(2 * Math.PI * newDimensions.radius * 10) / 10;
-        area = Math.round(Math.PI * newDimensions.radius * newDimensions.radius * 10) / 10;
-        break;
-      }
-    }
+  const isCorrect = userInput === correctAnswer.toString();
 
-    return {
-      type: randomShape,
-      dimensions: newDimensions,
-      perimeter,
-      area,
-      color: `hsl(${Math.random() * 360}, 70%, 60%)`
-    };
-  };
-
-  useEffect(() => {
-    if (dimensions && shape) {
-      let perimeter = 0;
-      let area = 0;
-
-      switch (shape) {
-        case 'rectangle':
-          perimeter = 2 * ((dimensions.length || 0) + (dimensions.width || 0));
-          area = (dimensions.length || 0) * (dimensions.width || 0);
-          break;
-        case 'square':
-          perimeter = 4 * (dimensions.side || 0);
-          area = (dimensions.side || 0) * (dimensions.side || 0);
-          break;
-        case 'triangle': {
-          const base = dimensions.base || 0;
-          const height = dimensions.height || 0;
-          const hypotenuse = Math.sqrt(base * base + height * height);
-          perimeter = base + height + Math.round(hypotenuse);
-          area = (base * height) / 2;
-          break;
-        }
-        case 'circle': {
-          const radius = dimensions.radius || 0;
-          perimeter = Math.round(2 * Math.PI * radius * 10) / 10;
-          area = Math.round(Math.PI * radius * radius * 10) / 10;
-          break;
-        }
-      }
-
-      setCurrentShape({
-        type: shape,
-        dimensions,
-        perimeter,
-        area,
-        color: `hsl(${Math.random() * 360}, 70%, 60%)`
-      });
-    } else {
-      setCurrentShape(generateRandomShape());
-    }
-  }, [shape, dimensions]);
-
-  useEffect(() => {
-    if (currentShape) {
-      onCalculation?.(currentShape.perimeter, currentShape.area);
-    }
-  }, [currentShape, onCalculation]);
-
-  const generateNewShape = () => {
-    setCurrentShape(generateRandomShape());
-    setShowCalculations(false);
-  };
-
-  const getShapeDescription = () => {
-    if (!currentShape) return '';
-    
-    switch (currentShape.type) {
-      case 'rectangle':
-        return `Rectangle: ${currentShape.dimensions.length}cm × ${currentShape.dimensions.width}cm`;
-      case 'square':
-        return `Square: ${currentShape.dimensions.side}cm × ${currentShape.dimensions.side}cm`;
-      case 'triangle':
-        return `Triangle: base ${currentShape.dimensions.base}cm, height ${currentShape.dimensions.height}cm`;
-      case 'circle':
-        return `Circle: radius ${currentShape.dimensions.radius}cm`;
-      default:
-        return '';
-    }
-  };
-
-  const getPerimeterFormula = () => {
-    if (!currentShape) return '';
-    
-    switch (currentShape.type) {
-      case 'rectangle':
-        return `P = 2 × (l + w) = 2 × (${currentShape.dimensions.length} + ${currentShape.dimensions.width}) = ${currentShape.perimeter}cm`;
-      case 'square':
-        return `P = 4 × s = 4 × ${currentShape.dimensions.side} = ${currentShape.perimeter}cm`;
-      case 'triangle':
-        return `P = a + b + c = ${currentShape.dimensions.base} + ${currentShape.dimensions.height} + c = ${currentShape.perimeter}cm`;
-      case 'circle':
-        return `P = 2πr = 2 × π × ${currentShape.dimensions.radius} = ${currentShape.perimeter}cm`;
-      default:
-        return '';
-    }
-  };
-
-  const getAreaFormula = () => {
-    if (!currentShape) return '';
-    
-    switch (currentShape.type) {
-      case 'rectangle':
-        return `A = l × w = ${currentShape.dimensions.length} × ${currentShape.dimensions.width} = ${currentShape.area}cm²`;
-      case 'square':
-        return `A = s² = ${currentShape.dimensions.side}² = ${currentShape.area}cm²`;
-      case 'triangle':
-        return `A = ½ × b × h = ½ × ${currentShape.dimensions.base} × ${currentShape.dimensions.height} = ${currentShape.area}cm²`;
-      case 'circle':
-        return `A = πr² = π × ${currentShape.dimensions.radius}² = ${currentShape.area}cm²`;
-      default:
-        return '';
-    }
-  };
-
-  if (!currentShape) return null;
-
-  return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <div className="mb-6">
-        <h3 className="text-2xl font-bold text-gray-800 mb-4">
-          📐 Shape Visualizer - Perimeter vs Area
-        </h3>
-        <p className="text-gray-600 mb-4">
-          Toggle between perimeter and area to see the difference!
-        </p>
-      </div>
-
-      <div className="mb-6">
-        <div className="flex justify-between items-center mb-4">
-          <h4 className="text-lg font-semibold text-gray-700">
-            {getShapeDescription()}
-          </h4>
-          <button
-            onClick={generateNewShape}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-          >
-            New Shape
-          </button>
-        </div>
-
-        {/* Toggle buttons */}
-        <div className="flex space-x-4 mb-6">
-          <button
-            onClick={() => setViewMode('perimeter')}
-            className={`px-6 py-3 rounded-lg font-medium transition-colors ${
-              viewMode === 'perimeter'
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-            }`}
-          >
-            📏 Show Perimeter
-          </button>
-          <button
-            onClick={() => setViewMode('area')}
-            className={`px-6 py-3 rounded-lg font-medium transition-colors ${
-              viewMode === 'area'
-                ? 'bg-green-500 text-white'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-            }`}
-          >
-            🎯 Show Area
-          </button>
-        </div>
-
-        {/* Shape visualization */}
-        <div className="flex justify-center mb-6">
-          <div className="relative">
-            {currentShape.type === 'rectangle' && (
-              <div
-                className="relative border-4 border-gray-800"
-                style={{
-                  width: `${(currentShape.dimensions.length || 0) * 40}px`,
-                  height: `${(currentShape.dimensions.width || 0) * 40}px`,
-                  backgroundColor: viewMode === 'area' ? currentShape.color : 'transparent',
-                  borderColor: viewMode === 'perimeter' ? '#ef4444' : '#374151',
-                  borderWidth: viewMode === 'perimeter' ? '4px' : '2px'
-                }}
-              >
-                {viewMode === 'perimeter' && (
+  const getStageContent = () => {
+    switch (stage) {
+      case 0:
+        return (
+          <>
+            <p className="mb-4 text-center text-muted-foreground">
+              Let's visualize this {shape} and understand how to calculate its {calculation}.
+            </p>
+            <div className="flex justify-center mb-6">
+              <div className="relative">
+                <div
+                  className="border-4 border-primary bg-primary/20"
+                  style={{
+                    width: `${width * 20}px`,
+                    height: `${actualHeight * 20}px`,
+                  }}
+                />
+                <div className="absolute -bottom-6 left-0 right-0 text-center">
+                  <span className="text-sm font-bold">Width: {width}</span>
+                </div>
+                <div className="absolute -right-8 top-0 bottom-0 flex items-center">
+                  <span className="text-sm font-bold transform -rotate-90">
+                    Height: {actualHeight}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="text-center">
+              <p className="text-lg font-bold mb-2">
+                {isSquare ? 'Square' : 'Rectangle'} Dimensions:
+              </p>
+              <p className="text-muted-foreground">
+                Width = {width}, Height = {actualHeight}
+              </p>
+            </div>
+            <div className="flex justify-end mt-6">
+              <Button onClick={() => setStage(1)}>
+                Let's Calculate! <ArrowRight />
+              </Button>
+            </div>
+          </>
+        );
+      case 1:
+        return (
+          <>
+            <p className="mb-4 text-center text-muted-foreground">
+              Now let's learn the formula for {calculation} of a {shape}.
+            </p>
+            <div className="flex justify-center mb-6">
+              <div className="relative">
+                <div
+                  className="border-4 border-primary bg-primary/20"
+                  style={{
+                    width: `${width * 20}px`,
+                    height: `${actualHeight * 20}px`,
+                  }}
+                />
+                {calculation === 'perimeter' && (
                   <>
-                    {/* Perimeter arrows */}
-                    <div className="absolute -top-8 left-0 w-full flex justify-between">
-                      <span className="text-red-600 font-bold">Length: {currentShape.dimensions.length}cm</span>
-                    </div>
-                    <div className="absolute -right-8 top-0 h-full flex flex-col justify-center">
-                      <span className="text-red-600 font-bold transform -rotate-90">Width: {currentShape.dimensions.width}cm</span>
+                    <div className="absolute inset-0 border-2 border-dashed border-red-500" />
+                    <div className="absolute -top-8 left-0 right-0 text-center">
+                      <span className="text-sm font-bold text-red-600">Perimeter = distance around</span>
                     </div>
                   </>
                 )}
-                {viewMode === 'area' && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">Area</span>
-                  </div>
+                {calculation === 'area' && (
+                  <>
+                    <div className="absolute inset-0 bg-green-200/50" />
+                    <div className="absolute -top-8 left-0 right-0 text-center">
+                      <span className="text-sm font-bold text-green-600">Area = space inside</span>
+                    </div>
+                  </>
                 )}
               </div>
-            )}
-
-            {currentShape.type === 'square' && (
-              <div
-                className="relative border-4 border-gray-800"
-                style={{
-                  width: `${(currentShape.dimensions.side || 0) * 40}px`,
-                  height: `${(currentShape.dimensions.side || 0) * 40}px`,
-                  backgroundColor: viewMode === 'area' ? currentShape.color : 'transparent',
-                  borderColor: viewMode === 'perimeter' ? '#ef4444' : '#374151',
-                  borderWidth: viewMode === 'perimeter' ? '4px' : '2px'
-                }}
-              >
-                {viewMode === 'perimeter' && (
-                  <div className="absolute -top-8 left-0 w-full flex justify-center">
-                    <span className="text-red-600 font-bold">Side: {currentShape.dimensions.side}cm</span>
-                  </div>
-                )}
-                {viewMode === 'area' && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">Area</span>
-                  </div>
-                )}
+            </div>
+            <div className="text-center">
+              <p className="text-lg font-bold mb-2">
+                Formula for {calculation}:
+              </p>
+              <div className="bg-gray-100 p-4 rounded-lg inline-block">
+                <p className="text-xl font-bold">
+                  {calculation === 'perimeter' 
+                    ? `P = 2 × (width + height)`
+                    : `A = width × height`
+                  }
+                </p>
               </div>
-            )}
-
-            {currentShape.type === 'triangle' && (
-              <div className="relative">
-                <svg
-                  width="200"
-                  height="150"
-                  className="border border-gray-300"
-                >
-                  <polygon
-                    points={`50,130 ${50 + (currentShape.dimensions.base || 0) * 20},130 ${50 + (currentShape.dimensions.base || 0) * 20},${130 - (currentShape.dimensions.height || 0) * 20}`}
-                    fill={viewMode === 'area' ? currentShape.color : 'transparent'}
-                    stroke={viewMode === 'perimeter' ? '#ef4444' : '#374151'}
-                    strokeWidth={viewMode === 'perimeter' ? '4' : '2'}
-                  />
-                  {viewMode === 'perimeter' && (
-                    <>
-                      <text x="50" y="145" className="text-red-600 font-bold text-sm">Base: {currentShape.dimensions.base}cm</text>
-                      <text x="120" y="80" className="text-red-600 font-bold text-sm">Height: {currentShape.dimensions.height}cm</text>
-                    </>
-                  )}
-                  {viewMode === 'area' && (
-                    <text x="100" y="80" className="text-white font-bold">Area</text>
-                  )}
-                </svg>
-              </div>
-            )}
-
-            {currentShape.type === 'circle' && (
+            </div>
+            <div className="flex justify-end mt-6">
+              <Button onClick={() => setStage(2)}>
+                Apply the Formula <ArrowRight />
+              </Button>
+            </div>
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <p className="mb-4 text-center text-muted-foreground">
+              Let's apply the formula to our {shape}:
+            </p>
+            <div className="flex justify-center mb-6">
               <div className="relative">
                 <div
-                  className="border-4 border-gray-800 rounded-full"
+                  className="border-4 border-primary bg-primary/20"
                   style={{
-                    width: `${(currentShape.dimensions.radius || 0) * 80}px`,
-                    height: `${(currentShape.dimensions.radius || 0) * 80}px`,
-                    backgroundColor: viewMode === 'area' ? currentShape.color : 'transparent',
-                    borderColor: viewMode === 'perimeter' ? '#ef4444' : '#374151',
-                    borderWidth: viewMode === 'perimeter' ? '4px' : '2px'
+                    width: `${width * 20}px`,
+                    height: `${actualHeight * 20}px`,
                   }}
-                >
-                  {viewMode === 'perimeter' && (
-                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                      <span className="text-red-600 font-bold">Radius: {currentShape.dimensions.radius}cm</span>
-                    </div>
-                  )}
-                  {viewMode === 'area' && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-white font-bold text-lg">Area</span>
-                    </div>
-                  )}
+                />
+              </div>
+            </div>
+            <div className="text-center">
+              <p className="text-lg font-bold mb-4">Step-by-step calculation:</p>
+              <div className="bg-gray-100 p-4 rounded-lg text-left max-w-md mx-auto">
+                <p className="text-lg">
+                  <strong>Given:</strong> Width = {width}, Height = {actualHeight}
+                </p>
+                <p className="text-lg mt-2">
+                  <strong>Formula:</strong> {calculation === 'perimeter' 
+                    ? `P = 2 × (width + height)`
+                    : `A = width × height`
+                  }
+                </p>
+                <p className="text-lg mt-2">
+                  <strong>Substitute:</strong> {calculation === 'perimeter' 
+                    ? `P = 2 × (${width} + ${actualHeight})`
+                    : `A = ${width} × ${actualHeight}`
+                  }
+                </p>
+                <p className="text-lg mt-2">
+                  <strong>Calculate:</strong> {calculation === 'perimeter' 
+                    ? `P = 2 × ${width + actualHeight} = ${perimeter}`
+                    : `A = ${area}`
+                  }
+                </p>
+              </div>
+            </div>
+            <div className="flex justify-end mt-6">
+              <Button onClick={() => setStage(3)}>
+                Try It Yourself <ArrowRight />
+              </Button>
+            </div>
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <p className="mb-4 text-center text-muted-foreground">
+              Now you try! What's the {calculation} of this {shape}?
+            </p>
+            <div className="flex justify-center mb-6">
+              <div className="relative">
+                <div
+                  className="border-4 border-primary bg-primary/20"
+                  style={{
+                    width: `${width * 20}px`,
+                    height: `${actualHeight * 20}px`,
+                  }}
+                />
+                <div className="absolute -bottom-6 left-0 right-0 text-center">
+                  <span className="text-sm font-bold">Width: {width}</span>
+                </div>
+                <div className="absolute -right-8 top-0 bottom-0 flex items-center">
+                  <span className="text-sm font-bold transform -rotate-90">
+                    Height: {actualHeight}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="text-center mb-6">
+              <input
+                type="number"
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
+                className="w-24 h-12 text-center text-xl font-bold border-2 border-primary rounded-lg"
+                placeholder="?"
+              />
+              <Button 
+                onClick={() => setShowAnswer(true)} 
+                className="ml-4"
+                disabled={!userInput}
+              >
+                Check
+              </Button>
+            </div>
+            {showAnswer && (
+              <div className={`p-4 rounded-lg border-2 ${
+                isCorrect 
+                  ? 'bg-green-50 border-green-500 text-green-800' 
+                  : 'bg-red-50 border-red-500 text-red-800'
+              }`}>
+                <p className="text-center font-bold text-lg">
+                  {isCorrect ? 'Correct! 🎉' : 'Not quite, but that\'s okay!'}
+                </p>
+                <p className="text-center mt-2">
+                  The {calculation} is {correctAnswer}
+                </p>
+                <div className="flex justify-center mt-4">
+                  <Button onClick={() => setStage(4)}>
+                    Continue <ArrowRight />
+                  </Button>
                 </div>
               </div>
             )}
-          </div>
-        </div>
-
-        {/* Current mode explanation */}
-        <div className={`p-4 rounded-lg mb-4 ${
-          viewMode === 'perimeter' 
-            ? 'bg-red-50 border border-red-200' 
-            : 'bg-green-50 border border-green-200'
-        }`}>
-          <div className="flex items-center mb-2">
-            <span className="text-2xl mr-2">
-              {viewMode === 'perimeter' ? '📏' : '🎯'}
-            </span>
-            <h4 className="text-lg font-bold">
-              {viewMode === 'perimeter' ? 'Perimeter (Distance Around)' : 'Area (Space Inside)'}
-            </h4>
-          </div>
-          <p className="text-gray-700">
-            {viewMode === 'perimeter' 
-              ? `The perimeter is the total distance around the shape: ${currentShape.perimeter}cm`
-              : `The area is the space inside the shape: ${currentShape.area}cm²`
-            }
-          </p>
-        </div>
-
-        {/* Show calculations button */}
-        <button
-          onClick={() => setShowCalculations(!showCalculations)}
-          className="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 mb-4"
-        >
-          {showCalculations ? 'Hide' : 'Show'} Calculations
-        </button>
-
-        {/* Calculations */}
-        {showCalculations && (
-          <div className="bg-gray-50 rounded-lg p-4 mb-4">
-            <h5 className="font-semibold text-gray-700 mb-3">Calculations:</h5>
-            <div className="space-y-2 text-sm">
-              <div className="bg-white p-3 rounded border">
-                <strong>Perimeter:</strong> {getPerimeterFormula()}
-              </div>
-              <div className="bg-white p-3 rounded border">
-                <strong>Area:</strong> {getAreaFormula()}
+          </>
+        );
+      case 4:
+        return (
+          <>
+            <p className="mb-4 text-center text-muted-foreground">
+              Excellent! You've mastered {calculation} calculations for {shape}s!
+            </p>
+            <div className="flex justify-center mb-6">
+              <div className="relative">
+                <div
+                  className="border-4 border-green-500 bg-green-200"
+                  style={{
+                    width: `${width * 20}px`,
+                    height: `${actualHeight * 20}px`,
+                  }}
+                />
+                <div className="absolute -bottom-6 left-0 right-0 text-center">
+                  <span className="text-sm font-bold text-green-600">Width: {width}</span>
+                </div>
+                <div className="absolute -right-8 top-0 bottom-0 flex items-center">
+                  <span className="text-sm font-bold transform -rotate-90 text-green-600">
+                    Height: {actualHeight}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+            <div className="text-center">
+              <p className="text-lg font-bold mb-2">Final Answer:</p>
+              <div className="bg-green-100 p-4 rounded-lg inline-block">
+                <p className="text-xl font-bold text-green-800">
+                  {calculation === 'perimeter' ? 'Perimeter' : 'Area'} = {correctAnswer}
+                </p>
+              </div>
+            </div>
+            <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
+              <p className="text-center font-bold">
+                Great job! Now you can calculate {calculation} for any {shape}!
+              </p>
+            </div>
+          </>
+        );
+      default:
+        return null;
+    }
+  };
 
-        {showHint && (
-          <div className="bg-blue-50 border border-blue-200 rounded-md p-4">
-            <p className="text-blue-800 text-sm">
-              💡 <strong>Remember:</strong> Perimeter is measured in cm (distance), 
-              while Area is measured in cm² (space). Toggle between the views to see the difference!
-            </p>
-          </div>
-        )}
+  return (
+    <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-6">
+      <div className="flex items-center mb-4">
+        <Lightbulb className="mr-2 h-5 w-5 text-blue-600" />
+        <h3 className="text-lg font-semibold text-blue-900">
+          Let's Work It Out Visually
+        </h3>
+      </div>
+      <div>
+        {getStageContent()}
       </div>
     </div>
   );
-};
+}
 
 export default ShapeVisualizer;

@@ -1,0 +1,30 @@
+{
+  "id": "integers",
+  "title": "Integers - The Other Side of Zero",
+  "description": "Explore numbers on both sides of zero",
+  "difficulty": "Advanced",
+  "estimatedTime": "25-30 min",
+  "emoji": "🔢",
+  "learningObjectives": [
+    "Understand positive and negative numbers",
+    "Use integers on a number line",
+    "Compare and order integers",
+    "Apply integers in real-world situations"
+  ],
+  "sections": [
+    {
+      "id": "intro",
+      "type": "intro",
+      "title": "🔢 Numbers Before Zero!",
+      "content": "0, 1, 2, 3... but what about -1, -2, -3? Negative numbers! ❄️",
+      "order": 1
+    },
+    {
+      "id": "operations",
+      "type": "practice",
+      "title": "🌡️ Temperature Challenge",
+      "content": "If it's -5°C and rises 8°C, what's the new temperature?",
+      "order": 3
+    }
+  ]
+}

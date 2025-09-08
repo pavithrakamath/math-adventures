@@ -1,442 +1,290 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { Button } from '../ui/button';
+import { ArrowRight, Lightbulb, RotateCcw } from 'lucide-react';
 
 interface SymmetryVisualizerProps {
-  shape?: 'square' | 'rectangle' | 'triangle' | 'circle' | 'butterfly' | 'heart' | 'star' | 'pentagon' | 'hexagon';
-  onComplete?: (isCorrect: boolean, linesFound: number) => void;
-  showHint?: boolean;
+  shape: 'square' | 'letter-r';
 }
 
-interface SymmetryLine {
-  id: string;
-  type: 'vertical' | 'horizontal' | 'diagonal';
-  x1: number;
-  y1: number;
-  x2: number;
-  y2: number;
-  description: string;
-}
+export function SymmetryVisualizer({ shape = 'square' }: SymmetryVisualizerProps) {
+  const [stage, setStage] = useState(0);
+  const [selectedLine, setSelectedLine] = useState<number | null>(null);
+  const [showAnswer, setShowAnswer] = useState(false);
 
-interface Shape {
-  type: string;
-  name: string;
-  symmetryLines: SymmetryLine[];
-  svgPath: string;
-  width: number;
-  height: number;
-  centerX: number;
-  centerY: number;
-}
-
-const shapes: Shape[] = [
-    {
-      type: 'square',
-      name: 'Square',
-      symmetryLines: [
-        { id: 'v1', type: 'vertical', x1: 100, y1: 50, x2: 100, y2: 150, description: 'Vertical line through center' },
-        { id: 'h1', type: 'horizontal', x1: 50, y1: 100, x2: 150, y2: 100, description: 'Horizontal line through center' },
-        { id: 'd1', type: 'diagonal', x1: 50, y1: 50, x2: 150, y2: 150, description: 'Diagonal from top-left to bottom-right' },
-        { id: 'd2', type: 'diagonal', x1: 150, y1: 50, x2: 50, y2: 150, description: 'Diagonal from top-right to bottom-left' }
-      ],
-      svgPath: 'M 50 50 L 150 50 L 150 150 L 50 150 Z',
-      width: 200,
-      height: 200,
-      centerX: 100,
-      centerY: 100
-    },
-    {
-      type: 'rectangle',
-      name: 'Rectangle',
-      symmetryLines: [
-        { id: 'v1', type: 'vertical', x1: 100, y1: 50, x2: 100, y2: 150, description: 'Vertical line through center' },
-        { id: 'h1', type: 'horizontal', x1: 50, y1: 100, x2: 150, y2: 100, description: 'Horizontal line through center' }
-      ],
-      svgPath: 'M 50 50 L 150 50 L 150 150 L 50 150 Z',
-      width: 200,
-      height: 200,
-      centerX: 100,
-      centerY: 100
-    },
-    {
-      type: 'triangle',
-      name: 'Equilateral Triangle',
-      symmetryLines: [
-        { id: 'v1', type: 'vertical', x1: 100, y1: 50, x2: 100, y2: 150, description: 'Line from apex to base midpoint' },
-        { id: 'd1', type: 'diagonal', x1: 50, y1: 150, x2: 125, y2: 100, description: 'Line from left vertex to right side midpoint' },
-        { id: 'd2', type: 'diagonal', x1: 150, y1: 150, x2: 75, y2: 100, description: 'Line from right vertex to left side midpoint' }
-      ],
-      svgPath: 'M 100 50 L 50 150 L 150 150 Z',
-      width: 200,
-      height: 200,
-      centerX: 100,
-      centerY: 100
-    },
-    {
-      type: 'pentagon',
-      name: 'Regular Pentagon',
-      symmetryLines: [
-        { id: 'v1', type: 'vertical', x1: 100, y1: 40, x2: 100, y2: 160, description: 'Line from top vertex to base center' },
-        { id: 'd1', type: 'diagonal', x1: 140, y1: 65, x2: 80, y2: 140, description: 'Line from top-right vertex to bottom-left side midpoint' },
-        { id: 'd2', type: 'diagonal', x1: 60, y1: 65, x2: 120, y2: 140, description: 'Line from top-left vertex to bottom-right side midpoint' },
-        { id: 'd3', type: 'diagonal', x1: 130, y1: 125, x2: 100, y2: 40, description: 'Line from bottom-right vertex to top vertex' },
-        { id: 'd4', type: 'diagonal', x1: 70, y1: 125, x2: 100, y2: 40, description: 'Line from bottom-left vertex to top vertex' }
-      ],
-      svgPath: 'M 100 40 L 140 65 L 130 125 L 70 125 L 60 65 Z',
-      width: 200,
-      height: 200,
-      centerX: 100,
-      centerY: 100
-    },
-    {
-      type: 'hexagon',
-      name: 'Regular Hexagon',
-      symmetryLines: [
-        { id: 'v1', type: 'vertical', x1: 100, y1: 40, x2: 100, y2: 160, description: 'Vertical line through opposite vertices' },
-        { id: 'd1', type: 'diagonal', x1: 140, y1: 60, x2: 60, y2: 140, description: 'Diagonal through opposite vertices' },
-        { id: 'd2', type: 'diagonal', x1: 60, y1: 60, x2: 140, y2: 140, description: 'Diagonal through opposite vertices' },
-        { id: 'h1', type: 'horizontal', x1: 40, y1: 100, x2: 160, y2: 100, description: 'Horizontal through opposite side midpoints' },
-        { id: 'd3', type: 'diagonal', x1: 130, y1: 40, x2: 70, y2: 160, description: 'Diagonal through opposite side midpoints' },
-        { id: 'd4', type: 'diagonal', x1: 70, y1: 40, x2: 130, y2: 160, description: 'Diagonal through opposite side midpoints' }
-      ],
-      svgPath: 'M 100 40 L 140 60 L 140 140 L 100 160 L 60 140 L 60 60 Z',
-      width: 200,
-      height: 200,
-      centerX: 100,
-      centerY: 100
-    },
-    {
-      type: 'circle',
-      name: 'Circle',
-      symmetryLines: [
-        { id: 'v1', type: 'vertical', x1: 100, y1: 50, x2: 100, y2: 150, description: 'Vertical line through center' },
-        { id: 'h1', type: 'horizontal', x1: 50, y1: 100, x2: 150, y2: 100, description: 'Horizontal line through center' },
-        { id: 'd1', type: 'diagonal', x1: 50, y1: 50, x2: 150, y2: 150, description: 'Diagonal from top-left to bottom-right' },
-        { id: 'd2', type: 'diagonal', x1: 150, y1: 50, x2: 50, y2: 150, description: 'Diagonal from top-right to bottom-left' }
-      ],
-      svgPath: 'M 50 100 A 50 50 0 1 1 150 100 A 50 50 0 1 1 50 100',
-      width: 200,
-      height: 200,
-      centerX: 100,
-      centerY: 100
-    },
-    {
-      type: 'butterfly',
-      name: 'Butterfly',
-      symmetryLines: [
-        { id: 'v1', type: 'vertical', x1: 100, y1: 50, x2: 100, y2: 150, description: 'Vertical line through center' }
-      ],
-      svgPath: 'M 50 100 Q 100 50 150 100 Q 100 150 50 100',
-      width: 200,
-      height: 200,
-      centerX: 100,
-      centerY: 100
-    },
-    {
-      type: 'heart',
-      name: 'Heart',
-      symmetryLines: [
-        { id: 'v1', type: 'vertical', x1: 100, y1: 50, x2: 100, y2: 150, description: 'Vertical line through center' }
-      ],
-      svgPath: 'M 100 150 Q 50 100 50 75 Q 50 50 100 75 Q 150 50 150 75 Q 150 100 100 150',
-      width: 200,
-      height: 200,
-      centerX: 100,
-      centerY: 100
-    },
-    {
-      type: 'star',
-      name: '5-Point Star',
-      symmetryLines: [
-        { id: 'v1', type: 'vertical', x1: 100, y1: 20, x2: 100, y2: 180, description: 'Vertical line through center' },
-        { id: 'd1', type: 'diagonal', x1: 60, y1: 40, x2: 140, y2: 160, description: 'Diagonal line 1' },
-        { id: 'd2', type: 'diagonal', x1: 140, y1: 40, x2: 60, y2: 160, description: 'Diagonal line 2' },
-        { id: 'd3', type: 'diagonal', x1: 20, y1: 100, x2: 180, y2: 100, description: 'Horizontal line through center' },
-        { id: 'd4', type: 'diagonal', x1: 40, y1: 160, x2: 160, y2: 40, description: 'Diagonal line 3' }
-      ],
-      svgPath: 'M 100 20 L 120 80 L 180 80 L 130 120 L 150 180 L 100 140 L 50 180 L 70 120 L 20 80 L 80 80 Z',
-      width: 200,
-      height: 200,
-      centerX: 100,
-      centerY: 100
-    }
-  ];
-
-const SymmetryVisualizer: React.FC<SymmetryVisualizerProps> = ({
-  shape,
-  onComplete,
-  showHint = true
-}) => {
-  const [currentShape, setCurrentShape] = useState<Shape | null>(null);
-  const [revealedLines, setRevealedLines] = useState<Set<string>>(new Set());
-  const [showAllLines, setShowAllLines] = useState(false);
-  const [userGuess, setUserGuess] = useState<number | null>(null);
-  const [showResult, setShowResult] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
-
-  useEffect(() => {
-    if (shape) {
-      const selectedShape = shapes.find(s => s.type === shape);
-      if (selectedShape) {
-        setCurrentShape(selectedShape);
-      }
-    } else {
-      // Select a random shape
-      const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
-      setCurrentShape(randomShape);
-    }
-    setRevealedLines(new Set());
-    setShowAllLines(false);
-    setUserGuess(null);
-    setShowResult(false);
-    setIsCorrect(false);
-  }, [shape]);
-
-  const handleRevealLine = (lineId: string) => {
-    if (showAllLines) return;
-    
-    const newRevealedLines = new Set(revealedLines);
-    newRevealedLines.add(lineId);
-    setRevealedLines(newRevealedLines);
-  };
-
-  const handleShowAllLines = () => {
-    setShowAllLines(true);
-    setRevealedLines(new Set(currentShape?.symmetryLines.map(l => l.id) || []));
-  };
-
-  const handleGuessSubmit = () => {
-    if (userGuess === null || !currentShape) return;
-    
-    const correct = userGuess === currentShape.symmetryLines.length;
-    setIsCorrect(correct);
-    setShowResult(true);
-    onComplete?.(correct, userGuess);
-  };
-
-  const generateNewShape = () => {
-    const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
-    setCurrentShape(randomShape);
-    setRevealedLines(new Set());
-    setShowAllLines(false);
-    setUserGuess(null);
-    setShowResult(false);
-    setIsCorrect(false);
-  };
-
-  const getLineColor = (line: SymmetryLine) => {
-    if (line.type === 'vertical') return '#ef4444';
-    if (line.type === 'horizontal') return '#3b82f6';
-    if (line.type === 'diagonal') return '#10b981';
-    return '#6b7280';
-  };
-
-  if (!currentShape) return null;
-
-  return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <div className="mb-6">
-        <h3 className="text-2xl font-bold text-gray-800 mb-4">
-          🦋 Symmetry Visualizer
-        </h3>
-        <p className="text-gray-600 mb-4">
-          Click on the shape to reveal lines of symmetry, or make a guess first!
-        </p>
-      </div>
-
-      <div className="mb-6">
-        <div className="flex justify-between items-center mb-4">
-          <h4 className="text-lg font-semibold text-gray-700">
-            {currentShape.name}
-          </h4>
-          <button
-            onClick={generateNewShape}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-          >
-            New Shape
-          </button>
-        </div>
-
-        {/* Shape visualization */}
-        <div className="flex justify-center mb-6">
-          <div className="relative">
-            <svg
-              width={currentShape.width}
-              height={currentShape.height}
-              className="border border-gray-300 bg-gray-50"
-              onClick={() => handleShowAllLines()}
-            >
-              {/* Shape */}
-              <path
-                d={currentShape.svgPath}
-                fill="#3b82f6"
-                stroke="#1e40af"
-                strokeWidth="2"
-                className="cursor-pointer hover:fill-blue-400 transition-colors"
-              />
-              
-              {/* Symmetry lines */}
-              {currentShape.symmetryLines.map((line) => {
-                const isRevealed = showAllLines || revealedLines.has(line.id);
-                return (
-                  <line
-                    key={line.id}
-                    x1={line.x1}
-                    y1={line.y1}
-                    x2={line.x2}
-                    y2={line.y2}
-                    stroke={getLineColor(line)}
-                    strokeWidth="3"
-                    strokeDasharray={isRevealed ? "0" : "5,5"}
-                    opacity={isRevealed ? 1 : 0.3}
-                    className="transition-all duration-500"
-                  />
-                );
-              })}
-            </svg>
-          </div>
-        </div>
-
-        {/* Guess section */}
-        {!showResult && (
-          <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              How many lines of symmetry does this shape have?
-            </label>
-            <div className="flex items-center space-x-4">
-              <input
-                type="number"
-                value={userGuess || ''}
-                onChange={(e) => setUserGuess(parseInt(e.target.value) || null)}
-                min="0"
-                max="10"
-                className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter your guess"
-              />
-              <button
-                onClick={handleGuessSubmit}
-                disabled={userGuess === null}
-                className="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Submit Guess
-              </button>
+  const getShapeComponent = () => {
+    if (shape === 'square') {
+      return (
+        <div className="w-32 h-32 border-4 border-primary bg-primary/20 relative">
+          {/* Vertical line */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-red-500 transform -translate-x-0.5" />
+          {/* Horizontal line */}
+          <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-red-500 transform -translate-y-0.5" />
+          {/* Diagonal lines */}
+          <div className="absolute top-0 left-0 bottom-0 right-0">
+            <div className="w-full h-full">
+              <div className="absolute top-0 left-0 w-full h-full">
+                <div className="absolute top-0 left-0 w-full h-full transform rotate-45 origin-center">
+                  <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-blue-500 transform -translate-x-0.5" />
+                </div>
+                <div className="absolute top-0 left-0 w-full h-full transform -rotate-45 origin-center">
+                  <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-blue-500 transform -translate-x-0.5" />
+                </div>
+              </div>
             </div>
           </div>
-        )}
+        </div>
+      );
+    } else {
+      return (
+        <div className="w-32 h-32 border-4 border-primary bg-primary/20 relative flex items-center justify-center">
+          <div className="text-6xl font-bold text-primary">R</div>
+          {/* Vertical line */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-red-500 transform -translate-x-0.5" />
+        </div>
+      );
+    }
+  };
 
-        {/* Reveal buttons */}
-        <div className="mb-6">
-          <div className="flex space-x-4 mb-4">
-            <button
-              onClick={handleShowAllLines}
-              disabled={showAllLines}
-              className="px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 disabled:opacity-50"
-            >
-              {showAllLines ? 'All Lines Revealed' : 'Reveal All Lines'}
-            </button>
-          </div>
-
-          {/* Individual line reveal buttons */}
-          {!showAllLines && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-              {currentShape.symmetryLines.map((line, index) => (
-                <button
-                  key={line.id}
-                  onClick={() => handleRevealLine(line.id)}
-                  disabled={revealedLines.has(line.id)}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                    revealedLines.has(line.id)
-                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                  }`}
-                >
-                  Line {index + 1}
-                </button>
-              ))}
+  const getInteractiveShape = () => {
+    if (shape === 'square') {
+      return (
+        <div className="w-32 h-32 border-4 border-primary bg-primary/20 relative">
+          {selectedLine === 0 && (
+            <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-red-500 transform -translate-x-0.5" />
+          )}
+          {selectedLine === 1 && (
+            <div className="absolute top-1/2 left-0 right-0 h-1 bg-red-500 transform -translate-y-0.5" />
+          )}
+          {selectedLine === 2 && (
+            <div className="absolute top-0 left-0 bottom-0 right-0">
+              <div className="absolute top-0 left-0 w-full h-full transform rotate-45 origin-center">
+                <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-blue-500 transform -translate-x-0.5" />
+              </div>
+            </div>
+          )}
+          {selectedLine === 3 && (
+            <div className="absolute top-0 left-0 bottom-0 right-0">
+              <div className="absolute top-0 left-0 w-full h-full transform -rotate-45 origin-center">
+                <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-blue-500 transform -translate-x-0.5" />
+              </div>
             </div>
           )}
         </div>
-
-        {/* Revealed lines info */}
-        {revealedLines.size > 0 && (
-          <div className="mb-6">
-            <h5 className="font-semibold text-gray-700 mb-3">Revealed Lines:</h5>
-            <div className="space-y-2">
-              {currentShape.symmetryLines
-                .filter(line => revealedLines.has(line.id))
-                .map((line) => (
-                  <div key={line.id} className="flex items-center space-x-2">
-                    <div
-                      className="w-4 h-0.5"
-                      style={{ backgroundColor: getLineColor(line) }}
-                    />
-                    <span className="text-sm text-gray-600">{line.description}</span>
-                  </div>
-                ))}
-            </div>
-          </div>
-        )}
-
-        {/* Result feedback */}
-        {showResult && (
-          <div className={`p-4 rounded-lg border-2 mb-4 ${
-            isCorrect 
-              ? 'bg-green-50 border-green-200' 
-              : 'bg-red-50 border-red-200'
-          }`}>
-            <div className="flex items-center mb-2">
-              <span className="text-2xl mr-2">
-                {isCorrect ? '✅' : '❌'}
-              </span>
-              <h4 className="text-lg font-bold">
-                {isCorrect ? 'Correct!' : 'Not quite right'}
-              </h4>
-            </div>
-            <p className="text-gray-700">
-              {isCorrect 
-                ? `Great job! The ${currentShape.name} has ${currentShape.symmetryLines.length} lines of symmetry.${currentShape.type === 'circle' ? ' (Actually, a circle has infinite lines of symmetry, but we\'re showing the main ones!)' : ''}`
-                : `The ${currentShape.name} has ${currentShape.symmetryLines.length} lines of symmetry. Your guess was ${userGuess}.${currentShape.type === 'circle' ? ' (Actually, a circle has infinite lines of symmetry, but we\'re showing the main ones!)' : ''}`
-              }
-            </p>
-          </div>
-        )}
-
-        {/* Legend */}
-        <div className="bg-gray-50 rounded-lg p-4">
-          <h5 className="font-semibold text-gray-700 mb-3">Line Types:</h5>
-          <div className="grid grid-cols-3 gap-4 text-sm">
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-0.5 bg-red-500"></div>
-              <span>Vertical</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-0.5 bg-blue-500"></div>
-              <span>Horizontal</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-8 h-0.5 bg-green-500"></div>
-              <span>Diagonal</span>
-            </div>
-          </div>
+      );
+    } else {
+      return (
+        <div className="w-32 h-32 border-4 border-primary bg-primary/20 relative flex items-center justify-center">
+          <div className="text-6xl font-bold text-primary">R</div>
+          {selectedLine === 0 && (
+            <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-red-500 transform -translate-x-0.5" />
+          )}
         </div>
+      );
+    }
+  };
 
-        {showHint && (
-          <div className="mt-4 bg-blue-50 border border-blue-200 rounded-md p-4">
-            <p className="text-blue-800 text-sm">
-              💡 <strong>Hint:</strong> A line of symmetry divides a shape into two identical halves. 
-              Try folding the shape along the line - both sides should match perfectly!
+  const getStageContent = () => {
+    switch (stage) {
+      case 0:
+        return (
+          <>
+            <p className="mb-4 text-center text-muted-foreground">
+              Let's explore symmetry! A line of symmetry divides a shape into two identical halves.
             </p>
-            <p className="text-blue-800 text-sm mt-2">
-              <strong>Remember:</strong> 
-              • Regular polygons: n sides = n lines of symmetry!
-              • Equilateral Triangle = 3 lines, Square = 4 lines
-              • Regular Pentagon = 5 lines, Regular Hexagon = 6 lines
-              • Circle = infinite lines (we show 4 main ones)
-              • Star = 5 lines, Butterfly/Heart = 1 line
+            <div className="flex justify-center mb-6">
+              {getShapeComponent()}
+            </div>
+            <div className="text-center">
+              <p className="text-lg font-bold mb-2">
+                {shape === 'square' ? 'Square' : 'Letter R'} - Can you find the lines of symmetry?
+              </p>
+              <p className="text-muted-foreground">
+                Click on the lines to see if they create symmetry
+              </p>
+            </div>
+            <div className="flex justify-end mt-6">
+              <Button onClick={() => setStage(1)}>
+                Let's Find Them! <ArrowRight />
+              </Button>
+            </div>
+          </>
+        );
+      case 1:
+        return (
+          <>
+            <p className="mb-4 text-center text-muted-foreground">
+              Click on the lines to see if they create symmetry. A line of symmetry means both sides are identical.
             </p>
-          </div>
-        )}
+            <div className="flex justify-center mb-6">
+              {getInteractiveShape()}
+            </div>
+            <div className="text-center mb-6">
+              <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
+                {shape === 'square' ? (
+                  <>
+                    <Button
+                      variant={selectedLine === 0 ? 'default' : 'outline'}
+                      onClick={() => setSelectedLine(selectedLine === 0 ? null : 0)}
+                    >
+                      Vertical Line
+                    </Button>
+                    <Button
+                      variant={selectedLine === 1 ? 'default' : 'outline'}
+                      onClick={() => setSelectedLine(selectedLine === 1 ? null : 1)}
+                    >
+                      Horizontal Line
+                    </Button>
+                    <Button
+                      variant={selectedLine === 2 ? 'default' : 'outline'}
+                      onClick={() => setSelectedLine(selectedLine === 2 ? null : 2)}
+                    >
+                      Diagonal Line 1
+                    </Button>
+                    <Button
+                      variant={selectedLine === 3 ? 'default' : 'outline'}
+                      onClick={() => setSelectedLine(selectedLine === 3 ? null : 3)}
+                    >
+                      Diagonal Line 2
+                    </Button>
+                  </>
+                ) : (
+                  <Button
+                    variant={selectedLine === 0 ? 'default' : 'outline'}
+                    onClick={() => setSelectedLine(selectedLine === 0 ? null : 0)}
+                    className="col-span-2"
+                  >
+                    Vertical Line
+                  </Button>
+                )}
+              </div>
+            </div>
+            <div className="flex justify-end mt-6">
+              <Button onClick={() => setStage(2)}>
+                Check My Answer <ArrowRight />
+              </Button>
+            </div>
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <p className="mb-4 text-center text-muted-foreground">
+              Let's check your answer! Here are the correct lines of symmetry:
+            </p>
+            <div className="flex justify-center mb-6">
+              {getShapeComponent()}
+            </div>
+            <div className="text-center">
+              <p className="text-lg font-bold mb-2">Lines of Symmetry:</p>
+              <div className="bg-gray-100 p-4 rounded-lg inline-block">
+                {shape === 'square' ? (
+                  <div className="text-left">
+                    <p className="text-lg">✓ Vertical line (red)</p>
+                    <p className="text-lg">✓ Horizontal line (red)</p>
+                    <p className="text-lg">✓ Diagonal line 1 (blue)</p>
+                    <p className="text-lg">✓ Diagonal line 2 (blue)</p>
+                    <p className="text-lg font-bold mt-2">Total: 4 lines of symmetry</p>
+                  </div>
+                ) : (
+                  <div className="text-left">
+                    <p className="text-lg">✓ Vertical line (red)</p>
+                    <p className="text-lg font-bold mt-2">Total: 1 line of symmetry</p>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="flex justify-end mt-6">
+              <Button onClick={() => setStage(3)}>
+                I Understand! <ArrowRight />
+              </Button>
+            </div>
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <p className="mb-4 text-center text-muted-foreground">
+              Great! Now let's test your understanding. How many lines of symmetry does this {shape} have?
+            </p>
+            <div className="flex justify-center mb-6">
+              {getShapeComponent()}
+            </div>
+            <div className="text-center mb-6">
+              <input
+                type="number"
+                value={showAnswer ? (shape === 'square' ? '4' : '1') : ''}
+                onChange={(e) => setUserInput(e.target.value)}
+                className="w-20 h-12 text-center text-xl font-bold border-2 border-primary rounded-lg"
+                placeholder="?"
+                disabled={showAnswer}
+              />
+              <Button 
+                onClick={() => setShowAnswer(true)} 
+                className="ml-4"
+                disabled={showAnswer}
+              >
+                Check
+              </Button>
+            </div>
+            {showAnswer && (
+              <div className="p-4 rounded-lg border-2 bg-green-50 border-green-500 text-green-800">
+                <p className="text-center font-bold text-lg">
+                  Correct! 🎉
+                </p>
+                <p className="text-center mt-2">
+                  The {shape} has {shape === 'square' ? '4' : '1'} line{shape === 'square' ? 's' : ''} of symmetry
+                </p>
+                <div className="flex justify-center mt-4">
+                  <Button onClick={() => setStage(4)}>
+                    Continue <ArrowRight />
+                  </Button>
+                </div>
+              </div>
+            )}
+          </>
+        );
+      case 4:
+        return (
+          <>
+            <p className="mb-4 text-center text-muted-foreground">
+              Excellent! You've mastered symmetry!
+            </p>
+            <div className="flex justify-center mb-6">
+              {getShapeComponent()}
+            </div>
+            <div className="text-center">
+              <p className="text-lg font-bold mb-2">Summary:</p>
+              <div className="bg-green-100 p-4 rounded-lg inline-block">
+                <p className="text-lg font-bold text-green-800">
+                  {shape === 'square' ? 'Square' : 'Letter R'} has {shape === 'square' ? '4' : '1'} line{shape === 'square' ? 's' : ''} of symmetry
+                </p>
+              </div>
+            </div>
+            <div className="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
+              <p className="text-center font-bold">
+                Great job! Now you can identify lines of symmetry in any shape!
+              </p>
+            </div>
+          </>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-6">
+      <div className="flex items-center mb-4">
+        <Lightbulb className="mr-2 h-5 w-5 text-blue-600" />
+        <h3 className="text-lg font-semibold text-blue-900">
+          Let's Work It Out Visually
+        </h3>
+      </div>
+      <div>
+        {getStageContent()}
       </div>
     </div>
   );
-};
+}
 
 export default SymmetryVisualizer;

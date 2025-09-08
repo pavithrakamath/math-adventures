@@ -12,24 +12,90 @@ export interface Lesson {
 
 export interface LessonSection {
   id: string;
-  type: 'intro' | 'interactive' | 'practice' | 'assessment';
+  type: 'intro' | 'interactive' | 'practice' | 'assessment' | 'quiz';
   title: string;
   content: React.ComponentType<Record<string, unknown>> | string;
   order: number;
 }
 
-export interface Question {
-  id: string;
-  question: string;
-  type: 'multiple-choice' | 'drag-drop' | 'input' | 'visual-select' | 'true-false';
-  options?: string[];
-  correctAnswer: string | number | string[] | boolean;
-  explanation: string;
-  hint: string;
-  visualization?: React.ComponentType<Record<string, unknown>>;
-  points: number;
-  difficulty: 'easy' | 'medium' | 'hard';
-}
+export type InteractiveHint =
+  | {
+      type: 'factor-checker';
+      number: number;
+    }
+  | {
+      type: 'pattern-visualizer';
+      sequence: number[];
+      operation: 'add' | 'subtract' | 'multiply' | 'divide';
+      value: number;
+    }
+  | {
+      type: 'shape-visualizer';
+      shape: 'rectangle' | 'square';
+      width: number;
+      height: number;
+      calculation: 'perimeter' | 'area';
+    }
+  | {
+      type: 'symmetry-visualizer';
+      shape: 'square' | 'letter-r';
+    }
+  | {
+      type: 'fraction-visualizer';
+      fraction1: { numerator: number; denominator: number };
+      fraction2: { numerator: number; denominator: number };
+      operation: 'add' | 'subtract';
+    }
+  | {
+      type: 'pattern-hint-visualizer';
+      patternType: 'triangular' | 'square' | 'fibonacci' | 'arithmetic' | 'geometric' | 'custom';
+      sequence: number[];
+      customPattern?: string;
+    };
+
+export type Question =
+  | {
+      type: 'text' | 'number' | 'pictograph';
+      text: string;
+      answer: string | string[];
+      errorDescription: string;
+      hint: string;
+      interactiveHint?: never;
+      data?: { name: string; value: number }[]; // For reference charts
+      symbol?: string;
+      scale?: number;
+      title?: string;
+      question?: string;
+    }
+  | {
+      type: 'chart';
+      component: 'BarChart';
+      text: string;
+      data: { name: string; value: number }[];
+      question: string;
+      answer: string | string[];
+      errorDescription: string;
+      hint: string;
+      interactiveHint?: never;
+    }
+  | {
+      type: 'text' | 'number' | 'multiple-choice';
+      text: string;
+      options?: string[];
+      answer: string | string[];
+      errorDescription: string;
+      hint: string;
+      interactiveHint: InteractiveHint;
+    }
+  | {
+      type: 'multiple-choice';
+      text: string;
+      options: string[];
+      answer: string | string[];
+      errorDescription: string;
+      hint: string;
+      interactiveHint?: never;
+    };
 
 export interface LessonProgress {
   lessonId: string;

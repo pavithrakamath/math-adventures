@@ -1,0 +1,62 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "A rectangle is 5 cm long and 4 cm wide. What is its perimeter?",
+    "options": ["9 cm", "18 cm", "20 cm", "20 sq cm"],
+    "answer": "18 cm",
+    "errorDescription": "The student may have calculated the area instead of the perimeter, or only added one length and one width. Remind them that perimeter is the distance around the entire shape.",
+    "hint": "This question is about perimeter. Let's use the visualizer to see what that means.",
+    "interactiveHint": {
+      "type": "shape-visualizer",
+      "shape": "rectangle",
+      "width": 5,
+      "height": 4,
+      "calculation": "perimeter"
+    }
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A square has a side length of 6 cm. What is its area? Pay attention to the units!",
+    "options": ["12 cm", "24 cm", "36 cm", "36 sq cm"],
+    "answer": "36 sq cm",
+    "errorDescription": "The student may have calculated the perimeter or is confused about the units. Remind them that area is side * side and the units are squared.",
+    "hint": "This question is about area, and the units are very important! Let's use the visualizer to see how it works.",
+    "interactiveHint": {
+      "type": "shape-visualizer",
+      "shape": "square",
+      "width": 6,
+      "height": 6,
+      "calculation": "area"
+    }
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A rectangle has a length of 8 cm and width of 3 cm. What is its area?",
+    "options": ["11 sq cm", "22 sq cm", "24 sq cm", "24 cm"],
+    "answer": "24 sq cm",
+    "errorDescription": "The student may have added length and width instead of multiplying, or confused area with perimeter.",
+    "hint": "Area is the space inside a shape. For a rectangle, we multiply length × width. Let's visualize this to understand better.",
+    "interactiveHint": {
+      "type": "shape-visualizer",
+      "shape": "rectangle",
+      "width": 8,
+      "height": 3,
+      "calculation": "area"
+    }
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the perimeter of a square with side length 7 cm?",
+    "options": ["14 cm", "28 cm", "49 cm", "49 sq cm"],
+    "answer": "28 cm",
+    "errorDescription": "The student may have calculated area instead of perimeter, or only added two sides instead of all four.",
+    "hint": "Perimeter is the distance around the outside of a shape. For a square, we add all four sides, or multiply one side by 4. Let's see this visually.",
+    "interactiveHint": {
+      "type": "shape-visualizer",
+      "shape": "square",
+      "width": 7,
+      "height": 7,
+      "calculation": "perimeter"
+    }
+  }
+]

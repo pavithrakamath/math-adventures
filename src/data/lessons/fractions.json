@@ -1,0 +1,37 @@
+{
+  "id": "fractions",
+  "title": "Understanding Fractions",
+  "description": "Learn what fractions are and how to represent them visually",
+  "difficulty": "Beginner",
+  "estimatedTime": "20-25 min",
+  "emoji": "🍕",
+  "learningObjectives": [
+    "Understand what a fraction represents",
+    "Identify numerator and denominator",
+    "Compare fractions using visual models",
+    "Solve real-world fraction problems with rotis and sharing"
+  ],
+  "sections": [
+    {
+      "id": "intro",
+      "type": "intro",
+      "title": "🍕 What are Fractions?",
+      "content": "Sharing rotis! 1 roti ÷ 2 children = 1/2 roti each! 🥟",
+      "order": 1
+    },
+    {
+      "id": "visual",
+      "type": "interactive",
+      "title": "🍕 Fraction Visualizer - Common Denominators",
+      "content": "FractionVisualizer",
+      "order": 2
+    },
+    {
+      "id": "practice",
+      "type": "practice",
+      "title": "🎯 Fraction Challenge",
+      "content": "Which is bigger? 1/2 roti or 1/4 roti?",
+      "order": 3
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "How many points are needed to draw a line?",
+    "options": ["1", "2", "3", "4"],
+    "answer": "2",
+    "errorDescription": "The student may be confusing a line with a point or ray. A single point cannot form a line, and a line needs exactly two points to be defined.",
+    "hint": "Think about how you draw a line with a ruler. You need to place the ruler between two points and draw along it. One point alone cannot make a line - you need exactly 2 points to draw a line!"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "An angle that is exactly 90 degrees is called a ___ angle.",
+    "options": ["Acute", "Obtuse", "Right", "Straight"],
+    "answer": "Right",
+    "errorDescription": "The student needs to memorize the basic terminology for angles (acute, obtuse, right).",
+    "hint": "Let's think about some real-world examples. Look at the corner of a book, a square tile on the floor, or where the wall meets the floor. They all form a perfect 'L' shape. This special 90-degree angle has a name that sounds like it's 'correct' or 'proper'. Which option fits that description?"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Two lines that never intersect and are always the same distance apart are called ___ lines.",
+    "options": ["Parallel", "Perpendicular", "Intersecting", "Curved"],
+    "answer": "Parallel",
+    "errorDescription": "The student is confused about the definition of parallel lines versus intersecting or perpendicular lines.",
+    "hint": "Imagine the two steel rails of a train track. They run alongside each other for miles and miles. For the train to stay on the track, what must be true about those two lines? They can never get closer together or further apart, and they can never cross. What is the mathematical word for lines that do that?"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "A ray has how many endpoints?",
+    "options": ["0", "1", "2", "3"],
+    "answer": "1",
+    "errorDescription": "The student may be confusing a ray with a line segment (2 endpoints) or a line (0 endpoints). A ray has exactly one endpoint.",
+    "hint": "Think about a ray of sunlight - it starts from the sun but goes on forever. A ray has exactly one endpoint and extends infinitely in one direction, like a laser beam!"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What type of angle is 45 degrees?",
+    "options": ["Acute", "Right", "Obtuse", "Straight"],
+    "answer": "Acute",
+    "errorDescription": "The student needs to understand that acute angles are less than 90 degrees, right angles are exactly 90 degrees, and obtuse angles are greater than 90 degrees.",
+    "hint": "Let's think about angle sizes: An acute angle is smaller than a right angle (90°). A right angle is exactly 90°. An obtuse angle is larger than a right angle. Since 45° is less than 90°, what type of angle is it?"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Two lines that intersect at a 90-degree angle are called ___ lines.",
+    "options": ["Parallel", "Perpendicular", "Intersecting", "Curved"],
+    "answer": "Perpendicular",
+    "errorDescription": "The student is confusing perpendicular lines with parallel lines. Perpendicular lines intersect at right angles, while parallel lines never intersect.",
+    "hint": "When two lines cross each other and form a perfect 'L' shape (90-degree angle), they are called perpendicular lines. Think of the plus sign (+) - the vertical and horizontal lines are perpendicular to each other."
+  }
+]

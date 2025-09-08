@@ -14,6 +14,12 @@ export interface UserProgress {
   lastActivity: Date;
 }
 
+export interface Mistake {
+  question: string;
+  errorDescription: string;
+  timestamp: number;
+}
+
 export interface LessonProgress {
   lessonId: string;
   currentSection: number;
@@ -23,6 +29,7 @@ export interface LessonProgress {
   timeSpent: number;
   isCompleted: boolean;
   lastAccessed: Date;
+  mistakes: Mistake[];
 }
 
 export interface ProgressAction {

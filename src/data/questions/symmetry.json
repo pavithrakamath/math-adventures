@@ -1,0 +1,42 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "How many lines of symmetry does a square have?",
+    "options": ["1", "2", "4", "8"],
+    "answer": "4",
+    "errorDescription": "The student is not visualizing all the lines of symmetry (horizontal, vertical, and two diagonals). Drawing and folding a square might help.",
+    "hint": "A line of symmetry is an imaginary line where you can fold a shape and have both halves match up perfectly. Let's look at a visual to be sure.",
+    "interactiveHint": {
+      "type": "symmetry-visualizer",
+      "shape": "square"
+    }
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Does the letter \"R\" have a line of symmetry?",
+    "options": ["Yes", "No"],
+    "answer": "No",
+    "errorDescription": "The student is incorrectly identifying a line of symmetry. Encourage them to try folding the letter in different ways to see if the two halves match.",
+    "hint": "Let's visualize the letter \"R\" to check. Remember, for a line to be a line of symmetry, the shape has to be identical on both sides of the line.",
+    "interactiveHint": {
+      "type": "symmetry-visualizer",
+      "shape": "letter-r"
+    }
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of these letters has a horizontal line of symmetry?",
+    "options": ["A", "B", "C", "D"],
+    "answer": ["B", "C", "D"],
+    "errorDescription": "The student needs to differentiate between vertical and horizontal symmetry.",
+    "hint": "A horizontal line of symmetry is a line that runs from left to right, cutting the shape into a top half and a bottom half that are mirror images of each other. Imagine drawing a line through the middle of each letter. Which ones can be folded top-to-bottom so the parts match perfectly? (There might be more than one answer!)"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "How many lines of symmetry does a rectangle have?",
+    "options": ["1", "2", "4", "0"],
+    "answer": "2",
+    "errorDescription": "The student is confusing the symmetry of a rectangle with a square. A rectangle only has two lines of symmetry, not four.",
+    "hint": "A rectangle is very similar to a square, but not quite the same. You can fold it in half horizontally and vertically, and the halves will match. But what about the diagonals? If you fold a rectangle diagonally, will the two halves match up perfectly? Let's think about it. The diagonals of a rectangle are not lines of symmetry."
+  }
+]

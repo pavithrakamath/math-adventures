@@ -1,0 +1,40 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "What is -5 + 3?",
+    "options": ["-8", "-2", "2", "8"],
+    "answer": "-2",
+    "errorDescription": "The student is struggling with adding integers. A number line can be a helpful visual tool for these operations.",
+    "hint": "Imagine a number line like a thermometer. Start at the first number, which is -5 (5 degrees below zero). The second number is a positive 3, so we need to get warmer by 3 degrees. If you go up 3 steps from -5, which number do you land on?"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is 4 - (-2)?",
+    "options": ["-2", "2", "6", "8"],
+    "answer": "6",
+    "errorDescription": "The student is confused about subtracting a negative number. Remind them that subtracting a negative is the same as adding a positive.",
+    "hint": "This looks tricky, but there's a simple rule that makes it easy: subtracting a negative number is the same as adding its positive version. The two minus signs next to each other effectively turn into a plus sign. So, '4 - (-2)' is the exact same problem as '4 + 2'. What's the answer to that?"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which number is greater: -5 or -3?",
+    "options": ["-5", "-3", "They are equal", "Cannot compare"],
+    "answer": "-3",
+    "errorDescription": "The student may be confused about comparing negative numbers. On a number line, numbers to the right are greater.",
+    "hint": "Think about the number line - numbers to the right are greater. -3 is to the right of -5, so -3 is greater than -5."
+  },
+  {
+    "type": "text",
+    "text": "What is the opposite of +7?",
+    "answer": "-7",
+    "errorDescription": "The student needs to understand that opposite numbers are the same distance from zero but on different sides.",
+    "hint": "Opposite numbers are the same distance from zero but on different sides. The opposite of +7 is -7. They are the same distance from zero but in opposite directions."
+  },
+  {
+    "type": "text",
+    "text": "If the temperature is -5°C and it rises by 8°C, what is the new temperature?",
+    "answer": "3",
+    "errorDescription": "The student needs help with adding integers in a real-world context. They should add the temperature rise to the current temperature.",
+    "hint": "Add the temperature rise to the current temperature. -5 + 8 = 3°C. The temperature rises from -5 to 3 degrees."
+  }
+]

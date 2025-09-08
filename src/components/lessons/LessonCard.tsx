@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Clock, Star, CheckCircle, Play } from 'lucide-react';
+import { Clock, Star, CheckCircle, Play, ArrowRight } from 'lucide-react';
 import type { Lesson } from '../../types/lesson.types';
+import { getIconForLesson } from '../../lib/lessonIcons';
 
 export interface LessonCardProps {
   lesson: Lesson;
@@ -20,10 +21,12 @@ const LessonCard: React.FC<LessonCardProps> = ({
   onClick,
   className = '',
 }) => {
+  const Icon = getIconForLesson(lesson.id);
+  
   const difficultyColors = {
-    Beginner: 'bg-success-100 text-success-800 border-success-200',
-    Intermediate: 'bg-warning-100 text-warning-800 border-warning-200',
-    Advanced: 'bg-error-100 text-error-800 border-error-200',
+    Beginner: 'bg-green-100 text-green-800 border-green-200',
+    Intermediate: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+    Advanced: 'bg-red-100 text-red-800 border-red-200',
   };
 
   const difficultyIcons = {
@@ -47,8 +50,10 @@ const LessonCard: React.FC<LessonCardProps> = ({
       {/* Header */}
       <div className="p-6">
         <div className="flex items-start justify-between mb-4">
-          <div className="flex items-center space-x-3">
-            <div className="text-4xl">{lesson.emoji}</div>
+          <div className="flex items-center space-x-4">
+            <div className="rounded-lg bg-primary/10 p-3">
+              <Icon className="h-8 w-8 text-primary" />
+            </div>
             <div>
               <h3 className="text-xl font-bold text-gray-900 font-display">
                 {lesson.title}
@@ -59,11 +64,11 @@ const LessonCard: React.FC<LessonCardProps> = ({
             </div>
           </div>
           
-                  {isCompleted ? (
-          <CheckCircle className="w-6 h-6 text-success-600" />
-        ) : (
-          <Play className="w-6 h-6 text-primary-600" />
-        )}
+          {isCompleted ? (
+            <CheckCircle className="w-6 h-6 text-green-600" />
+          ) : (
+            <Play className="w-6 h-6 text-primary-600" />
+          )}
         </div>
 
         {/* Difficulty Badge */}
@@ -126,13 +131,14 @@ const LessonCard: React.FC<LessonCardProps> = ({
           whileTap={{ scale: 0.95 }}
         >
           {isCompleted ? (
-            <div className="w-full py-2 px-4 bg-success-100 text-success-700 rounded-lg text-center font-medium flex items-center justify-center">
+            <div className="w-full py-2 px-4 bg-green-100 text-green-700 rounded-lg text-center font-medium flex items-center justify-center">
               <CheckCircle className="w-4 h-4 mr-2" />
               Completed
             </div>
           ) : (
-            <div className="w-full py-2 px-4 bg-primary-600 text-white rounded-lg text-center font-medium hover:bg-primary-700 transition-colors duration-200">
-              {progress > 0 ? 'Continue' : 'Start Lesson'}
+            <div className="w-full py-2 px-4 bg-primary-600 text-white rounded-lg text-center font-medium hover:bg-primary-700 transition-colors duration-200 flex items-center justify-center">
+              {progress > 0 ? 'Continue' : 'Start Learning'}
+              <ArrowRight className="w-4 h-4 ml-2" />
             </div>
           )}
         </motion.div>

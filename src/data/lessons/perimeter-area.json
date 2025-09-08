@@ -1,0 +1,37 @@
+{
+  "id": "perimeter-area",
+  "title": "Perimeter and Area",
+  "description": "Calculate perimeter and area of different shapes",
+  "difficulty": "Intermediate",
+  "estimatedTime": "25-30 min",
+  "emoji": "📐",
+  "learningObjectives": [
+    "Calculate perimeter of rectangles and squares",
+    "Calculate area of rectangles and squares",
+    "Understand the difference between perimeter and area",
+    "Solve real-world problems involving measurement"
+  ],
+  "sections": [
+    {
+      "id": "intro",
+      "type": "intro",
+      "title": "📐 Perimeter vs Area",
+      "content": "Perimeter = distance around! Area = space inside! 🎯",
+      "order": 1
+    },
+    {
+      "id": "perimeter",
+      "type": "interactive",
+      "title": "📐 Shape Visualizer - Perimeter vs Area",
+      "content": "ShapeVisualizer",
+      "order": 2
+    },
+    {
+      "id": "area",
+      "type": "practice",
+      "title": "🔍 Find the Area!",
+      "content": "A square with side 6 cm has area = 6 × 6 = 36 cm²!",
+      "order": 3
+    }
+  ]
+}

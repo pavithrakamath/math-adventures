@@ -1,0 +1,44 @@
+{
+  "id": "data-handling",
+  "title": "Data Collection and Representation",
+  "description": "Learn to collect, organize, and represent data using various methods",
+  "difficulty": "Intermediate",
+  "estimatedTime": "20-25 min",
+  "emoji": "📊",
+  "learningObjectives": [
+    "Collect data through surveys and observations",
+    "Use tally marks to record data",
+    "Create and interpret bar graphs",
+    "Make pictographs with symbols and emojis"
+  ],
+  "sections": [
+    {
+      "id": "intro",
+      "type": "intro",
+      "title": "📊 What is Data?",
+      "content": "Data is information! Like counting your favorite fruits! 🍎🍌🍊",
+      "order": 1
+    },
+    {
+      "id": "tally",
+      "type": "interactive",
+      "title": "✏️ Interactive Tally Marks",
+      "content": "InteractiveTallyMarks",
+      "order": 2
+    },
+    {
+      "id": "number-line",
+      "type": "interactive",
+      "title": "📊 Interactive Bar Graph for Temperature",
+      "content": "InteractiveBarGraph",
+      "order": 3
+    },
+    {
+      "id": "graphs",
+      "type": "interactive",
+      "title": "📈 Clickable Bar Graph",
+      "content": "ClickableLessonBarChart",
+      "order": 4
+    }
+  ]
+}

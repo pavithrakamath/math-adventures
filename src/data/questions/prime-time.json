@@ -1,0 +1,42 @@
+[
+  {
+    "type": "multiple-choice",
+    "text": "Is 15 a prime number?",
+    "options": ["Yes", "No"],
+    "answer": "No",
+    "errorDescription": "The student is confusing the definition of prime and composite numbers. Remind them that a prime number has only two factors: 1 and itself. (15 has factors 1, 3, 5, 15).",
+    "hint": "A prime number can only be divided by 1 and itself. Let's test 15. Can it be divided evenly by any number other than 1 and 15? Let's check together in the section below.",
+    "interactiveHint": {
+      "type": "factor-checker",
+      "number": 15
+    }
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which of these is a prime number?",
+    "options": ["9", "10", "11", "12"],
+    "answer": "11",
+    "errorDescription": "The student needs more practice identifying prime numbers. Have them list the factors for each number in the list.",
+    "hint": "Let's be number detectives and check each option. Remember, a prime number has ONLY two factors: 1 and itself.\n\n- Check 9: Can you multiply any numbers other than 1 and 9 to get 9? (Hint: think about the 3 times table).\n- Check 10: Does it end in a 0? All numbers ending in 0 can be divided by...?\n- Check 12: It's an even number. All even numbers (except 2) can be divided by...?\n- Check 11: Can you think of ANY other numbers besides 1 and 11 that divide into it evenly?\n\nThe one that has no other factors is our prime number!"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Is 23 a prime number?",
+    "options": ["Yes", "No"],
+    "answer": "Yes",
+    "errorDescription": "The student needs to test a larger number for primality. This encourages them to check divisibility by numbers like 2, 3, 4, 5, etc.",
+    "hint": "Remember the definition: a prime number only has two factors, 1 and itself. Let's see if 23 has any other hidden factors. Let's use our tool to check it out.",
+    "interactiveHint": {
+      "type": "factor-checker",
+      "number": 23
+    }
+  },
+  {
+    "type": "multiple-choice",
+    "text": "The number 2 is special because it is the only...",
+    "options": ["Even prime number", "Odd prime number", "Negative prime number", "Number with one factor"],
+    "answer": "Even prime number",
+    "errorDescription": "The student needs to recall the unique property of the number 2.",
+    "hint": "Let's think about prime numbers. They are numbers that can't be divided evenly by anything other than 1 and themselves. Now let's think about even numbers. What do all even numbers (like 4, 6, 8, 10...) have in common? They can all be divided by 2. This means they have a factor of 2. If a number has a factor of 2, can it be prime? The number 2 is the only exception to this rule. Why is that?"
+  }
+]

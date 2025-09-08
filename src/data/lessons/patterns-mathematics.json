@@ -1,0 +1,51 @@
+{
+  "id": "patterns-mathematics",
+  "title": "Patterns in Mathematics",
+  "description": "Discover and explore patterns in nature, numbers, and shapes",
+  "difficulty": "Beginner",
+  "estimatedTime": "20-25 min",
+  "emoji": "🔍",
+  "learningObjectives": [
+    "Identify visual patterns in nature and daily life",
+    "Recognize mathematical sequences and progressions",
+    "Understand different types of patterns (arithmetic, geometric, visual)",
+    "Create and extend patterns"
+  ],
+  "sections": [
+    {
+      "id": "intro",
+      "type": "intro",
+      "title": "🔍 Patterns Everywhere!",
+      "content": "Look around - patterns are everywhere! In nature, in numbers, in shapes! 🌟",
+      "order": 1
+    },
+    {
+      "id": "visual",
+      "type": "interactive",
+      "title": "🎨 Visual Pattern Recognition",
+      "content": "Learn to spot patterns in colors, shapes, and designs!",
+      "order": 2
+    },
+    {
+      "id": "number-sequences",
+      "type": "interactive",
+      "title": "🔢 Number Pattern Explorer",
+      "content": "PatternLesson",
+      "order": 3
+    },
+    {
+      "id": "natural",
+      "type": "interactive",
+      "title": "🌿 Natural Patterns",
+      "content": "Discover the amazing patterns in nature - from sunflowers to snowflakes!",
+      "order": 4
+    },
+    {
+      "id": "creation",
+      "type": "practice",
+      "title": "🧩 Pattern Challenge",
+      "content": "Can you find and create patterns? Test your pattern skills!",
+      "order": 5
+    }
+  ]
+}
