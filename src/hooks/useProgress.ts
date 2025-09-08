@@ -27,9 +27,10 @@ export const useProgress = () => {
         parsed.completedLessons = new Set(parsed.completedLessons);
         // Convert dates back from strings
         parsed.lastActivity = new Date(parsed.lastActivity);
-        Object.values(parsed.lessonProgress).forEach((lp: Record<string, unknown>) => {
-          lp.completedSections = new Set(lp.completedSections as unknown[]);
-          lp.lastAccessed = new Date(lp.lastAccessed as string);
+        Object.values(parsed.lessonProgress).forEach((lp) => {
+          const lessonProgress = lp as Record<string, unknown>;
+          lessonProgress.completedSections = new Set(lessonProgress.completedSections as unknown[]);
+          lessonProgress.lastAccessed = new Date(lessonProgress.lastAccessed as string);
         });
         setProgress(parsed);
       }
