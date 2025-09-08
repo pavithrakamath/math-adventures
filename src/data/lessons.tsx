@@ -280,29 +280,37 @@ export const lessons: Lesson[] = [
       'Identify symmetrical objects in nature',
       'Understand line symmetry and rotational symmetry',
       'Create symmetrical patterns like rangoli',
-      'Recognize symmetry in geometric shapes'
+      'Recognize symmetry in geometric shapes',
+      'Understand regular polygons and their symmetry properties'
     ],
     sections: [
       {
         id: 'intro',
         type: 'intro',
         title: '🦋 What is Symmetry?',
-        content: 'Fold a butterfly in half - both sides match! That\'s symmetry! ✨',
+        content: 'Fold a butterfly in half - both sides match! That\'s symmetry! ✨ A regular polygon with n sides has n lines of symmetry. The number of lines of symmetry is always equal to the number of sides, regardless of whether the polygon has an odd or even number of sides.',
         order: 1
+      },
+      {
+        id: 'regular-polygons',
+        type: 'intro',
+        title: '📐 Regular Polygons and Symmetry',
+        content: 'Regular polygons are shapes with equal sides and equal angles. They have a special symmetry property: A regular polygon with n sides has exactly n lines of symmetry! For example: An equilateral triangle (3 sides) has 3 lines of symmetry. A square (4 sides) has 4 lines of symmetry. A regular pentagon (5 sides) has 5 lines of symmetry. A regular hexagon (6 sides) has 6 lines of symmetry.',
+        order: 2
       },
       {
         id: 'line-symmetry',
         type: 'interactive',
         title: '🦋 Symmetry Visualizer',
         content: SymmetryVisualizer,
-        order: 2
+        order: 3
       },
       {
         id: 'rotational',
         type: 'practice',
         title: '🌀 Find Symmetry!',
-        content: 'Look around! Find symmetrical objects: butterfly, flower, rangoli!',
-        order: 3
+        content: 'Look around! Find symmetrical objects: butterfly, flower, rangoli! Can you find regular polygons around you?',
+        order: 4
       }
     ]
   },

@@ -377,6 +377,39 @@ export const questions: Record<string, Question[]> = {
       visualization: () => <SymmetryVisualizer shape="square" />,
       points: 20,
       difficulty: 'medium'
+    },
+    {
+      id: 'symmetry-5',
+      question: 'How many lines of symmetry does a regular pentagon have?',
+      type: 'multiple-choice',
+      options: ['3', '4', '5', '6'],
+      correctAnswer: '5',
+      explanation: 'A regular pentagon has 5 lines of symmetry. Regular polygons with n sides always have n lines of symmetry!',
+      hint: 'Remember: regular polygon with n sides = n lines of symmetry.',
+      points: 15,
+      difficulty: 'medium'
+    },
+    {
+      id: 'symmetry-6',
+      question: 'Which statement about regular polygons is true?',
+      type: 'multiple-choice',
+      options: ['All regular polygons have the same number of lines of symmetry', 'A regular polygon with n sides has n lines of symmetry', 'Only even-sided polygons have lines of symmetry', 'Regular polygons have no lines of symmetry'],
+      correctAnswer: 'A regular polygon with n sides has n lines of symmetry',
+      explanation: 'This is the key property of regular polygons! The number of lines of symmetry always equals the number of sides.',
+      hint: 'Think about the relationship between sides and symmetry lines in regular shapes.',
+      points: 20,
+      difficulty: 'hard'
+    },
+    {
+      id: 'symmetry-7',
+      question: 'Use the symmetry visualizer to find all lines of symmetry in a regular hexagon.',
+      type: 'visual-select',
+      correctAnswer: '6',
+      explanation: 'A regular hexagon has 6 lines of symmetry. This follows the rule: regular polygon with n sides = n lines of symmetry.',
+      hint: 'Click on the shape to reveal the lines of symmetry, or make a guess first.',
+      visualization: () => <SymmetryVisualizer shape="hexagon" />,
+      points: 25,
+      difficulty: 'hard'
     }
   ],
   'integers': [

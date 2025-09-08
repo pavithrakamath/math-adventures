@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 interface SymmetryVisualizerProps {
-  shape?: 'square' | 'rectangle' | 'triangle' | 'circle' | 'butterfly' | 'heart' | 'star';
+  shape?: 'square' | 'rectangle' | 'triangle' | 'circle' | 'butterfly' | 'heart' | 'star' | 'pentagon' | 'hexagon';
   onComplete?: (isCorrect: boolean, linesFound: number) => void;
   showHint?: boolean;
 }
@@ -60,11 +60,44 @@ const shapes: Shape[] = [
       type: 'triangle',
       name: 'Equilateral Triangle',
       symmetryLines: [
-        { id: 'v1', type: 'vertical', x1: 100, y1: 50, x2: 100, y2: 150, description: 'Vertical line through center' },
-        { id: 'd1', type: 'diagonal', x1: 50, y1: 150, x2: 125, y2: 100, description: 'Line from left base to right side' },
-        { id: 'd2', type: 'diagonal', x1: 150, y1: 150, x2: 75, y2: 100, description: 'Line from right base to left side' }
+        { id: 'v1', type: 'vertical', x1: 100, y1: 50, x2: 100, y2: 150, description: 'Line from apex to base midpoint' },
+        { id: 'd1', type: 'diagonal', x1: 50, y1: 150, x2: 125, y2: 100, description: 'Line from left vertex to right side midpoint' },
+        { id: 'd2', type: 'diagonal', x1: 150, y1: 150, x2: 75, y2: 100, description: 'Line from right vertex to left side midpoint' }
       ],
       svgPath: 'M 100 50 L 50 150 L 150 150 Z',
+      width: 200,
+      height: 200,
+      centerX: 100,
+      centerY: 100
+    },
+    {
+      type: 'pentagon',
+      name: 'Regular Pentagon',
+      symmetryLines: [
+        { id: 'v1', type: 'vertical', x1: 100, y1: 40, x2: 100, y2: 160, description: 'Line from top vertex to base center' },
+        { id: 'd1', type: 'diagonal', x1: 140, y1: 65, x2: 80, y2: 140, description: 'Line from top-right vertex to bottom-left side midpoint' },
+        { id: 'd2', type: 'diagonal', x1: 60, y1: 65, x2: 120, y2: 140, description: 'Line from top-left vertex to bottom-right side midpoint' },
+        { id: 'd3', type: 'diagonal', x1: 130, y1: 125, x2: 100, y2: 40, description: 'Line from bottom-right vertex to top vertex' },
+        { id: 'd4', type: 'diagonal', x1: 70, y1: 125, x2: 100, y2: 40, description: 'Line from bottom-left vertex to top vertex' }
+      ],
+      svgPath: 'M 100 40 L 140 65 L 130 125 L 70 125 L 60 65 Z',
+      width: 200,
+      height: 200,
+      centerX: 100,
+      centerY: 100
+    },
+    {
+      type: 'hexagon',
+      name: 'Regular Hexagon',
+      symmetryLines: [
+        { id: 'v1', type: 'vertical', x1: 100, y1: 40, x2: 100, y2: 160, description: 'Vertical line through opposite vertices' },
+        { id: 'd1', type: 'diagonal', x1: 140, y1: 60, x2: 60, y2: 140, description: 'Diagonal through opposite vertices' },
+        { id: 'd2', type: 'diagonal', x1: 60, y1: 60, x2: 140, y2: 140, description: 'Diagonal through opposite vertices' },
+        { id: 'h1', type: 'horizontal', x1: 40, y1: 100, x2: 160, y2: 100, description: 'Horizontal through opposite side midpoints' },
+        { id: 'd3', type: 'diagonal', x1: 130, y1: 40, x2: 70, y2: 160, description: 'Diagonal through opposite side midpoints' },
+        { id: 'd4', type: 'diagonal', x1: 70, y1: 40, x2: 130, y2: 160, description: 'Diagonal through opposite side midpoints' }
+      ],
+      svgPath: 'M 100 40 L 140 60 L 140 140 L 100 160 L 60 140 L 60 60 Z',
       width: 200,
       height: 200,
       centerX: 100,
@@ -393,7 +426,9 @@ const SymmetryVisualizer: React.FC<SymmetryVisualizerProps> = ({
             </p>
             <p className="text-blue-800 text-sm mt-2">
               <strong>Remember:</strong> 
-              • Square = 4 lines, Rectangle = 2 lines, Triangle = 3 lines
+              • Regular polygons: n sides = n lines of symmetry!
+              • Equilateral Triangle = 3 lines, Square = 4 lines
+              • Regular Pentagon = 5 lines, Regular Hexagon = 6 lines
               • Circle = infinite lines (we show 4 main ones)
               • Star = 5 lines, Butterfly/Heart = 1 line
             </p>
