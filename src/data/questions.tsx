@@ -28,30 +28,30 @@ import equationsQuestions from './questions/equations.json';
 
 // Map visualization component names to actual components
 const visualizationComponents: Record<string, React.ComponentType<Record<string, unknown>>> = {
-  FractionVisual,
-  InteractiveTallyMarks,
-  InteractiveBarGraph,
-  InteractivePerimeter,
-  FactorChecker,
-  PatternVisualizer,
-  ClickableLessonBarChart,
-  ShapeVisualizer,
-  SymmetryVisualizer,
-  FractionVisualizer,
-  TriangularNumbersVisualizer,
-  FibonacciVisualizer,
-  OddToSquareVisualizer,
-  PatternRelationshipsVisualizer,
+  FractionVisual: FractionVisual as React.ComponentType<Record<string, unknown>>,
+  InteractiveTallyMarks: InteractiveTallyMarks as React.ComponentType<Record<string, unknown>>,
+  InteractiveBarGraph: InteractiveBarGraph as React.ComponentType<Record<string, unknown>>,
+  InteractivePerimeter: InteractivePerimeter as React.ComponentType<Record<string, unknown>>,
+  FactorChecker: FactorChecker as React.ComponentType<Record<string, unknown>>,
+  PatternVisualizer: PatternVisualizer as React.ComponentType<Record<string, unknown>>,
+  ClickableLessonBarChart: ClickableLessonBarChart as React.ComponentType<Record<string, unknown>>,
+  ShapeVisualizer: ShapeVisualizer as React.ComponentType<Record<string, unknown>>,
+  SymmetryVisualizer: SymmetryVisualizer as React.ComponentType<Record<string, unknown>>,
+  FractionVisualizer: FractionVisualizer as React.ComponentType<Record<string, unknown>>,
+  TriangularNumbersVisualizer: TriangularNumbersVisualizer as React.ComponentType<Record<string, unknown>>,
+  FibonacciVisualizer: FibonacciVisualizer as React.ComponentType<Record<string, unknown>>,
+  OddToSquareVisualizer: OddToSquareVisualizer as React.ComponentType<Record<string, unknown>>,
+  PatternRelationshipsVisualizer: PatternRelationshipsVisualizer as React.ComponentType<Record<string, unknown>>,
 };
 
 // Function to process question data and map visualization components
 const processQuestionData = (questionData: Array<Record<string, unknown>>): Question[] => {
   return questionData.map((question: Record<string, unknown>) => ({
     ...question,
-    visualization: question.visualization && visualizationComponents[question.visualization] 
+    visualization: question.visualization && typeof question.visualization === 'string' && visualizationComponents[question.visualization] 
       ? visualizationComponents[question.visualization] 
       : question.visualization
-  }));
+  })) as Question[];
 };
 
 export const questions: Record<string, Question[]> = {

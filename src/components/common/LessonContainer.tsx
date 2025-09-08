@@ -11,6 +11,7 @@ interface LessonContainerProps {
   showProgress?: boolean;
   currentSection?: number;
   totalSections?: number;
+  onSectionChange?: (section: number) => void;
   className?: string;
 }
 

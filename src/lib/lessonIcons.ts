@@ -43,9 +43,6 @@ const icons: Record<string, LucideIcon> = {
   'perimeter-area': Ruler,
   'patterns-in-mathematics': Shapes,
   'lines-angles': ScanLine,
-  'data-handling': Presentation,
-  'fractions': DivideCircle,
-  'symmetry': FlipHorizontal,
 };
 
 export function getIconForLesson(lessonId: string): LucideIcon {

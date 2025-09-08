@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, Lock, Clock, Target } from 'lucide-react';
 import type { Lesson } from '../../types/lesson.types';
@@ -44,16 +44,9 @@ const MemoizedLessonCard = memo<MemoizedLessonCardProps>(({
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut',
-      },
     },
     hover: {
       scale: 1.02,
-      transition: {
-        duration: 0.2,
-      },
     },
   }), []);
 

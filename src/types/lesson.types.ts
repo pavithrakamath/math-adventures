@@ -62,17 +62,23 @@ export type InteractiveHint =
 export type Question =
   | {
       id: string;
-      type: 'text' | 'number' | 'pictograph';
+      type: 'text' | 'number' | 'pictograph' | 'true-false' | 'input' | 'visual-select';
       text: string;
       answer: string | string[];
+      correctAnswer?: string | string[];
       errorDescription: string;
       hint: string;
+      difficulty?: 'easy' | 'medium' | 'hard';
+      explanation?: string;
+      question?: string;
+      visualization?: React.ComponentType<Record<string, unknown>>;
       interactiveHint?: never;
       data?: { name: string; value: number }[]; // For reference charts
       symbol?: string;
       scale?: number;
       title?: string;
-      question?: string;
+      points?: number;
+      options?: string[];
     }
   | {
       id: string;
@@ -82,9 +88,14 @@ export type Question =
       data: { name: string; value: number }[];
       question: string;
       answer: string | string[];
+      correctAnswer?: string | string[];
       errorDescription: string;
       hint: string;
+      difficulty?: 'easy' | 'medium' | 'hard';
+      explanation?: string;
+      visualization?: React.ComponentType<Record<string, unknown>>;
       interactiveHint?: never;
+      points?: number;
     }
   | {
       id: string;
@@ -92,9 +103,15 @@ export type Question =
       text: string;
       options?: string[];
       answer: string | string[];
+      correctAnswer?: string | string[];
       errorDescription: string;
       hint: string;
+      difficulty?: 'easy' | 'medium' | 'hard';
+      explanation?: string;
+      question?: string;
+      visualization?: React.ComponentType<Record<string, unknown>>;
       interactiveHint: InteractiveHint;
+      points?: number;
     }
   | {
       id: string;
@@ -102,9 +119,15 @@ export type Question =
       text: string;
       options: string[];
       answer: string | string[];
+      correctAnswer?: string | string[];
       errorDescription: string;
       hint: string;
+      difficulty?: 'easy' | 'medium' | 'hard';
+      explanation?: string;
+      question?: string;
+      visualization?: React.ComponentType<Record<string, unknown>>;
       interactiveHint?: never;
+      points?: number;
     };
 
 export interface LessonProgress {

@@ -1,33 +1,56 @@
-import type { UserProgress } from '../types/progress.types';
-
-// Enhanced app state interface
 export interface AppState {
-  progress: UserProgress;
+  progress: {
+    completedLessons: Set<string>;
+    lessonProgress: Record<string, LessonProgress>;
+    currentStreak: number;
+    totalTimeSpent: number;
+    achievements: string[];
+    totalScore: number;
+    lastActivity: Date;
+  };
   currentLesson: string | null;
   isLoading: boolean;
   error: string | null;
   settings: {
-    theme: 'light' | 'dark' | 'auto';
-    language: string;
+    theme: 'light' | 'dark' | 'system';
+    language: 'en' | 'es' | 'fr' | 'de';
     soundEnabled: boolean;
     animationsEnabled: boolean;
   };
   ui: {
     sidebarOpen: boolean;
-    currentView: 'home' | 'lesson' | 'achievements' | 'settings';
+    currentView: string;
   };
 }
 
-// Action types
+export interface LessonProgress {
+  lessonId: string;
+  currentSection: number;
+  completedSections: Set<number>;
+  answers: Record<string, string | number | boolean | string[]>;
+  score: number;
+  timeSpent: number;
+  isCompleted: boolean;
+  lastAccessed: Date;
+}
+
+export interface Notification {
+  id: string;
+  type: 'success' | 'info' | 'warning' | 'error';
+  title: string;
+  message: string;
+  timestamp: Date;
+  read: boolean;
+}
+
 export type AppAction =
   | { type: 'SET_LOADING'; payload: boolean }
   | { type: 'SET_ERROR'; payload: string | null }
-  | { type: 'UPDATE_PROGRESS'; payload: Partial<UserProgress> }
+  | { type: 'UPDATE_PROGRESS'; payload: Partial<AppState['progress']> }
   | { type: 'COMPLETE_LESSON'; payload: { lessonId: string; score: number; timeSpent: number } }
-  | { type: 'ADD_MISTAKE'; payload: { lessonId: string; question: string; errorDescription: string } }
-  | { type: 'UPDATE_SCORE'; payload: { lessonId: string; scoreIncrement: number } }
-  | { type: 'MARK_AS_COMPLETED'; payload: string }
+  | { type: 'UPDATE_LESSON_PROGRESS'; payload: { lessonId: string; progress: Partial<LessonProgress> } }
   | { type: 'SET_CURRENT_LESSON'; payload: string | null }
   | { type: 'UPDATE_SETTINGS'; payload: Partial<AppState['settings']> }
-  | { type: 'UPDATE_UI'; payload: Partial<AppState['ui']> }
-  | { type: 'RESET_APP' };
+  | { type: 'TOGGLE_SIDEBAR' }
+  | { type: 'SET_CURRENT_VIEW'; payload: string }
+  | { type: 'RESET_PROGRESS' };

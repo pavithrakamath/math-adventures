@@ -88,12 +88,12 @@ const QuestionBox: React.FC<QuestionBoxProps> = ({
   };
 
   const checkAnswer = (answer: string | number | string[] | boolean): boolean => {
-    if (Array.isArray(question.correctAnswer)) {
-      return Array.isArray(answer) && 
-             answer.length === question.correctAnswer.length &&
-             answer.every(a => (question.correctAnswer as string[]).includes(a));
+    if (Array.isArray(question.answer)) {
+      return Array.isArray(answer) &&
+             answer.length === question.answer.length &&
+             answer.every(a => (question.answer as string[]).includes(a));
     }
-    return answer === question.correctAnswer;
+    return answer === question.answer;
   };
 
   const handleNext = () => {
@@ -129,14 +129,14 @@ const QuestionBox: React.FC<QuestionBoxProps> = ({
 
   const renderMultipleChoice = () => (
     <div className="space-y-3">
-      {question.options?.map((option, index) => (
+      {question.type === 'multiple-choice' && question.options?.map((option: string, index: number) => (
         <motion.button
           key={index}
           onClick={() => handleAnswerSelect(option)}
           disabled={disabled || showFeedback}
           className={`w-full p-4 text-left rounded-lg border-2 transition-all duration-200 ${
             showFeedback
-              ? option === question.correctAnswer
+              ? option === question.answer
                 ? 'border-success-500 bg-success-50 text-success-800'
                 : selectedAnswer === option
                 ? 'border-error-500 bg-error-50 text-error-800'
@@ -149,7 +149,7 @@ const QuestionBox: React.FC<QuestionBoxProps> = ({
           <div className="flex items-center">
             <div className={`w-6 h-6 rounded-full border-2 mr-3 flex items-center justify-center ${
               showFeedback
-                ? option === question.correctAnswer
+                ? option === question.answer
                   ? 'border-success-500 bg-success-500'
                   : selectedAnswer === option
                   ? 'border-error-500 bg-error-500'
@@ -240,24 +240,24 @@ const QuestionBox: React.FC<QuestionBoxProps> = ({
     // Determine the shape based on the question
     let shape: 'square' | 'rectangle' | 'triangle' | 'circle' | 'butterfly' | 'heart' | 'star' | 'pentagon' | 'hexagon' | undefined;
     
-    if (question.question.toLowerCase().includes('square')) {
+    if (question.question?.toLowerCase().includes('square')) {
       shape = 'square';
-    } else if (question.question.toLowerCase().includes('rectangle')) {
+    } else if (question.question?.toLowerCase().includes('rectangle')) {
       shape = 'rectangle';
-    } else if (question.question.toLowerCase().includes('triangle')) {
+    } else if (question.question?.toLowerCase().includes('triangle')) {
       shape = 'triangle';
-    } else if (question.question.toLowerCase().includes('pentagon')) {
+    } else if (question.question?.toLowerCase().includes('pentagon')) {
       shape = 'pentagon';
-    } else if (question.question.toLowerCase().includes('hexagon')) {
+    } else if (question.question?.toLowerCase().includes('hexagon')) {
       shape = 'hexagon';
-    } else if (question.question.toLowerCase().includes('circle')) {
+    } else if (question.question?.toLowerCase().includes('circle')) {
       shape = 'circle';
     }
 
     return (
       <div className="space-y-4">
         <SymmetryVisualizer
-          shape={shape}
+          shape={shape === 'square' ? 'square' : 'letter-r'}
           onComplete={handleVisualizerComplete}
           showHint={showHint}
         />

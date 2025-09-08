@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 
 // Translation interface
 interface Translations {
@@ -279,7 +279,7 @@ export const useTranslation = () => {
     let value: unknown = translations[language];
     
     for (const k of keys) {
-      value = value?.[k];
+      value = (value as Record<string, unknown>)?.[k];
     }
     
     if (typeof value !== 'string') {
@@ -312,7 +312,7 @@ export const useTranslation = () => {
   ], []);
 
   // Load language from localStorage on mount
-  React.useEffect(() => {
+  useEffect(() => {
     const savedLanguage = localStorage.getItem('math-adventures-language') as SupportedLanguage;
     if (savedLanguage && translations[savedLanguage]) {
       setLanguage(savedLanguage);

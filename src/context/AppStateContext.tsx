@@ -1,7 +1,8 @@
-import React, { useReducer, useMemo } from 'react';
+import { useReducer, useMemo, useEffect } from 'react';
+import type { FC, ReactNode } from 'react';
 import { debounce } from 'lodash-es';
-import { AppStateContext } from './AppStateContext';
 import type { AppState, AppAction } from './AppStateContext.types';
+import { AppStateContext } from './AppStateContextProvider';
 
 // Initial state
 const initialState: AppState = {
@@ -179,7 +180,7 @@ const appReducer = (state: AppState, action: AppAction): AppState => {
 
 
 // Provider component
-export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AppStateProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
   // Debounced save to localStorage
@@ -213,7 +214,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   );
 
   // Load state from localStorage on mount
-  React.useEffect(() => {
+  useEffect(() => {
     try {
       const savedState = localStorage.getItem('math-adventures-app-state');
       if (savedState) {
@@ -239,7 +240,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, []);
 
   // Save state to localStorage whenever it changes
-  React.useEffect(() => {
+  useEffect(() => {
     if (!state.isLoading) {
       debouncedSave(state);
     }

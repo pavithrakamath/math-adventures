@@ -32,7 +32,7 @@ const PerimeterAreaComparison = lazy(() => import('../components/visualizations/
 const Quiz = lazy(() => import('../components/lessons/Quiz'));
 
 // Component mapping
-const componentMap: Record<string, React.ComponentType<unknown>> = {
+const componentMap: Record<string, React.ComponentType<Record<string, unknown>>> = {
   'FractionVisualizer': FractionVisualizer,
   'BarChart': BarChart,
   'InteractiveBarGraph': InteractiveBarGraph,
@@ -67,7 +67,7 @@ const componentMap: Record<string, React.ComponentType<unknown>> = {
  * @param componentName - The string name of the component
  * @returns The resolved React component or null if not found
  */
-export const resolveComponent = (componentName: string): React.ComponentType<unknown> | null => {
+export const resolveComponent = (componentName: string): React.ComponentType<Record<string, unknown>> | null => {
   return componentMap[componentName] || null;
 };
 

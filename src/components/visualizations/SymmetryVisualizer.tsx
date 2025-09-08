@@ -4,6 +4,8 @@ import { ArrowRight, Lightbulb } from 'lucide-react';
 
 interface SymmetryVisualizerProps {
   shape: 'square' | 'letter-r';
+  onComplete?: (isCorrect: boolean, linesFound: number) => void;
+  showHint?: boolean;
 }
 
 export function SymmetryVisualizer({ shape = 'square' }: SymmetryVisualizerProps) {
@@ -213,7 +215,7 @@ export function SymmetryVisualizer({ shape = 'square' }: SymmetryVisualizerProps
               <input
                 type="number"
                 value={showAnswer ? (shape === 'square' ? '4' : '1') : ''}
-                onChange={(e) => setUserInput(e.target.value)}
+                onChange={() => {}}
                 className="w-20 h-12 text-center text-xl font-bold border-2 border-primary rounded-lg"
                 placeholder="?"
                 disabled={showAnswer}

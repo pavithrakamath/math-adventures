@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { getLessonById } from '../../data/lessons';
 import LessonView from './LessonView';
@@ -7,6 +7,7 @@ import { useProgress } from '../../hooks/useProgress';
 const LessonPage: React.FC = () => {
   const { lessonId } = useParams<{ lessonId: string }>();
   const { completeLesson } = useProgress();
+  const [currentSection, setCurrentSection] = useState(0);
   
   if (!lessonId) {
     return <Navigate to="/" replace />;
@@ -22,7 +23,14 @@ const LessonPage: React.FC = () => {
     completeLesson(lessonId, score, timeSpent);
   };
   
-  return <LessonView lesson={lesson} onComplete={handleLessonComplete} />;
+  return (
+    <LessonView 
+      lesson={lesson} 
+      currentSection={currentSection}
+      onSectionChange={setCurrentSection}
+      onComplete={handleLessonComplete} 
+    />
+  );
 };
 
 export default LessonPage;

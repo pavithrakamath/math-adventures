@@ -271,7 +271,7 @@ export const PatternRelationshipsVisualizer: React.FC<PatternRelationshipsVisual
               <div key={name} className="bg-white rounded-lg p-4 shadow-sm">
                 <h5 className="font-semibold mb-3 capitalize">{name} Numbers</h5>
                 <div className="flex flex-wrap gap-2">
-                  {sequence.slice(0, maxTerms).map((num, index) => (
+                  {sequence.slice(0, maxTerms).map((num: number, index: number) => (
                     <div
                       key={index}
                       className={`px-3 py-2 rounded-lg font-bold transition-all duration-300 ${
@@ -296,7 +296,7 @@ export const PatternRelationshipsVisualizer: React.FC<PatternRelationshipsVisual
                 Connection Analysis
               </h5>
               
-              {currentRel.id === 'odd-to-square' && (
+              {currentRel.id === 'odd-to-square' && 'sum' in connectionData && (
                 <div className="space-y-2">
                   <div className="text-sm">
                     <strong>Sum of first {maxTerms} odd numbers:</strong>
@@ -305,7 +305,7 @@ export const PatternRelationshipsVisualizer: React.FC<PatternRelationshipsVisual
                     </div>
                   </div>
                   <div className="text-sm">
-                    <strong>{maxTerms}² = {connectionData.square}</strong>
+                    <strong>{maxTerms}² = {'square' in connectionData ? connectionData.square : 'N/A'}</strong>
                   </div>
                   <div className={`text-sm font-bold ${connectionData.match ? 'text-green-600' : 'text-red-600'}`}>
                     {connectionData.match ? '✅ Perfect match!' : '❌ Not equal'}
@@ -313,7 +313,7 @@ export const PatternRelationshipsVisualizer: React.FC<PatternRelationshipsVisual
                 </div>
               )}
 
-              {currentRel.id === 'triangular-to-square' && (
+              {currentRel.id === 'triangular-to-square' && 'sum' in connectionData && (
                 <div className="space-y-2">
                   <div className="text-sm">
                     <strong>T({maxTerms}) + T({maxTerms - 1}):</strong>
@@ -322,7 +322,7 @@ export const PatternRelationshipsVisualizer: React.FC<PatternRelationshipsVisual
                     </div>
                   </div>
                   <div className="text-sm">
-                    <strong>{maxTerms}² = {connectionData.square}</strong>
+                    <strong>{maxTerms}² = {'square' in connectionData ? connectionData.square : 'N/A'}</strong>
                   </div>
                   <div className={`text-sm font-bold ${connectionData.match ? 'text-green-600' : 'text-red-600'}`}>
                     {connectionData.match ? '✅ Perfect match!' : '❌ Not equal'}
@@ -330,7 +330,7 @@ export const PatternRelationshipsVisualizer: React.FC<PatternRelationshipsVisual
                 </div>
               )}
 
-              {currentRel.id === 'fibonacci-golden' && (
+              {currentRel.id === 'fibonacci-golden' && 'ratio' in connectionData && (
                 <div className="space-y-2">
                   <div className="text-sm">
                     <strong>F({maxTerms})/F({maxTerms - 1}):</strong>
@@ -347,7 +347,7 @@ export const PatternRelationshipsVisualizer: React.FC<PatternRelationshipsVisual
                 </div>
               )}
 
-              {currentRel.id === 'powers-sum' && (
+              {currentRel.id === 'powers-sum' && 'sum' in connectionData && (
                 <div className="space-y-2">
                   <div className="text-sm">
                     <strong>Sum of powers + 1:</strong>
@@ -356,7 +356,7 @@ export const PatternRelationshipsVisualizer: React.FC<PatternRelationshipsVisual
                     </div>
                   </div>
                   <div className="text-sm">
-                    <strong>2^{maxTerms + 1} = {connectionData.nextPower}</strong>
+                    <strong>2^{maxTerms + 1} = {'nextPower' in connectionData ? connectionData.nextPower : 'N/A'}</strong>
                   </div>
                   <div className={`text-sm font-bold ${connectionData.match ? 'text-green-600' : 'text-red-600'}`}>
                     {connectionData.match ? '✅ Perfect match!' : '❌ Not equal'}

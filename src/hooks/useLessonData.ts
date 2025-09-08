@@ -43,7 +43,7 @@ export const useLessonData = () => {
         import('../data/lessons/integers.json'),
       ]);
 
-      const loadedLessons = lessonModules.map(module => module.default);
+      const loadedLessons = lessonModules.map(module => module.default) as Lesson[];
       setLessons(loadedLessons);
     } catch (err) {
       const error = err as Error;

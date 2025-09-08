@@ -270,7 +270,7 @@ export const FibonacciVisualizer: React.FC<FibonacciVisualizerProps> = ({
               {/* Spiral path */}
               {showSpiral && (
                 <path
-                  d={`M 0,0 ${spiralPoints.slice(0, currentTerm).map((point, index) => {
+                  d={`M 0,0 ${spiralPoints.slice(0, currentTerm).map((_, index) => {
                     const radius = fibonacci[index] * 8;
                     const angle = index * Math.PI / 2;
                     const x = Math.cos(angle) * radius;

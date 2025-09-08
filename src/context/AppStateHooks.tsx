@@ -1,5 +1,5 @@
 import { useContext, useCallback } from 'react';
-import { AppStateContext } from './AppStateContext';
+import { AppStateContext } from './AppStateContextProvider';
 import type { AppState } from './AppStateContext.types';
 import type { LessonProgress } from '../types/progress.types';
 
