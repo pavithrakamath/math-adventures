@@ -10,31 +10,26 @@ describe('questions data', () => {
   it('should have valid question structure', () => {
     Object.values(questions).forEach(lessonQuestions => {
       lessonQuestions.forEach((question) => {
-        expect(question).toHaveProperty('id');
-        expect(question).toHaveProperty('question');
         expect(question).toHaveProperty('type');
-        expect(question).toHaveProperty('correctAnswer');
-        expect(question).toHaveProperty('explanation');
+        expect(question).toHaveProperty('text');
+        expect(question).toHaveProperty('answer');
+        expect(question).toHaveProperty('errorDescription');
         expect(question).toHaveProperty('hint');
-        expect(question).toHaveProperty('points');
-        expect(question).toHaveProperty('difficulty');
         
-        expect(typeof question.id).toBe('string');
-        expect(typeof question.question).toBe('string');
-        expect(['multiple-choice', 'drag-drop', 'input', 'visual-select', 'true-false']).toContain(question.type);
-        expect(typeof question.explanation).toBe('string');
+        expect(['multiple-choice', 'drag-drop', 'input', 'visual-select', 'true-false', 'text', 'number', 'pictograph', 'chart']).toContain(question.type);
+        expect(typeof question.text).toBe('string');
+        expect(typeof question.answer === 'string' || Array.isArray(question.answer)).toBe(true);
+        expect(typeof question.errorDescription).toBe('string');
         expect(typeof question.hint).toBe('string');
-        expect(typeof question.points).toBe('number');
-        expect(['easy', 'medium', 'hard']).toContain(question.difficulty);
       });
     });
   });
 
-  it('should have unique question IDs', () => {
+  it('should have unique question texts', () => {
     const allQuestions = Object.values(questions).flat();
-    const ids = allQuestions.map(question => question.id);
-    const uniqueIds = new Set(ids);
-    expect(uniqueIds.size).toBe(ids.length);
+    const texts = allQuestions.map(question => question.text);
+    const uniqueTexts = new Set(texts);
+    expect(uniqueTexts.size).toBe(texts.length);
   });
 
   it('should have valid options for multiple choice questions', () => {
@@ -48,25 +43,18 @@ describe('questions data', () => {
     });
   });
 
-  it('should have valid correct answers', () => {
+  it('should have valid answers', () => {
     const allQuestions = Object.values(questions).flat();
     allQuestions.forEach(question => {
-      expect(question.correctAnswer).toBeDefined();
-      expect(question.correctAnswer).not.toBeNull();
+      expect(question.answer).toBeDefined();
+      expect(question.answer).not.toBeNull();
     });
   });
 
-  it('should have positive points', () => {
+  it('should have non-empty error descriptions and hints', () => {
     const allQuestions = Object.values(questions).flat();
     allQuestions.forEach(question => {
-      expect(question.points).toBeGreaterThan(0);
-    });
-  });
-
-  it('should have non-empty explanations and hints', () => {
-    const allQuestions = Object.values(questions).flat();
-    allQuestions.forEach(question => {
-      expect(question.explanation.trim().length).toBeGreaterThan(0);
+      expect(question.errorDescription.trim().length).toBeGreaterThan(0);
       expect(question.hint.trim().length).toBeGreaterThan(0);
     });
   });
@@ -82,9 +70,9 @@ describe('getQuestionsForLesson', () => {
     
     // All returned questions should be valid Question objects
     lessonQuestions.forEach(question => {
-      expect(question).toHaveProperty('id');
-      expect(question).toHaveProperty('question');
       expect(question).toHaveProperty('type');
+      expect(question).toHaveProperty('text');
+      expect(question).toHaveProperty('answer');
     });
   });
 

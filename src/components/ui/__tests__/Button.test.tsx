@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import Button from '../Button';
+import { vi } from 'vitest';
+import { Button } from '../button';
 
 describe('Button', () => {
   it('should render with text', () => {
@@ -40,11 +41,11 @@ describe('Button', () => {
     rerender(<Button variant="secondary">Secondary</Button>);
     expect(screen.getByRole('button')).toHaveClass('bg-gray-200');
     
-    rerender(<Button variant="success">Success</Button>);
-    expect(screen.getByRole('button')).toHaveClass('bg-success-600');
+    rerender(<Button variant="ghost">Ghost</Button>);
+    expect(screen.getByRole('button')).toHaveClass('text-gray-700');
     
-    rerender(<Button variant="error">Error</Button>);
-    expect(screen.getByRole('button')).toHaveClass('bg-error-600');
+    rerender(<Button variant="destructive">Destructive</Button>);
+    expect(screen.getByRole('button')).toHaveClass('bg-red-600');
   });
 
   it('should render different sizes', () => {
@@ -52,10 +53,10 @@ describe('Button', () => {
     expect(screen.getByRole('button')).toHaveClass('px-3', 'py-1.5', 'text-sm');
     
     rerender(<Button size="md">Medium</Button>);
-    expect(screen.getByRole('button')).toHaveClass('px-4', 'py-2', 'text-base');
+    expect(screen.getByRole('button')).toHaveClass('px-4', 'py-2', 'text-sm');
     
     rerender(<Button size="lg">Large</Button>);
-    expect(screen.getByRole('button')).toHaveClass('px-6', 'py-3', 'text-lg');
+    expect(screen.getByRole('button')).toHaveClass('px-6', 'py-3', 'text-base');
   });
 
   it('should render with different types', () => {

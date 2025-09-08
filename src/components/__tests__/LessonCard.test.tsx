@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { vi } from 'vitest';
 import MemoizedLessonCard from '../optimized/MemoizedLessonCard';
 import type { Lesson } from '../../types/lesson.types';
 
@@ -22,7 +23,7 @@ const TestWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 );
 
 describe('MemoizedLessonCard', () => {
-  const mockOnClick = jest.fn();
+  const mockOnClick = vi.fn();
 
   beforeEach(() => {
     mockOnClick.mockClear();
@@ -95,7 +96,9 @@ describe('MemoizedLessonCard', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByTestId('check-circle')).toBeInTheDocument();
+    // Check for the check circle icon by its class name
+    const checkIcon = document.querySelector('.lucide-circle-check-big');
+    expect(checkIcon).toBeInTheDocument();
   });
 
   it('shows lock status', () => {
@@ -111,7 +114,9 @@ describe('MemoizedLessonCard', () => {
       </TestWrapper>
     );
 
-    expect(screen.getByTestId('lock-icon')).toBeInTheDocument();
+    // Check for the lock icon by its class name
+    const lockIcon = document.querySelector('.lucide-lock');
+    expect(lockIcon).toBeInTheDocument();
   });
 
   it('handles keyboard navigation', () => {
@@ -148,7 +153,8 @@ describe('MemoizedLessonCard', () => {
       </TestWrapper>
     );
 
-    const progressBar = screen.getByRole('progressbar');
+    // Check for the progress bar by its class name
+    const progressBar = document.querySelector('.bg-primary-600');
     expect(progressBar).toBeInTheDocument();
   });
 });

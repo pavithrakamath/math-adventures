@@ -44,7 +44,7 @@ describe('lessons data', () => {
         expect(section).toHaveProperty('order');
         
         expect(typeof section.id).toBe('string');
-        expect(['intro', 'interactive', 'practice', 'assessment']).toContain(section.type);
+        expect(['intro', 'interactive', 'practice', 'assessment', 'quiz']).toContain(section.type);
         expect(typeof section.title).toBe('string');
         expect(typeof section.order).toBe('number');
       });

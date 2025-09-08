@@ -54,7 +54,7 @@ export const useProgress = () => {
               key,
               {
                 ...lp,
-                completedSections: Array.from(lp.completedSections),
+                completedSections: Array.from(lp.completedSections || new Set()),
                 lastAccessed: lp.lastAccessed.toISOString(),
               },
             ])
