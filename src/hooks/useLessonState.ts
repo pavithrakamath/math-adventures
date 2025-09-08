@@ -1,10 +1,16 @@
 import { useState, useCallback } from 'react';
 // import type { Question } from '../types/lesson.types';
 
+export interface AnswerData {
+  answer: string | number | boolean | string[];
+  isCorrect: boolean;
+  timestamp: Date;
+}
+
 export interface LessonState {
   currentSection: number;
   currentQuestion: number;
-  answers: Record<string, string | number | boolean | string[]>;
+  answers: Record<string, AnswerData>;
   showHint: boolean;
   timeSpent: number;
   startTime: Date;

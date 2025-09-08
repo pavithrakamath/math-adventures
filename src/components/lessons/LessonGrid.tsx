@@ -5,7 +5,6 @@ import type { Lesson } from '../../types/lesson.types';
 
 export interface LessonGridProps {
   lessons: Lesson[];
-  lessonProgress: Record<string, { score: number; timeSpent: number; isCompleted: boolean }>;
   completedLessons: Set<string>;
   onLessonClick: (lessonId: string) => void;
   className?: string;
@@ -13,7 +12,6 @@ export interface LessonGridProps {
 
 const LessonGrid: React.FC<LessonGridProps> = ({
   lessons,
-  lessonProgress,
   completedLessons,
   onLessonClick,
   className = '',
@@ -43,7 +41,7 @@ const LessonGrid: React.FC<LessonGridProps> = ({
   const getLessonStatus = (lesson: Lesson) => {
     const isCompleted = completedLessons.has(lesson.id);
     const isLocked = false; // Remove linear progression - all lessons are accessible
-    const progress = lessonProgress[lesson.id]?.progress || 0;
+    const progress = 0; // Progress calculation can be added later
     
     return { isCompleted, isLocked, progress };
   };

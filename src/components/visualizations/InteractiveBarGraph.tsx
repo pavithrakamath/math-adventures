@@ -33,10 +33,6 @@ const InteractiveBarGraph: React.FC<InteractiveBarGraphProps> = ({
 
   const emojis = ['🍎', '🍌', '🍊', '🍇', '🥕', '🥦', '🍞', '🧀'];
 
-  useEffect(() => {
-    drawGraph();
-  }, [graphData, maxValue, drawGraph]);
-
   const drawGraph = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -118,6 +114,10 @@ const InteractiveBarGraph: React.FC<InteractiveBarGraphProps> = ({
     ctx.textAlign = 'center';
     ctx.fillText(title, width / 2, 30);
   }, [graphData, maxValue, title]);
+
+  useEffect(() => {
+    drawGraph();
+  }, [drawGraph]);
 
   const addDataPoint = () => {
     const newItem: BarData = {

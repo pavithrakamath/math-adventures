@@ -21,7 +21,7 @@ const LessonView: React.FC<LessonViewProps> = ({ lesson, onComplete }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [lessonCompleted, setLessonCompleted] = useState(false);
   
-  const { state, addAnswer, completeLesson, getAccuracy, getProgress } = useLessonState(lesson.id);
+  const { state, addAnswer, completeLesson, getAccuracy, getProgress } = useLessonState();
   const questions = getQuestionsForLesson(lesson.id);
 
   const handleAnswer = (answer: string | number | boolean | string[], isCorrect: boolean) => {

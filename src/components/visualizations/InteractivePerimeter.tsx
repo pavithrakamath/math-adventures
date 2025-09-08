@@ -59,7 +59,7 @@ const InteractivePerimeter: React.FC<InteractivePerimeterProps> = ({
     if (targetPerimeter > 0) {
       drawTargetInfo(ctx, targetPerimeter, currentPerimeter);
     }
-  }, [points, shape, targetPerimeter, currentPerimeter, showGrid, centerPoint, drawCompassPreview, drawGrid, drawShape, previewPoint]);
+  }, [points, shape, targetPerimeter, currentPerimeter, showGrid, centerPoint, previewPoint, drawCompassPreview, drawGrid, drawShape]);
 
   const drawGrid = useCallback((ctx: CanvasRenderingContext2D, width: number, height: number) => {
     ctx.strokeStyle = '#e5e7eb';
