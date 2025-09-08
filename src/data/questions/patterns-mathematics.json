@@ -1,87 +1,215 @@
 [
   {
     "type": "multiple-choice",
-    "text": "What pattern do you see in this sequence: 2, 4, 8, 16, ?",
-    "options": ["24", "32", "20", "18"],
-    "answer": "32",
-    "errorDescription": "The student struggled to identify the multiplication pattern. They might need help understanding that each number is double the previous one.",
-    "hint": "Look at how each number relates to the one before it. Each number is double the previous one! 2×2=4, 4×2=8, 8×2=16, 16×2=32",
-    "interactiveHint": {
-      "type": "pattern-visualizer",
-      "sequence": [2, 4, 8, 16],
-      "operation": "multiply",
-      "value": 2
-    }
-  },
-  {
-    "type": "multiple-choice",
-    "text": "In nature, what pattern do you see in a sunflower?",
-    "options": ["Spiral", "Square", "Triangle", "Random"],
-    "answer": "Spiral",
-    "errorDescription": "The student might not have noticed the spiral pattern in sunflowers. This is a common natural pattern called the Fibonacci spiral.",
-    "hint": "Look at how the seeds are arranged in the center. Sunflowers have a beautiful spiral pattern in their seeds - this is called the Fibonacci spiral!"
-  },
-  {
-    "type": "multiple-choice",
-    "text": "What comes next in this pattern: 🔴🔵🔴🔵🔴?",
-    "options": ["🔴", "🔵", "🟢", "🟡"],
-    "answer": "🔵",
-    "errorDescription": "The student might have missed the alternating pattern. This is a simple ABAB pattern that repeats.",
-    "hint": "Look at the color sequence carefully. The pattern alternates between red and blue circles. After red, it should be blue!"
-  },
-  {
-    "type": "multiple-choice",
-    "text": "What is the next number in the sequence: 2, 4, 6, 8, ...?",
-    "options": ["9", "10", "12", "14"],
-    "answer": "10",
-    "errorDescription": "The student is having trouble identifying the simple arithmetic progression (adding 2). They may not be looking for the relationship between consecutive numbers.",
-    "hint": "You noticed there is a pattern, that is a great start! Let's look at it together below.",
-    "interactiveHint": {
-      "type": "pattern-visualizer",
-      "sequence": [2, 4, 6, 8],
-      "operation": "add",
-      "value": 2
-    }
-  },
-  {
-    "type": "multiple-choice",
-    "text": "Describe the pattern: 1, 4, 9, 16, ...",
+    "text": "What is mathematics, according to the lesson?",
     "options": [
-      "Adding 3",
-      "Multiplying by 4",
-      "Square Numbers",
-      "Doubling the number"
+      "Just solving equations",
+      "The search for patterns and their explanations",
+      "Only about numbers",
+      "Just geometry and algebra"
     ],
-    "answer": "Square Numbers",
-    "errorDescription": "The student may not recognize the pattern of perfect squares. Prompt them to think about multiplying a number by itself.",
-    "hint": "This pattern is a bit trickier than just adding or multiplying by the same number each time. Let's look at the position of each number in the sequence:\n\nThe 1st number is 1. (Think: 1 × 1 = 1)\nThe 2nd number is 4. (Think: 2 × 2 = 4)\nThe 3rd number is 9. (Think: 3 × 3 = 9)\nThe 4th number is 16. (Think: 4 × 4 = 16)\n\nWhat do you notice? Each number is its position number multiplied by itself. This special pattern has a name. Do you know what it is?"
+    "answer": "The search for patterns and their explanations",
+    "errorDescription": "The student may not have understood the fundamental definition of mathematics as pattern-seeking.",
+    "hint": "Mathematics is much more than just solving equations! It's about finding patterns in everything around us and understanding why those patterns exist."
   },
   {
     "type": "multiple-choice",
-    "text": "Find the next number in this sequence: 20, 17, 14, 11, ...?",
-    "options": ["8", "9", "10", "7"],
-    "answer": "8",
-    "errorDescription": "The student is having trouble with a subtraction pattern. They need to identify the common difference.",
-    "hint": "This pattern is going down instead of up. What's the difference between each number? Let's check it out together.",
-    "interactiveHint": {
-      "type": "pattern-visualizer",
-      "sequence": [20, 17, 14, 11],
-      "operation": "subtract",
-      "value": 3
-    }
+    "text": "Which of the following is NOT a number sequence mentioned in the lesson?",
+    "options": [
+      "Counting numbers: 1, 2, 3, 4, 5, ...",
+      "Odd numbers: 1, 3, 5, 7, 9, ...",
+      "Triangular numbers: 1, 3, 6, 10, 15, ...",
+      "Prime numbers: 2, 3, 5, 7, 11, ..."
+    ],
+    "answer": "Prime numbers: 2, 3, 5, 7, 11, ...",
+    "errorDescription": "The student may not have carefully read the list of sequences in Table 1 of the lesson.",
+    "hint": "Look back at Table 1 in the lesson. The sequences mentioned include: All 1's, Counting numbers, Odd numbers, Even numbers, Triangular numbers, Squares, Cubes, Virahānka numbers, Powers of 2, and Powers of 3."
   },
   {
     "type": "multiple-choice",
-    "text": "What is the next number in the sequence: 3, 6, 12, 24, ...?",
-    "options": ["30", "48", "36", "42"],
-    "answer": "48",
-    "errorDescription": "The student may not be seeing the multiplicative pattern. They might be trying to find an addition pattern instead.",
-    "hint": "Let's investigate this pattern. It seems to be growing very quickly! Adding the same number each time doesn't seem to work. What happens if you try multiplying each number to get the next one? Let's visualize it.",
-    "interactiveHint": {
-      "type": "pattern-visualizer",
-      "sequence": [3, 6, 12, 24],
-      "operation": "multiply",
-      "value": 2
-    }
+    "text": "What are the next three numbers in the sequence of triangular numbers: 1, 3, 6, 10, 15, ...?",
+    "options": [
+      "18, 22, 27",
+      "21, 28, 36",
+      "20, 25, 30",
+      "16, 18, 21"
+    ],
+    "answer": "21, 28, 36",
+    "errorDescription": "The student may not understand how triangular numbers are formed by adding consecutive counting numbers.",
+    "hint": "Triangular numbers are formed by adding counting numbers: 1, 1+2=3, 1+2+3=6, 1+2+3+4=10, 1+2+3+4+5=15. So the next would be 1+2+3+4+5+6=21, then 1+2+3+4+5+6+7=28, then 1+2+3+4+5+6+7+8=36."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the 6th square number?",
+    "options": ["25", "30", "36", "49"],
+    "answer": "36",
+    "errorDescription": "The student may not understand that square numbers are formed by multiplying a number by itself.",
+    "hint": "Square numbers are formed by multiplying a number by itself. The sequence is: 1×1=1, 2×2=4, 3×3=9, 4×4=16, 5×5=25, 6×6=36. So the 6th square number is 36."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the 4th cube number?",
+    "options": ["27", "64", "125", "216"],
+    "answer": "64",
+    "errorDescription": "The student may not understand that cube numbers are formed by multiplying a number by itself three times.",
+    "hint": "Cube numbers are formed by multiplying a number by itself three times. The sequence is: 1×1×1=1, 2×2×2=8, 3×3×3=27, 4×4×4=64. So the 4th cube number is 64."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Why are 1, 3, 6, 10, 15, ... called triangular numbers?",
+    "options": [
+      "Because they are odd numbers",
+      "Because they can be arranged in triangular shapes",
+      "Because they are multiples of 3",
+      "Because they are prime numbers"
+    ],
+    "answer": "Because they can be arranged in triangular shapes",
+    "errorDescription": "The student may not understand the visual representation of triangular numbers.",
+    "hint": "Triangular numbers are called so because they can be arranged in triangular patterns. For example, 3 dots can form a triangle, 6 dots can form a larger triangle, 10 dots can form an even larger triangle, and so on."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What happens when you add up odd numbers starting with 1?",
+    "options": [
+      "You get even numbers",
+      "You get triangular numbers",
+      "You get square numbers",
+      "You get cube numbers"
+    ],
+    "answer": "You get square numbers",
+    "errorDescription": "The student may not have understood the beautiful relationship between odd numbers and square numbers.",
+    "hint": "This is a beautiful pattern! 1=1, 1+3=4, 1+3+5=9, 1+3+5+7=16, 1+3+5+7+9=25. Notice that 1, 4, 9, 16, 25 are all square numbers (1², 2², 3², 4², 5²)."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the sum of the first 5 odd numbers?",
+    "options": ["15", "20", "25", "30"],
+    "answer": "25",
+    "errorDescription": "The student may not have applied the pattern of adding odd numbers to get square numbers.",
+    "hint": "The first 5 odd numbers are 1, 3, 5, 7, 9. Adding them: 1+3+5+7+9 = 25. Since 25 = 5², this confirms the pattern that adding the first n odd numbers gives n²."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the sum of 1 + 2 + 3 + 4 + 5 + 4 + 3 + 2 + 1?",
+    "options": ["20", "25", "30", "35"],
+    "answer": "25",
+    "errorDescription": "The student may not have recognized this as the 'adding up and down' pattern that gives square numbers.",
+    "hint": "This is the 'adding up and down' pattern! 1+2+3+4+5+4+3+2+1 = 25. This is another way to get square numbers - by adding counting numbers up to n and then back down to 1."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which number is both a triangular number and a square number?",
+    "options": ["16", "25", "36", "49"],
+    "answer": "36",
+    "errorDescription": "The student may not have recognized that 36 appears in both the triangular and square number sequences.",
+    "hint": "36 is special! It's the 8th triangular number (1+2+3+4+5+6+7+8=36) and it's also the 6th square number (6×6=36). This means 36 dots can be arranged both in a triangle and in a square!"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What are the next three numbers in the sequence of powers of 2: 1, 2, 4, 8, 16, ...?",
+    "options": [
+      "20, 24, 28",
+      "32, 64, 128",
+      "18, 20, 22",
+      "24, 32, 40"
+    ],
+    "answer": "32, 64, 128",
+    "errorDescription": "The student may not understand that powers of 2 are formed by multiplying by 2 each time.",
+    "hint": "Powers of 2 are formed by multiplying by 2 each time: 1, 1×2=2, 2×2=4, 4×2=8, 8×2=16, 16×2=32, 32×2=64, 64×2=128."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the 5th Virahānka number?",
+    "options": ["8", "13", "21", "34"],
+    "answer": "13",
+    "errorDescription": "The student may not be familiar with the Virahānka numbers (Fibonacci sequence).",
+    "hint": "Virahānka numbers (also called Fibonacci numbers) are formed by adding the two previous numbers: 1, 1, 1+1=2, 1+2=3, 2+3=5, 3+5=8, 5+8=13. So the 5th Virahānka number is 13."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "In the sequence of regular polygons, what is the number of sides in a hexagon?",
+    "options": ["5", "6", "7", "8"],
+    "answer": "6",
+    "errorDescription": "The student may not understand the relationship between regular polygons and counting numbers.",
+    "hint": "Regular polygons are named by their number of sides. A hexagon has 6 sides, a pentagon has 5 sides, a heptagon has 7 sides, and so on. The sequence of sides is the counting numbers starting from 3."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the sum of the first 10 odd numbers?",
+    "options": ["90", "100", "110", "120"],
+    "answer": "100",
+    "errorDescription": "The student may not have applied the pattern that the sum of the first n odd numbers is n².",
+    "hint": "Remember the pattern: the sum of the first n odd numbers equals n². So the sum of the first 10 odd numbers is 10² = 100."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What happens when you add up consecutive triangular numbers?",
+    "options": [
+      "You get square numbers",
+      "You get cube numbers",
+      "You get powers of 2",
+      "You get even numbers"
+    ],
+    "answer": "You get square numbers",
+    "errorDescription": "The student may not have discovered this relationship between triangular numbers and square numbers.",
+    "hint": "Adding consecutive triangular numbers gives square numbers! For example: 1+3=4, 3+6=9, 6+10=16, 10+15=25. Notice that 4, 9, 16, 25 are all square numbers."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the next number in the sequence of hexagonal numbers: 1, 7, 19, 37, ...?",
+    "options": ["55", "61", "67", "73"],
+    "answer": "61",
+    "errorDescription": "The student may not have recognized the pattern in hexagonal numbers.",
+    "hint": "Hexagonal numbers follow a specific pattern. The differences between consecutive terms are: 7-1=6, 19-7=12, 37-19=18. The differences increase by 6 each time, so the next difference would be 24, making the next number 37+24=61."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the sum of 1 + 2 + 3 + ... + 99 + 100 + 99 + ... + 3 + 2 + 1?",
+    "options": ["9900", "10000", "10100", "10200"],
+    "answer": "10000",
+    "errorDescription": "The student may not have recognized this as the 'adding up and down' pattern that gives square numbers.",
+    "hint": "This is the 'adding up and down' pattern! The sum of 1+2+3+...+n+...+3+2+1 equals n². So 1+2+3+...+100+...+3+2+1 = 100² = 10000."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the sum of the first 5 powers of 2: 1 + 2 + 4 + 8 + 16?",
+    "options": ["30", "31", "32", "33"],
+    "answer": "31",
+    "errorDescription": "The student may not have calculated the sum correctly or recognized the pattern.",
+    "hint": "Let's add them up: 1 + 2 + 4 + 8 + 16 = 31. Interestingly, this is one less than the next power of 2 (32). The sum of the first n powers of 2 is always 2^(n+1) - 1."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What happens when you add 1 to each sum of powers of 2?",
+    "options": [
+      "You get the next power of 2",
+      "You get triangular numbers",
+      "You get square numbers",
+      "You get odd numbers"
+    ],
+    "answer": "You get the next power of 2",
+    "errorDescription": "The student may not have discovered this interesting relationship.",
+    "hint": "This is a beautiful pattern! 1+1=2, (1+2)+1=4, (1+2+4)+1=8, (1+2+4+8)+1=16. When you add 1 to the sum of the first n powers of 2, you get the next power of 2!"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the 6th triangular number?",
+    "options": ["15", "21", "28", "36"],
+    "answer": "21",
+    "errorDescription": "The student may not have calculated the triangular number correctly.",
+    "hint": "The 6th triangular number is 1+2+3+4+5+6 = 21. Triangular numbers are formed by adding consecutive counting numbers."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Which sequence represents the counting numbers?",
+    "options": [
+      "0, 1, 2, 3, 4, ...",
+      "1, 2, 3, 4, 5, ...",
+      "2, 4, 6, 8, 10, ...",
+      "1, 3, 5, 7, 9, ..."
+    ],
+    "answer": "1, 2, 3, 4, 5, ...",
+    "errorDescription": "The student may be confusing counting numbers with whole numbers or other sequences.",
+    "hint": "Counting numbers start from 1 and go up by 1 each time: 1, 2, 3, 4, 5, 6, 7, ... They are also called natural numbers."
   }
 ]

@@ -24,12 +24,13 @@ export const PatternRelationshipsVisualizer: React.FC<PatternRelationshipsVisual
         return Array.from({ length: n }, (_, i) => (i + 1) ** 2);
       case 'odd':
         return Array.from({ length: n }, (_, i) => 2 * i + 1);
-      case 'fibonacci':
+      case 'fibonacci': {
         const fib = [1, 1];
         for (let i = 2; i < n; i++) {
           fib.push(fib[i - 1] + fib[i - 2]);
         }
         return fib;
+      }
       case 'powers2':
         return Array.from({ length: n }, (_, i) => 2 ** (i + 1));
       case 'counting':

@@ -11,7 +11,6 @@ import {
   Play,
   Presentation,
   Gem,
-  Square,
   Construction,
   FlipHorizontal,
   Binary,

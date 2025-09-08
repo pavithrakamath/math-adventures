@@ -1,6 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Home, BookOpen, Trophy, Settings } from 'lucide-react';
+import { Home, Trophy, Settings } from 'lucide-react';
 
 const Navigation = () => {
   const location = useLocation();

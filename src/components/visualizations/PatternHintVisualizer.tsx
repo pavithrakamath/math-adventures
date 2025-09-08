@@ -13,7 +13,6 @@ const PatternHintVisualizer: React.FC<PatternHintVisualizerProps> = ({
 }) => {
   const renderTriangularPattern = () => {
     const dots = [];
-    let dotCount = 0;
     
     for (let i = 0; i < sequence.length; i++) {
       const currentNumber = sequence[i];

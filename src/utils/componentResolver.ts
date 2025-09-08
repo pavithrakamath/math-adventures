@@ -10,7 +10,6 @@ const InteractiveTallyMarks = lazy(() => import('../components/visualizations/In
 const InteractivePictograph = lazy(() => import('../components/visualizations/InteractivePictograph'));
 const PatternVisualizer = lazy(() => import('../components/visualizations/PatternVisualizer'));
 const PatternLesson = lazy(() => import('../components/visualizations/PatternLesson'));
-const NumberPatternLesson = lazy(() => import('../components/visualizations/NumberPatternLesson'));
 const PalindromeVisualizer = lazy(() => import('../components/visualizations/PalindromeVisualizer'));
 const KaprekarVisualizer = lazy(() => import('../components/visualizations/KaprekarVisualizer'));
 const SupercellVisualizer = lazy(() => import('../components/visualizations/SupercellVisualizer'));
@@ -20,6 +19,7 @@ const ShapeVisualizer = lazy(() => import('../components/visualizations/ShapeVis
 const SymmetryVisualizer = lazy(() => import('../components/visualizations/SymmetryVisualizer'));
 const TallyMarks = lazy(() => import('../components/visualizations/TallyMarks'));
 const AreaVisual = lazy(() => import('../components/visualizations/AreaVisual'));
+const AreaVisualizationLesson = lazy(() => import('../components/visualizations/AreaVisualizationLesson'));
 const FactorChecker = lazy(() => import('../components/visualizations/FactorChecker'));
 const ClickableLessonBarChart = lazy(() => import('../components/visualizations/ClickableLessonBarChart'));
 const TriangularNumbersVisualizer = lazy(() => import('../components/visualizations/TriangularNumbersVisualizer'));
@@ -31,7 +31,7 @@ const PatternRelationshipsVisualizer = lazy(() => import('../components/visualiz
 const Quiz = lazy(() => import('../components/lessons/Quiz'));
 
 // Component mapping
-const componentMap: Record<string, React.ComponentType<any>> = {
+const componentMap: Record<string, React.ComponentType<Record<string, unknown>>> = {
   'FractionVisualizer': FractionVisualizer,
   'BarChart': BarChart,
   'InteractiveBarGraph': InteractiveBarGraph,
@@ -41,7 +41,6 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'InteractivePictograph': InteractivePictograph,
   'PatternVisualizer': PatternVisualizer,
   'PatternLesson': PatternLesson,
-  'NumberPatternLesson': NumberPatternLesson,
   'PalindromeVisualizer': PalindromeVisualizer,
   'KaprekarVisualizer': KaprekarVisualizer,
   'SupercellVisualizer': SupercellVisualizer,
@@ -51,6 +50,7 @@ const componentMap: Record<string, React.ComponentType<any>> = {
   'SymmetryVisualizer': SymmetryVisualizer,
   'TallyMarks': TallyMarks,
   'AreaVisual': AreaVisual,
+  'AreaVisualizationLesson': AreaVisualizationLesson,
   'FactorChecker': FactorChecker,
   'ClickableLessonBarChart': ClickableLessonBarChart,
   'TriangularNumbersVisualizer': TriangularNumbersVisualizer,
@@ -65,7 +65,7 @@ const componentMap: Record<string, React.ComponentType<any>> = {
  * @param componentName - The string name of the component
  * @returns The resolved React component or null if not found
  */
-export const resolveComponent = (componentName: string): React.ComponentType<any> | null => {
+export const resolveComponent = (componentName: string): React.ComponentType<Record<string, unknown>> | null => {
   return componentMap[componentName] || null;
 };
 
@@ -75,7 +75,7 @@ export const resolveComponent = (componentName: string): React.ComponentType<any
  * @returns True if the content is a component reference
  */
 export const isComponentReference = (content: string): boolean => {
-  return componentMap.hasOwnProperty(content);
+  return Object.prototype.hasOwnProperty.call(componentMap, content);
 };
 
 /**

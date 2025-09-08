@@ -12,6 +12,7 @@ import TriangularNumbersVisualizer from '../components/visualizations/Triangular
 import FibonacciVisualizer from '../components/visualizations/FibonacciVisualizer';
 import OddToSquareVisualizer from '../components/visualizations/OddToSquareVisualizer';
 import PatternRelationshipsVisualizer from '../components/visualizations/PatternRelationshipsVisualizer';
+import AreaVisualizationLesson from '../components/visualizations/AreaVisualizationLesson';
 
 // Import lesson data from JSON files
 import patternsMathematicsData from './lessons/patterns-mathematics.json';
@@ -25,7 +26,8 @@ import symmetryData from './lessons/symmetry.json';
 import integersData from './lessons/integers.json';
 
 // Map visualization component names to actual components
-const visualizationComponents: Record<string, any> = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const visualizationComponents: Record<string, React.ComponentType<any>> = {
   InteractiveTallyMarks,
   InteractiveBarGraph,
   InteractivePerimeter,
@@ -39,19 +41,20 @@ const visualizationComponents: Record<string, any> = {
   FibonacciVisualizer,
   OddToSquareVisualizer,
   PatternRelationshipsVisualizer,
+  AreaVisualizationLesson,
 };
 
 // Function to process lesson data and map visualization components
-const processLessonData = (lessonData: any): Lesson => {
+const processLessonData = (lessonData: Record<string, unknown>): Lesson => {
   return {
     ...lessonData,
-    sections: lessonData.sections.map((section: any) => ({
+    sections: (lessonData.sections as Array<Record<string, unknown>>).map((section: Record<string, unknown>) => ({
       ...section,
       content: typeof section.content === 'string' && visualizationComponents[section.content] 
         ? visualizationComponents[section.content] 
         : section.content
-    }))
-  };
+    })) as unknown as Lesson['sections']
+  } as Lesson;
 };
 
 export const lessons: Lesson[] = [

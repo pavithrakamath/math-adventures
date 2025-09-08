@@ -11,8 +11,8 @@ export interface AreaVisualProps {
 }
 
 const AreaVisual: React.FC<AreaVisualProps> = ({
-  shape,
-  dimensions,
+  shape = 'rectangle',
+  dimensions = [5, 3],
   unit = 'cm',
   showGrid = true,
   showFormula = true,

@@ -1,68 +1,321 @@
 [
   {
-    "type": "chart",
-    "text": "The bar chart below shows the number of fruits sold at a local shop in one day.",
-    "data": [
-      { "name": "Apple", "value": 45 },
-      { "name": "Banana", "value": 60 },
-      { "name": "Orange", "value": 30 },
-      { "name": "Grapes", "value": 50 },
-      { "name": "Mango", "value": 25 }
+    "type": "multiple-choice",
+    "text": "What is data?",
+    "options": [
+      "Only numbers",
+      "Any collection of facts, numbers, measures, observations that convey information",
+      "Only pictures and graphs",
+      "Only survey results"
     ],
-    "question": "Which fruit was sold the most?",
-    "answer": "Banana",
-    "errorDescription": "The student is having trouble reading the bar chart. They should look for the tallest bar.",
-    "hint": "A bar chart is a visual way to compare numbers. The 'taller' the bar, the larger the number it represents. To find the fruit that was sold the most, simply look for the bar that reaches the highest up the chart. Which fruit is that?"
-  },
-  {
-    "type": "text",
-    "text": "How many more Bananas were sold than Apples?",
-    "data": [
-      { "name": "Apple", "value": 45 },
-      { "name": "Banana", "value": 60 },
-      { "name": "Orange", "value": 30 },
-      { "name": "Grapes", "value": 50 },
-      { "name": "Mango", "value": 25 }
-    ],
-    "answer": "15",
-    "errorDescription": "The student needs help with interpreting the data to find a difference. They need to find the values for both fruits and then subtract.",
-    "hint": "This is a two-step problem, but it's straightforward! First, find the value for each fruit by looking at the height of its bar. The Bananas bar is at 60 and the Apples bar is at 45. The question asks 'how many more', which means we need to find the difference. What is 60 - 45?"
-  },
-  {
-    "type": "chart",
-    "text": "The bar chart shows the number of fruits sold.",
-    "data": [
-      { "name": "Apple", "value": 45 },
-      { "name": "Banana", "value": 60 },
-      { "name": "Orange", "value": 30 },
-      { "name": "Grapes", "value": 50 },
-      { "name": "Mango", "value": 25 }
-    ],
-    "question": "Which fruit was sold the least?",
-    "answer": "Mango",
-    "errorDescription": "The student is having trouble reading the bar chart for the lowest value. They should look for the shortest bar.",
-    "hint": "Just like the tallest bar shows the biggest number, the shortest bar shows the smallest number. Look for the fruit with the bar that is lowest on the chart."
-  },
-  {
-    "type": "text",
-    "text": "What is the total number of fruits sold for the day?",
-    "data": [
-      { "name": "Apple", "value": 45 },
-      { "name": "Banana", "value": 60 },
-      { "name": "Orange", "value": 30 },
-      { "name": "Grapes", "value": 50 },
-      { "name": "Mango", "value": 25 }
-    ],
-    "answer": "210",
-    "errorDescription": "The student needs to add up the values from all the bars.",
-    "hint": "The question asks for the 'total' number of fruits. 'Total' is a keyword that tells us we need to add things together. You need to find the value for each fruit and then add them all up: 45 + 60 + 30 + 50 + 25. What do you get?"
+    "answer": "Any collection of facts, numbers, measures, observations that convey information",
+    "errorDescription": "The student may have a narrow understanding of what constitutes data.",
+    "hint": "Data is much more than just numbers! It includes any information that tells us something about the world around us - facts, measurements, observations, survey responses, and more!"
   },
   {
     "type": "multiple-choice",
-    "text": "How many tally marks represent the number 7?",
-    "options": ["7 tally marks", "6 tally marks", "8 tally marks", "9 tally marks"],
-    "answer": "7 tally marks",
-    "errorDescription": "The student may be confused about how tally marks work. Tally marks are grouped in fives with a diagonal line through every fifth mark.",
-    "hint": "Remember: tally marks are grouped in fives with a diagonal line through every fifth mark. For 7, we write 5 marks with a diagonal line through them (representing 5) plus 2 more marks."
+    "text": "In the tally mark system, how do you represent the number 7?",
+    "options": [
+      "Seven separate lines: |||||||",
+      "Four vertical lines with a diagonal through them, plus two more vertical lines: ||̸|| ||",
+      "Seven diagonal lines: ///////",
+      "Three groups of two lines: || || ||"
+    ],
+    "answer": "Four vertical lines with a diagonal through them, plus two more vertical lines: ||̸|| ||",
+    "errorDescription": "The student may not understand the tally mark system where every fifth mark is crossed diagonally.",
+    "hint": "In tally marks, we group by fives! We draw four vertical lines and then draw a diagonal line through them to represent 5. For 7, we have one complete group of 5 (four vertical lines with a diagonal through them) plus two more vertical lines."
+  },
+  {
+    "type": "pictograph",
+    "text": "The pictograph below shows the number of books borrowed from a library in one week. Each circle represents 2 books.",
+    "data": [
+      { "name": "Monday", "value": 6 },
+      { "name": "Tuesday", "value": 4 },
+      { "name": "Wednesday", "value": 8 },
+      { "name": "Thursday", "value": 3 },
+      { "name": "Friday", "value": 5 },
+      { "name": "Saturday", "value": 2 }
+    ],
+    "symbol": "●",
+    "scale": 2,
+    "title": "Books Borrowed from Library",
+    "question": "How many books were borrowed on Wednesday?",
+    "answer": "8",
+    "errorDescription": "The student may have counted only the symbols or made a calculation error.",
+    "hint": "Look at Wednesday's row. Count the circles and remember that each circle represents 2 books. If there are 4 circles, how many books is that? 4 × 2 = ?"
+  },
+  {
+    "type": "pictograph",
+    "text": "The pictograph shows modes of travel used by students. Each symbol represents 1 student.",
+    "data": [
+      { "name": "Private car", "value": 3 },
+      { "name": "Public bus", "value": 8 },
+      { "name": "School bus", "value": 12 },
+      { "name": "Cycle", "value": 5 },
+      { "name": "Walking", "value": 7 }
+    ],
+    "symbol": "●",
+    "scale": 1,
+    "title": "Modes of Travel Used by Students",
+    "question": "Which mode of travel is used by the most number of students?",
+    "answer": "School bus",
+    "errorDescription": "The student needs to identify the category with the highest frequency by looking at the tallest bar.",
+    "hint": "To find the most popular mode of travel, look for the category with the most symbols (tallest bar). Count the symbols for each mode and see which one has the most!"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "In a pictograph where each symbol represents 10 children, how many children does 3.5 symbols represent?",
+    "options": ["30", "35", "40", "45"],
+    "answer": "35",
+    "errorDescription": "The student may not understand how to calculate with fractional symbols in pictographs.",
+    "hint": "If each symbol represents 10 children, then 3 complete symbols = 3 × 10 = 30 children. The half symbol = 0.5 × 10 = 5 children. So 3.5 symbols = 30 + 5 = 35 children."
+  },
+  {
+    "type": "chart",
+    "text": "The bar graph shows the number of students absent in each class on a particular day.",
+    "data": [
+      { "name": "Class I", "value": 3 },
+      { "name": "Class II", "value": 5 },
+      { "name": "Class III", "value": 4 },
+      { "name": "Class IV", "value": 2 },
+      { "name": "Class V", "value": 0 },
+      { "name": "Class VI", "value": 1 },
+      { "name": "Class VII", "value": 5 },
+      { "name": "Class VIII", "value": 7 }
+    ],
+    "question": "Which class had full attendance (no students absent)?",
+    "answer": "Class V",
+    "errorDescription": "The student needs to identify the class with 0 absent students by looking for the bar at zero height.",
+    "hint": "Full attendance means no students were absent. Look for the class with a bar height of 0 - that's the class with perfect attendance!"
+  },
+  {
+    "type": "chart",
+    "text": "The bar graph shows monthly expenditure of a family on various items (in ₹).",
+    "data": [
+      { "name": "House rent", "value": 3000 },
+      { "name": "Food", "value": 3400 },
+      { "name": "Education", "value": 800 },
+      { "name": "Electricity", "value": 400 },
+      { "name": "Transport", "value": 600 },
+      { "name": "Miscellaneous", "value": 1200 }
+    ],
+    "question": "On which item does the family spend the most money?",
+    "answer": "Food",
+    "errorDescription": "The student needs to identify the category with the highest value by looking at the tallest bar.",
+    "hint": "To find where the family spends the most, look for the tallest bar in the graph. The height of each bar represents the amount spent on that item."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the frequency of a particular value in a data set?",
+    "options": [
+      "The average of all values",
+      "The count of how many times that value appears",
+      "The highest value in the set",
+      "The difference between highest and lowest values"
+    ],
+    "answer": "The count of how many times that value appears",
+    "errorDescription": "The student may not understand the concept of frequency in data handling.",
+    "hint": "Frequency tells us how often something occurs. If you have the numbers 2, 3, 2, 4, 2, the frequency of '2' is 3 because it appears 3 times in the data set."
+  },
+  {
+    "type": "pictograph",
+    "text": "The pictograph shows the number of tractors in five villages. Each tractor symbol represents 2 tractors.",
+    "data": [
+      { "name": "Village A", "value": 6 },
+      { "name": "Village B", "value": 10 },
+      { "name": "Village C", "value": 8 },
+      { "name": "Village D", "value": 12 },
+      { "name": "Village E", "value": 4 }
+    ],
+    "symbol": "🚜",
+    "scale": 2,
+    "title": "Tractors in Villages",
+    "question": "How many more tractors does Village D have than Village B?",
+    "answer": "2",
+    "errorDescription": "The student needs to calculate the difference between the two villages' tractor counts.",
+    "hint": "First, count the symbols for each village: Village D has 6 symbols, Village B has 5 symbols. Then calculate: (6 × 2) - (5 × 2) = 12 - 10 = 2 tractors."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "When creating a bar graph, why is it important to choose an appropriate scale?",
+    "options": [
+      "To make the graph look colorful",
+      "To fit the data nicely on the paper and make it easy to read",
+      "To use as many bars as possible",
+      "To make the graph as large as possible"
+    ],
+    "answer": "To fit the data nicely on the paper and make it easy to read",
+    "errorDescription": "The student may not understand the practical importance of choosing the right scale for data representation.",
+    "hint": "Choosing the right scale is crucial! If your data ranges from 0 to 1000, using 1 unit = 1 item would make a very tall graph. Using 1 unit = 100 items makes it much more manageable and readable."
+  },
+  {
+    "type": "chart",
+    "text": "The bar graph shows the number of tickets sold at a railway station for different cities.",
+    "data": [
+      { "name": "Vidisha", "value": 24 },
+      { "name": "Jabalpur", "value": 20 },
+      { "name": "Seoni", "value": 16 },
+      { "name": "Indore", "value": 28 },
+      { "name": "Sagar", "value": 16 }
+    ],
+    "question": "What is the total number of tickets sold for all cities?",
+    "answer": "104",
+    "errorDescription": "The student needs to add up all the values from the bar graph.",
+    "hint": "To find the total, add up all the ticket sales: 24 + 20 + 16 + 28 + 16. Add them step by step to get the total number of tickets sold."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "In a pictograph, what does the scale tell us?",
+    "options": [
+      "How tall the graph should be",
+      "What each symbol or picture represents",
+      "How many categories there are",
+      "What colors to use"
+    ],
+    "answer": "What each symbol or picture represents",
+    "errorDescription": "The student may not understand the purpose of the scale in pictographs.",
+    "hint": "The scale (like '= 1 student' or '= 10 children') tells us what each symbol represents. Without the scale, we wouldn't know if one symbol means 1 person or 10 people!"
+  },
+  {
+    "type": "chart",
+    "text": "The bar graph shows the number of girl students in each class. The scale is 1 unit = 4 girls.",
+    "data": [
+      { "name": "Class 1", "value": 3 },
+      { "name": "Class 2", "value": 4 },
+      { "name": "Class 3", "value": 2 },
+      { "name": "Class 4", "value": 5 },
+      { "name": "Class 5", "value": 6 },
+      { "name": "Class 6", "value": 4 },
+      { "name": "Class 7", "value": 3 },
+      { "name": "Class 8", "value": 2 }
+    ],
+    "question": "How many girls are there in Class 5?",
+    "answer": "24",
+    "errorDescription": "The student may have counted the bar height without considering the scale.",
+    "hint": "Look at Class 5's bar height and remember the scale! The bar shows 6 units, and each unit represents 4 girls. So 6 × 4 = 24 girls in Class 5."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is the main advantage of using bar graphs over tables for presenting data?",
+    "options": [
+      "Bar graphs use less space",
+      "Bar graphs allow quick visual comparison of different categories",
+      "Bar graphs are easier to draw",
+      "Bar graphs use fewer numbers"
+    ],
+    "answer": "Bar graphs allow quick visual comparison of different categories",
+    "errorDescription": "The student may not understand the primary benefit of visual data representation.",
+    "hint": "Bar graphs are powerful because you can instantly see which categories are higher or lower just by looking at the bar heights. This makes comparing different values much faster than reading through a table of numbers!"
+  },
+  {
+    "type": "pictograph",
+    "text": "The pictograph shows the number of saplings planted each day of the week. Each sapling symbol represents 10 saplings.",
+    "data": [
+      { "name": "Monday", "value": 30 },
+      { "name": "Tuesday", "value": 40 },
+      { "name": "Wednesday", "value": 60 },
+      { "name": "Thursday", "value": 50 },
+      { "name": "Friday", "value": 70 },
+      { "name": "Saturday", "value": 20 },
+      { "name": "Sunday", "value": 10 }
+    ],
+    "symbol": "🌱",
+    "scale": 10,
+    "title": "Saplings Planted Each Day",
+    "question": "On which day were the most saplings planted?",
+    "answer": "Friday",
+    "errorDescription": "The student needs to identify the day with the most symbols.",
+    "hint": "Look for the day with the most sapling symbols. Count the symbols for each day and see which one has the highest number!"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "When might a pictograph become difficult to use?",
+    "options": [
+      "When there are too many categories",
+      "When the data values are very large and not exact multiples of the scale",
+      "When the symbols are too colorful",
+      "When there are too few categories"
+    ],
+    "answer": "When the data values are very large and not exact multiples of the scale",
+    "errorDescription": "The student may not understand the practical limitations of pictographs.",
+    "hint": "Pictographs work best when data values are exact multiples of your scale. If you use '= 10 students' but have 27 students, you'd need 2 complete symbols plus 0.7 of another symbol, which is hard to draw accurately!"
+  },
+  {
+    "type": "chart",
+    "text": "The bar graph shows the number of wickets taken by a bowler in his last 30 matches.",
+    "data": [
+      { "name": "0 wickets", "value": 2 },
+      { "name": "1 wicket", "value": 4 },
+      { "name": "2 wickets", "value": 6 },
+      { "name": "3 wickets", "value": 8 },
+      { "name": "4 wickets", "value": 3 },
+      { "name": "5 wickets", "value": 5 },
+      { "name": "6 wickets", "value": 1 },
+      { "name": "7 wickets", "value": 1 }
+    ],
+    "question": "In how many matches did the bowler take exactly 3 wickets?",
+    "answer": "8",
+    "errorDescription": "The student needs to read the frequency from the bar graph for the '3 wickets' category.",
+    "hint": "Look at the bar for '3 wickets' and read its height. The height of the bar tells you how many matches had exactly 3 wickets."
+  },
+  {
+    "type": "multiple-choice",
+    "text": "What is a column graph?",
+    "options": [
+      "A bar graph with horizontal bars",
+      "A bar graph with vertical bars",
+      "A pictograph with columns",
+      "A table with columns"
+    ],
+    "answer": "A bar graph with vertical bars",
+    "errorDescription": "The student may not be familiar with the term 'column graph'.",
+    "hint": "A column graph is just another name for a bar graph where the bars go up vertically (like columns in a building) instead of horizontally. Both show the same information, just oriented differently!"
+  },
+  {
+    "type": "chart",
+    "text": "The bar graph shows the population of India in different years (in crores).",
+    "data": [
+      { "name": "1951", "value": 36 },
+      { "name": "1961", "value": 44 },
+      { "name": "1971", "value": 54 },
+      { "name": "1981", "value": 68 },
+      { "name": "1991", "value": 84 },
+      { "name": "2001", "value": 102 },
+      { "name": "2011", "value": 121 }
+    ],
+    "question": "By how much did India's population increase from 1951 to 2011?",
+    "answer": "85 crores",
+    "errorDescription": "The student needs to calculate the difference between the 1951 and 2011 population values.",
+    "hint": "To find the increase, subtract the 1951 population from the 2011 population: 121 - 36 = 85 crores. This shows how much the population grew over 60 years!"
+  },
+  {
+    "type": "multiple-choice",
+    "text": "Why might an infographic be misleading even if it looks visually appealing?",
+    "options": [
+      "Because it uses too many colors",
+      "Because it might imply additional information that may not be accurate",
+      "Because it's too small to read",
+      "Because it doesn't have enough data"
+    ],
+    "answer": "Because it might imply additional information that may not be accurate",
+    "errorDescription": "The student may not understand the potential pitfalls of overly artistic data presentations.",
+    "hint": "While making data look more appealing can be good, we need to be careful! For example, if we make taller bars also wider, it might suggest that taller things are always wider, which may not be true. We should focus on accurate representation first, then make it look good."
+  },
+  {
+    "type": "chart",
+    "text": "The bar graph shows the heights of the tallest mountains on each continent (in meters).",
+    "data": [
+      { "name": "Everest (Asia)", "value": 8848 },
+      { "name": "Aconcagua (S America)", "value": 6962 },
+      { "name": "Denali (N America)", "value": 6194 },
+      { "name": "Kilimanjaro (Africa)", "value": 5895 },
+      { "name": "Elbrus (Europe)", "value": 5642 },
+      { "name": "Vinson Massif (Antarctica)", "value": 4892 },
+      { "name": "Kosciuszko (Australia)", "value": 2228 }
+    ],
+    "question": "How much taller is Mount Everest than Mount Kosciuszko?",
+    "answer": "6620 meters",
+    "errorDescription": "The student needs to calculate the difference between the two mountain heights.",
+    "hint": "To find how much taller Everest is, subtract Kosciuszko's height from Everest's height: 8848 - 2228 = 6620 meters. That's more than 6 kilometers taller!"
   }
 ]

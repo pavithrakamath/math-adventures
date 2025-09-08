@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useErrorHandler } from './useErrorHandler';
-import type { Lesson } from '../types/lesson.types';
+import type { Lesson, Question } from '../types/lesson.types';
 
 // Enhanced lesson data interface
 export interface LessonData {
   lesson: Lesson;
-  questions: any[];
+  questions: Question[];
   metadata: {
     lastUpdated: Date;
     version: string;
@@ -18,7 +18,7 @@ const lessonCache = new Map<string, LessonData>();
 
 export const useLessonData = () => {
   const [lessons, setLessons] = useState<Lesson[]>([]);
-  const [questions, setQuestions] = useState<Record<string, any[]>>({});
+  const [questions, setQuestions] = useState<Record<string, Question[]>>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '../ui/button';
-import { ArrowRight, Lightbulb, RotateCcw } from 'lucide-react';
+import { ArrowRight, Lightbulb } from 'lucide-react';
 
 interface SymmetryVisualizerProps {
   shape: 'square' | 'letter-r';

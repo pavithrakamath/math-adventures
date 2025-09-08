@@ -20,18 +20,18 @@
       "order": 1
     },
     {
-      "id": "perimeter",
+      "id": "area-visualizations",
       "type": "interactive",
-      "title": "📐 Shape Visualizer - Perimeter vs Area",
-      "content": "ShapeVisualizer",
+      "title": "📐 Interactive Area Visualizations",
+      "content": "AreaVisualizationLesson",
       "order": 2
     },
     {
-      "id": "area",
-      "type": "practice",
-      "title": "🔍 Find the Area!",
-      "content": "A square with side 6 cm has area = 6 × 6 = 36 cm²!",
-      "order": 3
+      "id": "perimeter-practice",
+      "type": "interactive",
+      "title": "📏 Perimeter Practice",
+      "content": "ShapeVisualizer",
+      "order": 6
     }
   ]
 }

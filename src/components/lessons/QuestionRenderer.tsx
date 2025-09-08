@@ -145,7 +145,7 @@ export function QuestionRenderer({
         label: item.name,
         value: item.value,
         color: `hsl(${(index * 137.5) % 360}, 70%, 50%)`, // Generate distinct colors
-        emoji: (item as any).emoji
+        emoji: (item as { emoji?: string }).emoji
       })) || [];
       
       return (
@@ -182,7 +182,7 @@ export function QuestionRenderer({
         label: item.name,
         value: item.value,
         color: `hsl(${(index * 137.5) % 360}, 70%, 50%)`,
-        emoji: (item as any).emoji
+        emoji: (item as { emoji?: string }).emoji
       }));
       
       return (

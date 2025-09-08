@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '../ui/button';
-import { ArrowRight, Lightbulb, Calculator } from 'lucide-react';
+import { ArrowRight, Lightbulb } from 'lucide-react';
 
 interface PatternVisualizerProps {
   sequence: number[];

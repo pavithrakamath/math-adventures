@@ -2,7 +2,6 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { AppStateProvider } from './context/AppStateContext';
-import { useTranslation } from './hooks/useTranslation';
 import LoadingSpinner from './components/common/LoadingSpinner';
 
 // Lazy load components for better performance
@@ -23,7 +22,6 @@ const LoadingSpinner: React.FC = () => (
 
 // Main App component with all improvements
 const App: React.FC = () => {
-  const { t } = useTranslation();
 
   return (
     <ErrorBoundary>

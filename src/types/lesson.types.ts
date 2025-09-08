@@ -55,6 +55,7 @@ export type InteractiveHint =
 
 export type Question =
   | {
+      id: string;
       type: 'text' | 'number' | 'pictograph';
       text: string;
       answer: string | string[];
@@ -68,6 +69,7 @@ export type Question =
       question?: string;
     }
   | {
+      id: string;
       type: 'chart';
       component: 'BarChart';
       text: string;
@@ -79,6 +81,7 @@ export type Question =
       interactiveHint?: never;
     }
   | {
+      id: string;
       type: 'text' | 'number' | 'multiple-choice';
       text: string;
       options?: string[];
@@ -88,6 +91,7 @@ export type Question =
       interactiveHint: InteractiveHint;
     }
   | {
+      id: string;
       type: 'multiple-choice';
       text: string;
       options: string[];

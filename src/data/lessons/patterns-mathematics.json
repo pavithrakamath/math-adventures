@@ -1,51 +1,74 @@
 {
   "id": "patterns-mathematics",
   "title": "Patterns in Mathematics",
-  "description": "Discover and explore patterns in nature, numbers, and shapes",
-  "difficulty": "Beginner",
-  "estimatedTime": "20-25 min",
+  "description": "Explore the search for patterns in mathematics - from number sequences to shape patterns and their beautiful relationships",
+  "difficulty": "Intermediate",
+  "estimatedTime": "30-35 min",
   "emoji": "🔍",
   "learningObjectives": [
-    "Identify visual patterns in nature and daily life",
-    "Recognize mathematical sequences and progressions",
-    "Understand different types of patterns (arithmetic, geometric, visual)",
-    "Create and extend patterns"
+    "Understand mathematics as the search for patterns and their explanations",
+    "Identify and recognize various number sequences (counting, odd, even, triangular, square, cube, etc.)",
+    "Visualize number sequences using pictures and diagrams",
+    "Discover relationships between different number sequences",
+    "Explore shape sequences and their connections to number sequences",
+    "Apply pattern recognition skills to solve mathematical problems"
   ],
   "sections": [
     {
       "id": "intro",
       "type": "intro",
-      "title": "🔍 Patterns Everywhere!",
-      "content": "Look around - patterns are everywhere! In nature, in numbers, in shapes! 🌟",
+      "title": "🔍 What is Mathematics?",
+      "content": "Mathematics is, in large part, the search for patterns, and for the explanations as to why those patterns exist. Such patterns indeed exist all around us—in nature, in our homes and schools, and in the motion of the sun, moon, and stars. They occur in everything that we do and see, from shopping and cooking, to throwing a ball and playing games, to understanding weather patterns and using technology.",
       "order": 1
-    },
-    {
-      "id": "visual",
-      "type": "interactive",
-      "title": "🎨 Visual Pattern Recognition",
-      "content": "Learn to spot patterns in colors, shapes, and designs!",
-      "order": 2
     },
     {
       "id": "number-sequences",
       "type": "interactive",
-      "title": "🔢 Number Pattern Explorer",
+      "title": "🔢 Number Sequences",
       "content": "PatternLesson",
+      "order": 2
+    },
+    {
+      "id": "visualizing-sequences",
+      "type": "interactive",
+      "title": "🎨 Visualizing Number Sequences",
+      "content": "TriangularNumbersVisualizer",
       "order": 3
     },
     {
-      "id": "natural",
+      "id": "sequence-relations",
       "type": "interactive",
-      "title": "🌿 Natural Patterns",
-      "content": "Discover the amazing patterns in nature - from sunflowers to snowflakes!",
+      "title": "🔗 Relations Among Number Sequences",
+      "content": "PatternRelationshipsVisualizer",
       "order": 4
     },
     {
-      "id": "creation",
-      "type": "practice",
-      "title": "🧩 Pattern Challenge",
-      "content": "Can you find and create patterns? Test your pattern skills!",
+      "id": "fibonacci-patterns",
+      "type": "interactive",
+      "title": "🌀 Fibonacci & Golden Ratio",
+      "content": "FibonacciVisualizer",
       "order": 5
+    },
+    {
+      "id": "odd-to-square",
+      "type": "interactive",
+      "title": "🔲 Odd Numbers → Square Numbers",
+      "content": "OddToSquareVisualizer",
+      "order": 6
+    },
+    {
+      "id": "shape-patterns",
+      "type": "interactive",
+      "title": "📐 Patterns in Shapes",
+      "content": "Other important and basic patterns that occur in Mathematics are patterns of shapes. These shapes may be in one, two, or three dimensions.",
+      "order": 7
+    },
+    {
+      "id": "shape-number-relations",
+      "type": "practice",
+      "title": "🔗 Shape-Number Relationships",
+      "content": "Often, shape sequences are related to number sequences in surprising ways. Such relationships can be helpful in studying and understanding both the shape sequence and the related number sequence.",
+      "order": 8
     }
   ]
 }

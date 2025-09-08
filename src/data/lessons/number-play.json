@@ -24,28 +24,28 @@
       "id": "supercells",
       "type": "interactive",
       "title": "🔍 Supercell Puzzles",
-      "content": "Find numbers that are greater than all their neighbors! Can you solve the supercell mystery?",
+      "content": "SupercellVisualizer",
       "order": 2
     },
     {
       "id": "palindromes",
       "type": "interactive",
       "title": "🔄 Palindromic Numbers",
-      "content": "Discover numbers that read the same forwards and backwards! Try the reverse-and-add game!",
+      "content": "PalindromeVisualizer",
       "order": 3
     },
     {
       "id": "kaprekar",
       "type": "interactive",
       "title": "✨ Kaprekar's Magic",
-      "content": "Experience the magic of 6174! Pick any 4-digit number and watch the magic unfold!",
+      "content": "KaprekarVisualizer",
       "order": 4
     },
     {
       "id": "estimation",
       "type": "interactive",
       "title": "📏 Estimation Games",
-      "content": "How many times do you blink in a day? Let's estimate and explore numbers around us!",
+      "content": "EstimationGame",
       "order": 5
     },
     {

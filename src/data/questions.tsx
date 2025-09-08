@@ -27,7 +27,7 @@ import integersQuestions from './questions/integers.json';
 import equationsQuestions from './questions/equations.json';
 
 // Map visualization component names to actual components
-const visualizationComponents: Record<string, any> = {
+const visualizationComponents: Record<string, React.ComponentType<Record<string, unknown>>> = {
   FractionVisual,
   InteractiveTallyMarks,
   InteractiveBarGraph,
@@ -45,8 +45,8 @@ const visualizationComponents: Record<string, any> = {
 };
 
 // Function to process question data and map visualization components
-const processQuestionData = (questionData: any[]): Question[] => {
-  return questionData.map((question: any) => ({
+const processQuestionData = (questionData: Array<Record<string, unknown>>): Question[] => {
+  return questionData.map((question: Record<string, unknown>) => ({
     ...question,
     visualization: question.visualization && visualizationComponents[question.visualization] 
       ? visualizationComponents[question.visualization] 

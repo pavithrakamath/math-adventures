@@ -1,11 +1,11 @@
-import React, { Suspense, lazy, ComponentType } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { VisualizationErrorBoundary } from '../ErrorBoundary';
 
 // Lazy loading wrapper for visualizations
 const LazyVisualization: React.FC<{
   componentName: string;
   fallback?: React.ReactNode;
-  [key: string]: any;
+  [key: string]: unknown;
 }> = ({ componentName, fallback, ...props }) => {
   // Dynamically import the visualization component
   const LazyComponent = lazy(() => 

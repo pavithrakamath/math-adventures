@@ -10,7 +10,6 @@ interface OddToSquareVisualizerProps {
 
 export const OddToSquareVisualizer: React.FC<OddToSquareVisualizerProps> = ({
   maxSquares = 6,
-  showAnimation = true,
   autoPlay = false
 }) => {
   const [currentSquare, setCurrentSquare] = useState(1);

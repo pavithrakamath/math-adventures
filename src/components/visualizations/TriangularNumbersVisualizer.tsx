@@ -10,7 +10,6 @@ interface TriangularNumbersVisualizerProps {
 
 export const TriangularNumbersVisualizer: React.FC<TriangularNumbersVisualizerProps> = ({
   maxTriangularNumber = 10,
-  showAnimation = true,
   autoPlay = false
 }) => {
   const [currentN, setCurrentN] = useState(1);

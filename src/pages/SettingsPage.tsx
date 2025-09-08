@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Settings, Palette, Globe, Volume2, Zap, RotateCcw } from 'lucide-react';
+import { Palette, Globe, Volume2, Zap, RotateCcw } from 'lucide-react';
 import { useTranslation } from '../hooks/useTranslation';
 import { useSettings } from '../context/AppStateContext';
 import { AccessibleButton } from '../components/common/AccessibleButton';
@@ -62,7 +62,7 @@ const SettingsPage = () => {
                   <AccessibleButton
                     key={theme}
                     variant={settings.theme === theme ? 'primary' : 'secondary'}
-                    onClick={() => handleThemeChange(theme as any)}
+                    onClick={() => handleThemeChange(theme as 'light' | 'dark' | 'auto')}
                     className="capitalize"
                   >
                     {theme}

@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, Trophy, RotateCcw } from 'lucide-react';
+import { CheckCircle, RotateCcw } from 'lucide-react';
 import { Button } from '../ui/button';
 import QuestionBox from './QuestionBox';
 import type { Question } from '../../types/lesson.types';
@@ -15,7 +15,7 @@ interface QuizState {
   currentQuestionIndex: number;
   answers: Array<{
     questionId: string;
-    answer: any;
+    answer: string | number | boolean | string[];
     isCorrect: boolean;
     attempts: number;
   }>;
@@ -34,7 +34,7 @@ const Quiz = ({ questions, onComplete, onBack }: QuizProps) => {
   const currentQuestion = questions[quizState.currentQuestionIndex];
   const isLastQuestion = quizState.currentQuestionIndex === questions.length - 1;
 
-  const handleAnswer = (answer: any, isCorrect: boolean) => {
+  const handleAnswer = (answer: string | number | boolean | string[], isCorrect: boolean) => {
     const newAnswer = {
       questionId: currentQuestion.id,
       answer,
@@ -45,7 +45,7 @@ const Quiz = ({ questions, onComplete, onBack }: QuizProps) => {
     setQuizState(prev => ({
       ...prev,
       answers: [...prev.answers.filter(a => a.questionId !== currentQuestion.id), newAnswer],
-      score: prev.score + (isCorrect ? currentQuestion.points : 0),
+      score: prev.score + (isCorrect ? ((currentQuestion as { points?: number }).points || 1) : 0),
     }));
   };
 
@@ -72,7 +72,7 @@ const Quiz = ({ questions, onComplete, onBack }: QuizProps) => {
   };
 
   const getScorePercentage = () => {
-    const totalPoints = questions.reduce((sum, q) => sum + q.points, 0);
+    const totalPoints = questions.reduce((sum, q) => sum + ((q as { points?: number }).points || 1), 0);
     return totalPoints > 0 ? Math.round((quizState.score / totalPoints) * 100) : 0;
   };
 

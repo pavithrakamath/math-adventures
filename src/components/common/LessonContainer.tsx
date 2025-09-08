@@ -11,7 +11,6 @@ interface LessonContainerProps {
   showProgress?: boolean;
   currentSection?: number;
   totalSections?: number;
-  onSectionChange?: (section: number) => void;
   className?: string;
 }
 
@@ -22,7 +21,6 @@ export const LessonContainer: React.FC<LessonContainerProps> = ({
   showProgress = true,
   currentSection = 0,
   totalSections = 1,
-  onSectionChange,
   className = '',
 }) => {
   const progressPercentage = (currentSection / totalSections) * 100;
