@@ -8,11 +8,11 @@ const SettingsPage = () => {
   const { t } = useTranslation();
   const { settings, updateSettings } = useSettings();
 
-  const handleThemeChange = (theme: 'light' | 'dark' | 'auto') => {
+  const handleThemeChange = (theme: 'light' | 'dark' | 'system') => {
     updateSettings({ theme });
   };
 
-  const handleLanguageChange = (language: string) => {
+  const handleLanguageChange = (language: 'en' | 'es' | 'fr' | 'de') => {
     updateSettings({ language });
   };
 
@@ -58,11 +58,11 @@ const SettingsPage = () => {
                 <h2 className="text-xl font-semibold text-gray-900">Theme</h2>
               </div>
               <div className="grid grid-cols-3 gap-4">
-                {['light', 'dark', 'auto'].map((theme) => (
+                {['light', 'dark', 'system'].map((theme) => (
                   <AccessibleButton
                     key={theme}
                     variant={settings.theme === theme ? 'primary' : 'secondary'}
-                    onClick={() => handleThemeChange(theme as 'light' | 'dark' | 'auto')}
+                    onClick={() => handleThemeChange(theme as 'light' | 'dark' | 'system')}
                     className="capitalize"
                   >
                     {theme}
@@ -79,15 +79,13 @@ const SettingsPage = () => {
               </div>
               <select
                 value={settings.language}
-                onChange={(e) => handleLanguageChange(e.target.value)}
+                onChange={(e) => handleLanguageChange(e.target.value as 'en' | 'es' | 'fr' | 'de')}
                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               >
                 <option value="en">English</option>
                 <option value="es">Español</option>
                 <option value="fr">Français</option>
                 <option value="de">Deutsch</option>
-                <option value="hi">हिन्दी</option>
-                <option value="zh">中文</option>
               </select>
             </div>
 

@@ -32,6 +32,13 @@ export interface LessonProgress {
   timeSpent: number;
   isCompleted: boolean;
   lastAccessed: Date;
+  mistakes: Mistake[];
+}
+
+export interface Mistake {
+  question: string;
+  errorDescription: string;
+  timestamp: number;
 }
 
 export interface Notification {
@@ -53,4 +60,9 @@ export type AppAction =
   | { type: 'UPDATE_SETTINGS'; payload: Partial<AppState['settings']> }
   | { type: 'TOGGLE_SIDEBAR' }
   | { type: 'SET_CURRENT_VIEW'; payload: string }
-  | { type: 'RESET_PROGRESS' };
+  | { type: 'RESET_PROGRESS' }
+  | { type: 'ADD_MISTAKE'; payload: { lessonId: string; question: string; errorDescription: string } }
+  | { type: 'UPDATE_SCORE'; payload: { lessonId: string; scoreIncrement: number } }
+  | { type: 'MARK_AS_COMPLETED'; payload: string }
+  | { type: 'UPDATE_UI'; payload: Partial<AppState['ui']> }
+  | { type: 'RESET_APP' };
