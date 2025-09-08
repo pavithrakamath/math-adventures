@@ -59,3 +59,4 @@ echo "✅ Build completed successfully!"
 echo "🎉 Deployment completed successfully!"
 echo "📁 Built files are in the 'dist' directory"
 echo "🌐 You can preview the build with: npm run preview"
+

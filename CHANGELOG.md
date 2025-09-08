@@ -55,3 +55,4 @@ We use [Semantic Versioning](https://semver.org/) for version numbers:
 - **Removed** for now removed features
 - **Fixed** for any bug fixes
 - **Security** for vulnerability fixes
+

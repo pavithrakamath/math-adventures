@@ -54,7 +54,7 @@ Desktop.ini
 .cache
 
 # Package manager files
-package-lock.json
+# package-lock.json - Keep this file for consistent builds
 yarn.lock
 pnpm-lock.yaml
 

@@ -84,3 +84,4 @@ For security-related questions or concerns, please contact us at [security@matha
 ## Acknowledgments
 
 We appreciate the security research community and responsible disclosure practices. Thank you for helping keep Math Adventures secure for all users.
+
