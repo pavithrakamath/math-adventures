@@ -62,18 +62,24 @@ export const useLessonData = () => {
     }
 
     const result = await handleAsyncError(async () => {
-      const [lessonData, questionData] = await Promise.all([
-        import(`../data/lessons/${lessonId}.json`),
-        import(`../data/questions/${lessonId}.json`)
-      ]);
+      // Import the processed lesson data instead of raw JSON
+      const { getLessonById } = await import('../data/lessons');
+      const lesson = getLessonById(lessonId);
+      
+      if (!lesson) {
+        throw new Error(`Lesson not found: ${lessonId}`);
+      }
+
+      // Load questions data
+      const questionData = await import(`../data/questions/${lessonId}.json`);
 
       const lessonDataWithMetadata: LessonData = {
-        lesson: lessonData.default,
+        lesson: lesson,
         questions: questionData.default,
         metadata: {
           lastUpdated: new Date(),
           version: '1.0.0',
-          difficulty: lessonData.default.difficulty || 'Beginner',
+          difficulty: lesson.difficulty || 'Beginner',
         },
       };
 

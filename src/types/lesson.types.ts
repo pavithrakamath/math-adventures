@@ -15,6 +15,7 @@ export interface LessonSection {
   type: 'intro' | 'interactive' | 'practice' | 'assessment' | 'quiz';
   title: string;
   content: React.ComponentType<Record<string, unknown>> | string;
+  props?: Record<string, unknown>;
   order: number;
 }
 

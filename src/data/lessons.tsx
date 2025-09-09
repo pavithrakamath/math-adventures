@@ -1,10 +1,8 @@
+import React from 'react';
 import type { Lesson } from '../types/lesson.types';
-import InteractiveTallyMarks from '../components/visualizations/InteractiveTallyMarks';
-import InteractiveBarGraph from '../components/visualizations/InteractiveBarGraph';
 import InteractivePerimeter from '../components/visualizations/InteractivePerimeter';
 import FactorChecker from '../components/visualizations/FactorChecker';
 import PatternVisualizer from '../components/visualizations/PatternVisualizer';
-import ClickableLessonBarChart from '../components/visualizations/ClickableLessonBarChart';
 import ShapeVisualizer from '../components/visualizations/ShapeVisualizer';
 import SymmetryVisualizer from '../components/visualizations/SymmetryVisualizer';
 import FractionVisualizer from '../components/visualizations/FractionVisualizer';
@@ -12,7 +10,6 @@ import TriangularNumbersVisualizer from '../components/visualizations/Triangular
 import FibonacciVisualizer from '../components/visualizations/FibonacciVisualizer';
 import OddToSquareVisualizer from '../components/visualizations/OddToSquareVisualizer';
 import PatternRelationshipsVisualizer from '../components/visualizations/PatternRelationshipsVisualizer';
-import AreaVisualizationLesson from '../components/visualizations/AreaVisualizationLesson';
 import PerimeterAreaComparison from '../components/visualizations/PerimeterAreaComparison';
 
 // Import lesson data from JSON files
@@ -29,12 +26,9 @@ import integersData from './lessons/integers.json';
 // Map visualization component names to actual components
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const visualizationComponents: Record<string, React.ComponentType<any>> = {
-  InteractiveTallyMarks,
-  InteractiveBarGraph,
   InteractivePerimeter,
   FactorChecker,
   PatternVisualizer,
-  ClickableLessonBarChart,
   ShapeVisualizer,
   SymmetryVisualizer,
   FractionVisualizer,
@@ -42,7 +36,6 @@ const visualizationComponents: Record<string, React.ComponentType<any>> = {
   FibonacciVisualizer,
   OddToSquareVisualizer,
   PatternRelationshipsVisualizer,
-  AreaVisualizationLesson,
   PerimeterAreaComparison,
 };
 
@@ -50,12 +43,24 @@ const visualizationComponents: Record<string, React.ComponentType<any>> = {
 const processLessonData = (lessonData: Record<string, unknown>): Lesson => {
   return {
     ...lessonData,
-    sections: (lessonData.sections as Array<Record<string, unknown>>).map((section: Record<string, unknown>) => ({
-      ...section,
-      content: typeof section.content === 'string' && visualizationComponents[section.content] 
-        ? visualizationComponents[section.content] 
-        : section.content
-    })) as unknown as Lesson['sections']
+    sections: (lessonData.sections as Array<Record<string, unknown>>).map((section: Record<string, unknown>) => {
+      const processedSection = { ...section };
+      
+      // If content is a string and we have a component for it, replace with the component
+      if (typeof section.content === 'string' && visualizationComponents[section.content]) {
+        const Component = visualizationComponents[section.content];
+        const props = section.props || {};
+        
+        // Create a component with props
+        processedSection.content = (() => {
+          const WrappedComponent = () => <Component {...props} />;
+          WrappedComponent.displayName = `Wrapped${section.content}`;
+          return WrappedComponent;
+        })() as React.ComponentType<Record<string, unknown>>;
+      }
+      
+      return processedSection;
+    }) as unknown as Lesson['sections']
   } as Lesson;
 };
 

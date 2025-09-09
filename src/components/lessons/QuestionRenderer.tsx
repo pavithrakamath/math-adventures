@@ -7,7 +7,7 @@ import PatternHintVisualizer from '../visualizations/PatternHintVisualizer';
 import ShapeVisualizer from '../visualizations/ShapeVisualizer';
 import SymmetryVisualizer from '../visualizations/SymmetryVisualizer';
 import FractionVisualizer from '../visualizations/FractionVisualizer';
-import InteractiveBarGraph from '../visualizations/InteractiveBarGraph';
+import BarChart from '../visualizations/BarChart';
 import InteractivePictograph from '../visualizations/InteractivePictograph';
 import PerimeterVisual from '../visualizations/PerimeterVisual';
 
@@ -116,15 +116,39 @@ export function QuestionRenderer({
           </div>
         );
       case 'chart':
-        // For chart questions, the "input" is the chart itself.
-        return isCorrect ? (
-          <input
-            type="text"
-            value={userAnswer}
-            disabled={true}
-            className="mt-4 w-full px-3 py-2 border border-gray-300 rounded-md"
-          />
-        ) : null;
+        // For chart questions, provide a text input for the answer
+        return (
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Your Answer:
+            </label>
+            <input
+              type="text"
+              value={userAnswer}
+              onChange={(e) => onAnswerChange(e.target.value)}
+              placeholder="Type your answer here (e.g., Class V)"
+              disabled={isCorrect}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+        );
+      case 'pictograph':
+        // For pictograph questions, provide a text input for the answer
+        return (
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Your Answer:
+            </label>
+            <input
+              type="text"
+              value={userAnswer}
+              onChange={(e) => onAnswerChange(e.target.value)}
+              placeholder="Type your answer here (e.g., 2)"
+              disabled={isCorrect}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+        );
       default:
         return (
           <input
@@ -141,7 +165,7 @@ export function QuestionRenderer({
 
   const renderChart = () => {
     if (question.type === 'chart') {
-      // Transform data from {name, value} to {label, value} format for InteractiveBarGraph
+      // Transform data from {name, value} to {label, value} format for BarChart
       const transformedData = question.data?.map((item, index) => ({
         label: item.name,
         value: item.value,
@@ -150,21 +174,28 @@ export function QuestionRenderer({
       })) || [];
       
       return (
-        <>
-          <div className="my-4 h-64">
-            <InteractiveBarGraph
-              data={transformedData}
-              onDataChange={isCorrect ? () => {} : (data) => onAnswerChange(data[0]?.label || '')}
-            />
+        <div className="my-6">
+          <div className="bg-white rounded-lg border border-gray-200 p-4">
+            <div className="h-64">
+              <BarChart
+                data={transformedData}
+                mode="static"
+                title=""
+                showValues={true}
+                animated={true}
+              />
+            </div>
           </div>
-          <p className="font-code text-xl pt-2">{question.question}</p>
-        </>
+          <p className="text-lg font-medium text-gray-800 mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+            {question.question}
+          </p>
+        </div>
       );
     }
     if (question.type === 'pictograph') {
       return (
-        <>
-          <div className="my-4">
+        <div className="my-6">
+          <div className="bg-white rounded-lg border border-gray-200 p-4">
             <InteractivePictograph
               data={question.data || []}
               symbol={question.symbol || '📚'}
@@ -173,8 +204,10 @@ export function QuestionRenderer({
               interactive={false}
             />
           </div>
-          <p className="font-code text-xl pt-2">{question.question}</p>
-        </>
+          <p className="text-lg font-medium text-gray-800 mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+            {question.question}
+          </p>
+        </div>
       );
     }
     // Render a reference chart for other question types if data is provided
@@ -187,11 +220,16 @@ export function QuestionRenderer({
       }));
       
       return (
-        <div className="my-4 h-64">
-          <InteractiveBarGraph 
-            data={transformedData} 
-            onDataChange={() => {}} // No-op for reference charts
-          />
+        <div className="my-6">
+          <div className="bg-white rounded-lg border border-gray-200 p-4">
+            <div className="h-64">
+              <BarChart 
+                data={transformedData} 
+                mode="static"
+                onDataChange={() => {}} // No-op for reference charts
+              />
+            </div>
+          </div>
         </div>
       );
     }
@@ -213,8 +251,11 @@ export function QuestionRenderer({
           return <ShapeVisualizer {...question.interactiveHint} />;
         case 'symmetry-visualizer':
           return <SymmetryVisualizer {...question.interactiveHint} />;
-        case 'fraction-visualizer':
-          return <FractionVisualizer {...question.interactiveHint} />;
+      case 'fraction-visualizer': {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { type: _type, ...fractionProps } = question.interactiveHint;
+        return <FractionVisualizer {...fractionProps} />;
+      }
         case 'perimeter-visual':
           return <PerimeterVisual {...question.interactiveHint} />;
         default:
@@ -308,11 +349,21 @@ export function QuestionRenderer({
   const isAnswered = userAnswer.trim() !== '';
 
   return (
-    <div className="space-y-4">
-      <p className="text-lg font-medium">{question.text}</p>
-      {renderChart()}
-      {renderInput()}
+    <div className="space-y-6">
+      {/* Question text */}
+      <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <p className="text-lg font-medium text-gray-800">{question.text}</p>
+      </div>
       
+      {/* Chart/Visualization */}
+      {renderChart()}
+      
+      {/* Input section */}
+      <div className="bg-white rounded-lg border border-gray-200 p-6">
+        {renderInput()}
+      </div>
+      
+      {/* Action buttons */}
       <div className="flex gap-2">
         {!isCorrect && !showExplanation && (
           <Button onClick={onCheckAnswer} disabled={!isAnswered}>
@@ -331,6 +382,7 @@ export function QuestionRenderer({
         )}
       </div>
 
+      {/* Feedback messages */}
       {isCorrect && (
         <div className="flex items-center gap-2 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
           <CheckCircle2 className="h-5 w-5" />
@@ -345,6 +397,7 @@ export function QuestionRenderer({
         </div>
       )}
 
+      {/* Explanation */}
       {showExplanation && renderExplanation()}
     </div>
   );

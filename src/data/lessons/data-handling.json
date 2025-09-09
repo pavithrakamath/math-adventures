@@ -34,6 +34,11 @@
       "type": "interactive",
       "title": "✏️ Interactive Tally Marks",
       "content": "InteractiveTallyMarks",
+      "props": {
+        "mode": "interactive",
+        "showInstructions": true,
+        "targetCount": 0
+      },
       "order": 3
     },
     {
@@ -41,6 +46,9 @@
       "type": "interactive",
       "title": "🎨 Pictographs with Different Scales",
       "content": "InteractivePictograph",
+      "props": {
+        "showInstructions": true
+      },
       "order": 4
     },
     {
@@ -48,6 +56,29 @@
       "type": "interactive",
       "title": "📊 Bar Graphs and Column Graphs",
       "content": "InteractiveBarGraph",
+      "props": {
+        "mode": "interactive",
+        "title": "Favorite Fruits Survey",
+        "data": [
+          { "label": "Apples", "value": 15, "color": "#ef4444", "emoji": "🍎" },
+          {
+            "label": "Bananas",
+            "value": 12,
+            "color": "#f59e0b",
+            "emoji": "🍌"
+          },
+          { "label": "Oranges", "value": 8, "color": "#f97316", "emoji": "🍊" },
+          { "label": "Grapes", "value": 6, "color": "#8b5cf6", "emoji": "🍇" },
+          {
+            "label": "Strawberries",
+            "value": 10,
+            "color": "#ec4899",
+            "emoji": "🍓"
+          }
+        ],
+        "allowEdit": true,
+        "showValues": true
+      },
       "order": 5
     },
     {
@@ -55,6 +86,20 @@
       "type": "interactive",
       "title": "📈 Drawing Bar Graphs",
       "content": "ClickableLessonBarChart",
+      "props": {
+        "mode": "lesson",
+        "title": "Classroom Pet Survey",
+        "data": [
+          { "label": "Dogs", "value": 8, "color": "#3b82f6", "emoji": "🐕" },
+          { "label": "Cats", "value": 6, "color": "#10b981", "emoji": "🐱" },
+          { "label": "Fish", "value": 4, "color": "#06b6d4", "emoji": "🐠" },
+          { "label": "Birds", "value": 3, "color": "#f59e0b", "emoji": "🐦" },
+          { "label": "Hamsters", "value": 5, "color": "#8b5cf6", "emoji": "🐹" }
+        ],
+        "question": "Which pet is most popular in our class?",
+        "correctAnswer": "Dogs",
+        "showFeedback": true
+      },
       "order": 6
     },
     {

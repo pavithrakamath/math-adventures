@@ -2,7 +2,12 @@
   {
     "type": "multiple-choice",
     "text": "What is a palindrome?",
-    "options": ["A number that is divisible by 11", "A number that reads the same forwards and backwards", "A number with all even digits", "A number that is a perfect square"],
+    "options": [
+      "A number that is divisible by 11",
+      "A number that reads the same forwards and backwards",
+      "A number with all even digits",
+      "A number that is a perfect square"
+    ],
     "answer": "A number that reads the same forwards and backwards",
     "errorDescription": "The student needs to understand the definition of a palindrome. A palindrome is a number (or word) that reads the same from left to right and right to left.",
     "hint": "Think of words like 'racecar' or 'level' - they read the same forwards and backwards. Numbers can be palindromes too! For example, 121, 1331, and 12321 are all palindromic numbers."
@@ -42,7 +47,12 @@
   {
     "type": "multiple-choice",
     "text": "In a supercell puzzle, a number becomes a supercell when:",
-    "options": ["It's the largest number in the table", "It's greater than all its neighboring numbers", "It's a prime number", "It's divisible by 3"],
+    "options": [
+      "It's the largest number in the table",
+      "It's greater than all its neighboring numbers",
+      "It's a prime number",
+      "It's divisible by 3"
+    ],
     "answer": "It's greater than all its neighboring numbers",
     "errorDescription": "The student needs to understand the supercell concept. A supercell is a number that is greater than all the numbers in its adjacent cells.",
     "hint": "A supercell is a number that is greater than all its neighboring numbers. In a grid, this means the number is larger than the numbers in the cells immediately next to it (left, right, top, bottom)."
@@ -50,16 +60,14 @@
   {
     "type": "multiple-choice",
     "text": "What is the Collatz Conjecture about?",
-    "options": ["All sequences reach 1", "All sequences reach 0", "All sequences reach 100", "All sequences reach infinity"],
+    "options": [
+      "All sequences reach 1",
+      "All sequences reach 0",
+      "All sequences reach 100",
+      "All sequences reach infinity"
+    ],
     "answer": "All sequences reach 1",
     "errorDescription": "The student may not be familiar with the Collatz Conjecture. This is a famous unsolved problem in mathematics about a specific sequence rule.",
     "hint": "The Collatz Conjecture is a famous unsolved problem in mathematics. It states that if you start with any positive whole number and follow this rule: if the number is even, divide by 2; if odd, multiply by 3 and add 1, you will always eventually reach 1. No one has proven this yet!"
-  },
-  {
-    "type": "text",
-    "text": "Estimate: How many times do you blink in one hour?",
-    "answer": "900-1200",
-    "errorDescription": "The student may not have a good sense of estimation. The average person blinks about 15-20 times per minute.",
-    "hint": "The average person blinks about 15-20 times per minute. So in one hour (60 minutes), that would be about 15-20 × 60 = 900-1200 blinks. This is just an estimate - the actual number varies from person to person!"
   }
 ]

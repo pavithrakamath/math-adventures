@@ -196,7 +196,7 @@ const LessonView = ({ lesson, currentSection, onSectionChange, onComplete }: Les
                     <span className="ml-2 text-gray-600">Loading interactive content...</span>
                   </div>
                 }>
-                  <Component />
+                  <Component {...(section.props || {})} />
                 </Suspense>
               </div>
             </motion.div>
@@ -240,7 +240,7 @@ const LessonView = ({ lesson, currentSection, onSectionChange, onComplete }: Les
                 <span className="ml-2 text-gray-600">Loading interactive content...</span>
               </div>
             }>
-              <Component />
+              <Component {...(section.props || {})} />
             </Suspense>
           </div>
         </motion.div>

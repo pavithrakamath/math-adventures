@@ -49,11 +49,18 @@
       "order": 5
     },
     {
-      "id": "games",
-      "type": "practice",
-      "title": "🎯 Mathematical Games",
-      "content": "Play the '21' game and discover winning strategies! Can you always win?",
+      "id": "collatz",
+      "type": "interactive",
+      "title": "🔢 Collatz Conjecture",
+      "content": "CollatzVisualizer",
       "order": 6
+    },
+    {
+      "id": "games",
+      "type": "interactive",
+      "title": "🎯 The 21 Game & Variations",
+      "content": "TwentyOneGameVisualizer",
+      "order": 7
     }
   ]
 }

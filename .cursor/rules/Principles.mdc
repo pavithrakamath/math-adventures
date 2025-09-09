@@ -1,0 +1,10 @@
+---
+alwaysApply: true
+---
+1. Prefer to use as less 3rd party dependencies as possible and iff needed, use a dependency that is LTS version and has no known vulnerabilities.
+2. Prefer reading the codebase and understanding the functionality before starting to code.
+3. Prefer Test driven development
+4. Use design principles judiciously to arrive at a solution. Prefer clean interfaces and Responsibility segregation
+5. create frequent commits.
+6. Every repo and codebase must have pre-commit hooks that will lint, security check, build the codebase
+7. We use vitest for test

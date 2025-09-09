@@ -1,0 +1,5 @@
+---
+description: typescript codebase or code base that supports object oriented design.
+alwaysApply: false
+---
+1. In typescript projects, always model the object and create relevant Types / models instead of using `unknown` and `any` types

@@ -1,11 +1,7 @@
 import type { Question } from '../types/lesson.types';
-import FractionVisual from '../components/visualizations/FractionVisual';
-import InteractiveTallyMarks from '../components/visualizations/InteractiveTallyMarks';
-import InteractiveBarGraph from '../components/visualizations/InteractiveBarGraph';
 import InteractivePerimeter from '../components/visualizations/InteractivePerimeter';
 import FactorChecker from '../components/visualizations/FactorChecker';
 import PatternVisualizer from '../components/visualizations/PatternVisualizer';
-import ClickableLessonBarChart from '../components/visualizations/ClickableLessonBarChart';
 import ShapeVisualizer from '../components/visualizations/ShapeVisualizer';
 import SymmetryVisualizer from '../components/visualizations/SymmetryVisualizer';
 import FractionVisualizer from '../components/visualizations/FractionVisualizer';
@@ -28,13 +24,9 @@ import equationsQuestions from './questions/equations.json';
 
 // Map visualization component names to actual components
 const visualizationComponents: Record<string, React.ComponentType<Record<string, unknown>>> = {
-  FractionVisual: FractionVisual as unknown as React.ComponentType<Record<string, unknown>>,
-  InteractiveTallyMarks: InteractiveTallyMarks as unknown as React.ComponentType<Record<string, unknown>>,
-  InteractiveBarGraph: InteractiveBarGraph as unknown as React.ComponentType<Record<string, unknown>>,
   InteractivePerimeter: InteractivePerimeter as unknown as React.ComponentType<Record<string, unknown>>,
   FactorChecker: FactorChecker as unknown as React.ComponentType<Record<string, unknown>>,
   PatternVisualizer: PatternVisualizer as unknown as React.ComponentType<Record<string, unknown>>,
-  ClickableLessonBarChart: ClickableLessonBarChart as unknown as React.ComponentType<Record<string, unknown>>,
   ShapeVisualizer: ShapeVisualizer as unknown as React.ComponentType<Record<string, unknown>>,
   SymmetryVisualizer: SymmetryVisualizer as unknown as React.ComponentType<Record<string, unknown>>,
   FractionVisualizer: FractionVisualizer as unknown as React.ComponentType<Record<string, unknown>>,

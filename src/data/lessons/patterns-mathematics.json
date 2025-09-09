@@ -25,7 +25,12 @@
       "id": "number-sequences",
       "type": "interactive",
       "title": "🔢 Number Sequences",
-      "content": "PatternLesson",
+      "content": "PatternVisualizer",
+      "props": {
+        "sequence": [2, 4, 6, 8],
+        "operation": "add",
+        "value": 2
+      },
       "order": 2
     },
     {

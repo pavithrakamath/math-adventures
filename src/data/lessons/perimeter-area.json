@@ -7,7 +7,7 @@
   "emoji": "📐",
   "learningObjectives": [
     "Calculate perimeter of rectangles, squares, and triangles",
-    "Calculate area of rectangles, squares, and triangles", 
+    "Calculate area of rectangles, squares, and triangles",
     "Understand the difference between perimeter and area",
     "Solve real-world problems involving measurement",
     "Compare shapes with different perimeters and areas",
@@ -29,15 +29,22 @@
       "order": 2
     },
     {
-      "id": "area-basics", 
+      "id": "area-basics",
       "type": "interactive",
       "title": "📐 Understanding Area",
-      "content": "AreaVisualizationLesson",
+      "content": "AreaVisual",
+      "props": {
+        "shape": "rectangle",
+        "dimensions": [6, 4],
+        "unit": "cm",
+        "showGrid": true,
+        "showFormula": true
+      },
       "order": 3
     },
     {
       "id": "perimeter-practice",
-      "type": "interactive", 
+      "type": "interactive",
       "title": "🎯 Perimeter Practice",
       "content": "ShapeVisualizer",
       "order": 4
@@ -45,7 +52,7 @@
     {
       "id": "area-practice",
       "type": "interactive",
-      "title": "🎯 Area Practice", 
+      "title": "🎯 Area Practice",
       "content": "ShapeVisualizer",
       "order": 5
     },
