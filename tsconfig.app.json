@@ -24,7 +24,7 @@
     "noUncheckedSideEffectImports": true,
 
     /* Test globals */
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals", "node"]
   },
   "include": ["src"],
   "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/**/__tests__/**/*"]
